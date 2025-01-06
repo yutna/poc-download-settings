@@ -46,7 +46,7 @@ body {
 .cols {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .col {
@@ -66,6 +66,10 @@ body {
 form {
   width: 100%;
   max-width: 600px;
+}
+
+fieldset {
+  margin-top: 0.5rem;
 }
 
 label {

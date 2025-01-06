@@ -2,6 +2,7 @@ import type { Action, State } from "./types";
 
 export default function reducer(draft: State, action: Action) {
   switch (action.type) {
+    // General Settings Form
     case "SET_AGENCY_ID":
       draft.general.agencyId = action.payload;
       break;
@@ -20,6 +21,24 @@ export default function reducer(draft: State, action: Action) {
     case "SET_STATUS":
       draft.general.status = action.payload;
       break;
+
+    // Data Storage Folder Form
+    case "SET_DATA_SUB_TYPE":
+      draft.dataStorageFolder.dataSubType = action.payload;
+      break;
+    case "SET_DATA_TYPE":
+      draft.dataStorageFolder.dataType = action.payload;
+      break;
+    case "SET_DOWNLOADER_FILE_IDS":
+      draft.dataStorageFolder.downloaderFileIds = action.payload;
+      break;
+    case "SET_DOWNLOADER_FILE_OPTIONS":
+      draft.dataStorageFolder.downloaderFileOptions = action.payload;
+      break;
+    case "SET_STORAGE_PREVIEW":
+      draft.dataStorageFolder.storagePreview = action.payload;
+      break;
+
     default:
       throw new Error(`Unhandled action type`);
   }

@@ -1,13 +1,10 @@
-export type DownloaderType = "internal" | "external";
+import type { Option } from "@/types/settings-downloader";
 
-export interface AgencyOptions {
-  label: string;
-  value: string;
-}
+export type DownloaderType = "internal" | "external";
 
 export interface FormGeneralSettingsData {
   agencyId: number;
-  agencyOptions: AgencyOptions[];
+  agencyOptions: Option[];
   downloader: string;
   downloaderDescription: string;
   downloaderType: DownloaderType;

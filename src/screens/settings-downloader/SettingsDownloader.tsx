@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useImmerReducer } from "use-immer";
 
+import FormDataStorageFolder from "@/components/form-data-storage-folder";
 import FormGeneralSettings from "@/components/form-general-settings";
 
 import { initialState } from "./constants";
@@ -44,6 +45,19 @@ export default function SettingsDownloader() {
     dispatch({ type: "SET_STATUS", payload: status });
   }
 
+  // Form Data Storage Folder
+  function handleDataSubTypeChange(value: string) {
+    dispatch({ type: "SET_DATA_SUB_TYPE", payload: value });
+  }
+
+  function handleDataTypeChange(value: string) {
+    dispatch({ type: "SET_DATA_TYPE", payload: value });
+  }
+
+  function handleDownloaderFileChange(values: number[]) {
+    dispatch({ type: "SET_DOWNLOADER_FILE_IDS", payload: values });
+  }
+
   // Effect hooks
   useEffect(() => {
     // TODO: fetch agency options
@@ -54,7 +68,44 @@ export default function SettingsDownloader() {
         { label: "กรมเกลียว", value: "2" },
       ],
     });
+
+    // TODO: fetch downloader file options
+    dispatch({
+      type: "SET_DOWNLOADER_FILE_OPTIONS",
+      payload: [
+        { label: ".png", value: "1" },
+        { label: ".jpg", value: "2" },
+      ],
+    });
   }, [dispatch]);
+
+  useEffect(() => {
+    let timeout: string | number | NodeJS.Timeout | undefined;
+
+    if (
+      state.general.agencyId &&
+      state.dataStorageFolder.downloaderFileIds.length &&
+      state.dataStorageFolder.dataSubType.trim().length &&
+      state.dataStorageFolder.dataType.trim().length
+    ) {
+      // TODO: fetch storage preview
+      timeout = setTimeout(() => {
+        console.log("Fetch storage path");
+      }, 500);
+    } else {
+      dispatch({ type: "SET_STORAGE_PREVIEW", payload: "" });
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [
+    dispatch,
+    state.general.agencyId,
+    state.dataStorageFolder.downloaderFileIds.length,
+    state.dataStorageFolder.dataSubType,
+    state.dataStorageFolder.dataType,
+  ]);
 
   return (
     <div className="container">
@@ -70,6 +121,17 @@ export default function SettingsDownloader() {
           onDownloaderDescriptionChange={handleDownloaderDescriptionChange}
           onDownloaderTypeChange={handleDownloaderTypeChange}
           onStatusChange={handleStatusChange}
+        />
+        <FormDataStorageFolder
+          data={{
+            agencyId: state.general.agencyId,
+            agencyOptions: state.general.agencyOptions,
+            ...state.dataStorageFolder,
+          }}
+          disabled={disabled}
+          onDataSubTypeChange={handleDataSubTypeChange}
+          onDataTypeChange={handleDataTypeChange}
+          onDownloaderFileChange={handleDownloaderFileChange}
         />
         <div className="action">
           <button type="submit">บันทึก</button>

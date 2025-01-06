@@ -9,4 +9,11 @@ export const initialState: State = {
     downloaderType: "external",
     status: true,
   },
+  dataStorageFolder: {
+    dataSubType: "",
+    dataType: "",
+    downloaderFileIds: [],
+    downloaderFileOptions: [],
+    storagePreview: "",
+  },
 };
