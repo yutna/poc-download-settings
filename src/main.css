@@ -1,0 +1,85 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.preview {
+  border: 1px solid black;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 600px;
+  background-color: gainsboro;
+}
+
+.preview > pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.group {
+  margin-bottom: 0.5rem;
+}
+
+.group:last-child {
+  margin-bottom: 0;
+}
+
+.cols {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.col {
+  flex: 1 1 auto;
+}
+
+.col + .col {
+  margin-left: 1rem;
+}
+
+.action {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+input[type="checkbox"] + label {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+}
