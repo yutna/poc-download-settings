@@ -18,10 +18,12 @@ export type Action =
   | { type: "SET_STATUS"; payload: boolean }
   | { type: "SET_STORAGE_PREVIEW"; payload: string };
 
+export type DataStorageFolder = Omit<
+  FormDataStorageFolderData,
+  "agencyId" | "agencyOptions"
+>;
+
 export interface State {
   general: FormGeneralSettingsData;
-  dataStorageFolder: Omit<
-    FormDataStorageFolderData,
-    "agencyId" | "agencyOptions"
-  >;
+  dataStorageFolder: DataStorageFolder;
 }
