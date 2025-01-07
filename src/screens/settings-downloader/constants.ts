@@ -16,4 +16,9 @@ export const initialState: State = {
     downloaderFileOptions: [],
     storagePreview: "",
   },
+  download: {
+    retryCount: 0,
+    scheduleInterval: "",
+    timePreview: "",
+  },
 };

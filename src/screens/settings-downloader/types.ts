@@ -1,4 +1,5 @@
 import type { FormDataStorageFolderData } from "@/components/form-data-storage-folder";
+import type { FormDownloadSettingsData } from "@/components/form-download-settings";
 import type {
   DownloaderType,
   FormGeneralSettingsData,
@@ -15,8 +16,11 @@ export type Action =
   | { type: "SET_DOWNLOADER_FILE_IDS"; payload: number[] }
   | { type: "SET_DOWNLOADER_FILE_OPTIONS"; payload: Option[] }
   | { type: "SET_DOWNLOADER_TYPE"; payload: DownloaderType }
+  | { type: "SET_RETRY_COUNT"; payload: number }
+  | { type: "SET_SCHEDULE_INTERVAL"; payload: string }
   | { type: "SET_STATUS"; payload: boolean }
-  | { type: "SET_STORAGE_PREVIEW"; payload: string };
+  | { type: "SET_STORAGE_PREVIEW"; payload: string }
+  | { type: "SET_TIME_PREVIEW"; payload: string };
 
 export type DataStorageFolder = Omit<
   FormDataStorageFolderData,
@@ -26,4 +30,5 @@ export type DataStorageFolder = Omit<
 export interface State {
   general: FormGeneralSettingsData;
   dataStorageFolder: DataStorageFolder;
+  download: FormDownloadSettingsData;
 }

@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cron-parser": "4.9.0",
+    "cronstrue": "2.52.0",
     "immer": "10.1.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",

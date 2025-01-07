@@ -39,6 +39,17 @@ export default function reducer(draft: State, action: Action) {
       draft.dataStorageFolder.storagePreview = action.payload;
       break;
 
+    // Download Settings Form
+    case "SET_RETRY_COUNT":
+      draft.download.retryCount = action.payload;
+      break;
+    case "SET_SCHEDULE_INTERVAL":
+      draft.download.scheduleInterval = action.payload;
+      break;
+    case "SET_TIME_PREVIEW":
+      draft.download.timePreview = action.payload;
+      break;
+
     default:
       throw new Error(`Unhandled action type`);
   }
