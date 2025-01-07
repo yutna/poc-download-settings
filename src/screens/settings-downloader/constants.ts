@@ -21,4 +21,7 @@ export const initialState: State = {
     scheduleInterval: "",
     timePreview: "",
   },
+  process: {
+    downloaderDriverType: "standard",
+  },
 };

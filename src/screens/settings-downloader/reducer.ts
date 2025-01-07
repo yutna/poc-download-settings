@@ -50,6 +50,11 @@ export default function reducer(draft: State, action: Action) {
       draft.download.timePreview = action.payload;
       break;
 
+    // Process Settings
+    case "SET_DOWNLOADER_DRIVER_TYPE":
+      draft.process.downloaderDriverType = action.payload;
+      break;
+
     default:
       throw new Error(`Unhandled action type`);
   }

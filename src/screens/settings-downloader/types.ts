@@ -4,6 +4,10 @@ import type {
   DownloaderType,
   FormGeneralSettingsData,
 } from "@/components/form-general-settings";
+import type {
+  DownloaderDriverType,
+  FormProcessSettingsData,
+} from "@/components/form-process-settings";
 import type { Option } from "@/types/settings-downloader";
 
 export type Action =
@@ -13,6 +17,7 @@ export type Action =
   | { type: "SET_DATA_TYPE"; payload: string }
   | { type: "SET_DOWNLOADER"; payload: string }
   | { type: "SET_DOWNLOADER_DESCRIPTION"; payload: string }
+  | { type: "SET_DOWNLOADER_DRIVER_TYPE"; payload: DownloaderDriverType }
   | { type: "SET_DOWNLOADER_FILE_IDS"; payload: number[] }
   | { type: "SET_DOWNLOADER_FILE_OPTIONS"; payload: Option[] }
   | { type: "SET_DOWNLOADER_TYPE"; payload: DownloaderType }
@@ -31,4 +36,5 @@ export interface State {
   general: FormGeneralSettingsData;
   dataStorageFolder: DataStorageFolder;
   download: FormDownloadSettingsData;
+  process: FormProcessSettingsData;
 }

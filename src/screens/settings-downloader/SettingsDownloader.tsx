@@ -3,6 +3,7 @@ import { useImmerReducer } from "use-immer";
 import FormDataStorageFolder from "@/components/form-data-storage-folder";
 import FormDownloadSettings from "@/components/form-download-settings";
 import FormGeneralSettings from "@/components/form-general-settings";
+import FormProcessSettings from "@/components/form-process-settings";
 
 import { initialState } from "./constants";
 import reducer from "./reducer";
@@ -72,6 +73,11 @@ export default function SettingsDownloader() {
           disabled={disabled}
           onRetryCountChange={handleEvent("SET_RETRY_COUNT")}
           onScheduleIntervalChange={handleEvent("SET_SCHEDULE_INTERVAL")}
+        />
+        <FormProcessSettings
+          data={state.process}
+          disabled={disabled}
+          onDownloaderDriverType={handleEvent("SET_DOWNLOADER_DRIVER_TYPE")}
         />
         <div className="action">
           <button type="submit">บันทึก</button>
