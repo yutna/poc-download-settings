@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import type { Option } from "@/types/settings-downloader";
+import type { Option } from "@/types/form";
 
 export type DataEntryFormat = "SELECT_FROM_SETTINGS" | "SELF_FILL_DATA_ENTRY";
 export type DownloaderDriverType =

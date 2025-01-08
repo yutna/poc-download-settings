@@ -30,7 +30,7 @@ export default function FormStandardDriver({
           <label htmlFor="timeoutSeconds">Timout</label>
           <input
             disabled={disabled}
-            is="timeoutSeconds"
+            id="timeoutSeconds"
             name="timeoutSeconds"
             onChange={onTimeoutSecondsChange}
             required

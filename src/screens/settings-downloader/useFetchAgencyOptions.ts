@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import { getAgencies } from "@/api/agencies";
+
 import type { Dispatch } from "react";
 import type { Action } from "./types";
 
@@ -9,13 +11,11 @@ export default function useFetchAgencyOptions({
   dispatch: Dispatch<Action>;
 }) {
   useEffect(() => {
-    // TODO: fetch agency options
-    dispatch({
-      type: "SET_AGENCY_OPTIONS",
-      payload: [
-        { label: "กรมทรัพยากรน้ำ", value: "1" },
-        { label: "กรมเกลียว", value: "2" },
-      ],
+    getAgencies().then((payload) => {
+      dispatch({
+        type: "SET_AGENCY_OPTIONS",
+        payload,
+      });
     });
   }, [dispatch]);
 }

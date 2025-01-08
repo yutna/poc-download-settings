@@ -1,4 +1,4 @@
-import type { Option } from "@/types/settings-downloader";
+import type { Option } from "@/types/form";
 
 export type DownloaderType = "INTERNAL" | "EXTERNAL";
 

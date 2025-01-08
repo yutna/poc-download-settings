@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import { postDownloaderDataFolder } from "@/api/downloaders";
+
 import type { Dispatch } from "react";
 import type { Action, State } from "./types";
 
@@ -15,19 +17,27 @@ export default function useFetchStorage({
   delay?: number;
 }) {
   const { agencyId } = state.general;
-  const { dataSubType, dataType, downloaderFileIds } = state.dataStorageFolder;
+  const {
+    dataSubType,
+    dataType,
+    downloaderFileIds: fileIds,
+  } = state.dataStorageFolder;
 
   useEffect(() => {
     let timeout: string | number | NodeJS.Timeout | undefined;
     const isValid =
-      agencyId &&
-      downloaderFileIds.length &&
-      dataSubType.trim() &&
-      dataType.trim();
+      agencyId && fileIds.length && dataSubType.trim() && dataType.trim();
 
     if (isValid) {
       timeout = setTimeout(() => {
-        // TODO: fetch storage preview
+        postDownloaderDataFolder({
+          agencyId,
+          dataSubType,
+          dataType,
+          fileIds,
+        }).then((payload) => {
+          dispatch({ type: "SET_STORAGE_PREVIEW", payload });
+        });
       }, delay);
     } else {
       dispatch({ type: "SET_STORAGE_PREVIEW", payload: "" });
@@ -36,12 +46,5 @@ export default function useFetchStorage({
     return () => {
       clearTimeout(timeout);
     };
-  }, [
-    agencyId,
-    dataSubType,
-    dataType,
-    delay,
-    dispatch,
-    downloaderFileIds.length,
-  ]);
+  }, [agencyId, dataSubType, dataType, delay, dispatch, fileIds]);
 }

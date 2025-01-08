@@ -9,7 +9,7 @@ import type {
   DownloaderDriverType,
   FormProcessSettingsData,
 } from "@/components/form-process-settings";
-import type { Option } from "@/types/settings-downloader";
+import type { Option } from "@/types/form";
 
 export type Action =
   | { type: "SET_AGENCY_ID"; payload: number }
