@@ -51,8 +51,35 @@ export default function reducer(draft: State, action: Action) {
       break;
 
     // Process Settings
+    case "SET_DATA_ENTRY_FORMAT":
+      draft.downloaderDriver.dataEntryFormat = action.payload;
+      break;
+    case "SET_DOWNLOADER_DRIVER_CONFIG_ID":
+      draft.downloaderDriver.downloaderDriverConfigId = action.payload;
+      break;
+    case "SET_DOWNLOADER_DRIVER_CONFIG_OPTIONS":
+      draft.downloaderDriver.downloaderDriverConfigOptions = action.payload;
+      break;
     case "SET_DOWNLOADER_DRIVER_TYPE":
-      draft.process.downloaderDriverType = action.payload;
+      draft.downloaderDriver.downloaderDriverType = action.payload;
+      break;
+    case "SET_DRIVER_ID":
+      draft.downloaderDriver.driverId = action.payload;
+      break;
+    case "SET_DRIVER_OPTIONS":
+      draft.downloaderDriver.driverOptions = action.payload;
+      break;
+    case "SET_HOST":
+      draft.downloaderDriver.host = action.payload;
+      break;
+    case "SET_PASSWORD":
+      draft.downloaderDriver.password = action.payload;
+      break;
+    case "SET_TIMEOUT_SECONDS":
+      draft.downloaderDriver.timeoutSeconds = action.payload;
+      break;
+    case "SET_USERNAME":
+      draft.downloaderDriver.username = action.payload;
       break;
 
     default:

@@ -9,7 +9,9 @@ import { initialState } from "./constants";
 import reducer from "./reducer";
 import useDisplayTimePreview from "./useDisplayTimePreview";
 import useFetchAgencyOptions from "./useFetchAgencyOptions";
+import useFetchDownloaderDriverConfigOptions from "./useFetchDownloaderDriverConfigOptions";
 import useFetchDownloaderFileOptions from "./useFetchDownloaderFileOptions";
+import useFetchDriverOptions from "./useFetchDriverOptions";
 import useFetchStorage from "./useFetchStorage";
 
 import type { FormEvent } from "react";
@@ -23,7 +25,7 @@ export default function SettingsDownloader() {
   const disabled = !state.general.status;
 
   // Event handlers
-  function handleEvent(type: string) {
+  function handleEvent(type: Action["type"]) {
     return function (payload: unknown) {
       dispatch({ type, payload } as Action);
     };
@@ -39,6 +41,8 @@ export default function SettingsDownloader() {
   useFetchDownloaderFileOptions({ dispatch });
   useFetchStorage({ state, dispatch });
   useDisplayTimePreview({ state, dispatch });
+  useFetchDriverOptions({ state, dispatch });
+  useFetchDownloaderDriverConfigOptions({ state, dispatch });
 
   return (
     <div className="container">
@@ -75,9 +79,20 @@ export default function SettingsDownloader() {
           onScheduleIntervalChange={handleEvent("SET_SCHEDULE_INTERVAL")}
         />
         <FormProcessSettings
-          data={state.process}
+          data={state.downloaderDriver}
           disabled={disabled}
-          onDownloaderDriverType={handleEvent("SET_DOWNLOADER_DRIVER_TYPE")}
+          onDataEntryFormatChange={handleEvent("SET_DATA_ENTRY_FORMAT")}
+          onDownloaderDriverConfigChange={handleEvent(
+            "SET_DOWNLOADER_DRIVER_CONFIG_ID"
+          )}
+          onDownloaderDriverTypeChange={handleEvent(
+            "SET_DOWNLOADER_DRIVER_TYPE"
+          )}
+          onDriverChange={handleEvent("SET_DRIVER_ID")}
+          onHostChange={handleEvent("SET_HOST")}
+          onPasswordChange={handleEvent("SET_PASSWORD")}
+          onTimeoutSecondsChange={handleEvent("SET_TIMEOUT_SECONDS")}
+          onUsernameChange={handleEvent("SET_USERNAME")}
         />
         <div className="action">
           <button type="submit">บันทึก</button>

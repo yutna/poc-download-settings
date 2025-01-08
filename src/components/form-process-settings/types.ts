@@ -1,14 +1,33 @@
+import type { Option } from "@/types/settings-downloader";
+
+export type DataEntryFormat = "SELECT_FROM_SETTINGS" | "SELF_FILL_DATA_ENTRY";
 export type DownloaderDriverType =
-  | "standard"
-  | "non_standard"
-  | "post_processing";
+  | "STANDARD"
+  | "NON_STANDARD"
+  | "POST_PROCESSING";
 
 export interface FormProcessSettingsData {
+  dataEntryFormat: DataEntryFormat;
+  downloaderDriverConfigId: number | undefined;
+  downloaderDriverConfigOptions: Option[];
   downloaderDriverType: DownloaderDriverType;
+  driverId: number | undefined;
+  driverOptions: Option[];
+  host: string;
+  password: string;
+  timeoutSeconds: number;
+  username: string;
 }
 
 export interface FormProcessSettingsProps {
   data: FormProcessSettingsData;
   disabled: boolean;
-  onDownloaderDriverType: (value: DownloaderDriverType) => void;
+  onDataEntryFormatChange: (value: DataEntryFormat) => void;
+  onDownloaderDriverConfigChange: (value: number) => void;
+  onDownloaderDriverTypeChange: (value: DownloaderDriverType) => void;
+  onDriverChange: (value: number) => void;
+  onHostChange: (value: string) => void;
+  onPasswordChange: (value: string) => void;
+  onTimeoutSecondsChange: (value: number) => void;
+  onUsernameChange: (value: string) => void;
 }

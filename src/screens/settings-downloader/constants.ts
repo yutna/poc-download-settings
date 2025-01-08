@@ -6,7 +6,7 @@ export const initialState: State = {
     agencyOptions: [],
     downloader: "",
     downloaderDescription: "",
-    downloaderType: "external",
+    downloaderType: "EXTERNAL",
     status: true,
   },
   dataStorageFolder: {
@@ -21,7 +21,16 @@ export const initialState: State = {
     scheduleInterval: "",
     timePreview: "",
   },
-  process: {
-    downloaderDriverType: "standard",
+  downloaderDriver: {
+    dataEntryFormat: "SELF_FILL_DATA_ENTRY",
+    downloaderDriverConfigId: undefined,
+    downloaderDriverConfigOptions: [],
+    downloaderDriverType: "STANDARD",
+    driverId: undefined,
+    driverOptions: [],
+    host: "",
+    password: "",
+    timeoutSeconds: 0,
+    username: "",
   },
 };

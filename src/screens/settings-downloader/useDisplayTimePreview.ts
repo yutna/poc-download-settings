@@ -6,11 +6,11 @@ import type { Dispatch } from "react";
 import type { Action, State } from "./types";
 
 export default function useDisplayTimePreview({
-  state,
   dispatch,
+  state,
 }: {
-  state: State;
   dispatch: Dispatch<Action>;
+  state: State;
 }) {
   useEffect(() => {
     const expression = state.download.scheduleInterval;

@@ -4,12 +4,14 @@ import type { Dispatch } from "react";
 import type { Action, State } from "./types";
 
 export default function useFetchStorage({
-  state,
   dispatch,
+  state,
+
   delay = 500,
 }: {
-  state: State;
   dispatch: Dispatch<Action>;
+  state: State;
+
   delay?: number;
 }) {
   const { agencyId } = state.general;

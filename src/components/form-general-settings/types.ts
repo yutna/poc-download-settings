@@ -1,6 +1,6 @@
 import type { Option } from "@/types/settings-downloader";
 
-export type DownloaderType = "internal" | "external";
+export type DownloaderType = "INTERNAL" | "EXTERNAL";
 
 export interface FormGeneralSettingsData {
   agencyId: number;
