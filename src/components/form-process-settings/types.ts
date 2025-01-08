@@ -1,3 +1,4 @@
+import type { ChangeEvent } from "react";
 import type { Option } from "@/types/settings-downloader";
 
 export type DataEntryFormat = "SELECT_FROM_SETTINGS" | "SELF_FILL_DATA_ENTRY";
@@ -30,4 +31,16 @@ export interface FormProcessSettingsProps {
   onPasswordChange: (value: string) => void;
   onTimeoutSecondsChange: (value: number) => void;
   onUsernameChange: (value: string) => void;
+}
+
+export interface FormStandardDriverProps {
+  data: FormProcessSettingsData;
+  disabled: boolean;
+  isSelectFromSettings: boolean;
+  onDataEntryFormatChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onDownloaderDriverConfigChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onHostChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onPasswordChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onTimeoutSecondsChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onUsernameChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }

@@ -1,3 +1,5 @@
+import FormStandardDriver from "./FormStandardDriver";
+
 import type {
   DataEntryFormat,
   DownloaderDriverType,
@@ -64,100 +66,23 @@ export default function FormProcessSettings({
 
       {/* Case 1 */}
       {isStandardDriver && (
-        <>
-          <div className="cols group">
-            <div className="col">
-              <label htmlFor="host">โฮส</label>
-              <input
-                disabled={disabled}
-                id="host"
-                name="host"
-                onChange={(e) => onHostChange(e.target.value)}
-                required
-                type="text"
-                value={data.host}
-              />
-            </div>
-            <div className="col">
-              <label htmlFor="timeoutSeconds">Timout</label>
-              <input
-                disabled={disabled}
-                is="timeoutSeconds"
-                name="timeoutSeconds"
-                onChange={(e) => onTimeoutSecondsChange(Number(e.target.value))}
-                required
-                type="number"
-                value={data.timeoutSeconds}
-              />
-            </div>
-          </div>
-          <div className="cols group">
-            <div className="col">
-              <label htmlFor="dataEntryFormat">รูปแบบการกรอกข้อมูล</label>
-              <select
-                disabled={disabled}
-                id="dataEntryFormat"
-                name="dataEntryFormat"
-                onChange={(e) =>
-                  onDataEntryFormatChange(e.target.value as DataEntryFormat)
-                }
-                required
-                value={data.dataEntryFormat}
-              >
-                <option value="SELF_FILL_DATA_ENTRY">
-                  กรอกข้อมูลด้วยตัวเอง
-                </option>
-                <option value="SELECT_FROM_SETTINGS">เลือกจากการตั้งค่า</option>
-              </select>
-            </div>
-            {isSelectFromSettings && (
-              <div className="col">
-                <label htmlFor="downloaderDriverConfigId">Config Name</label>
-                <select
-                  disabled={disabled}
-                  id="downloaderDriverConfigId"
-                  name="downloaderDriverConfigId"
-                  onChange={(e) =>
-                    onDownloaderDriverConfigChange(Number(e.target.value))
-                  }
-                  required
-                  value={data.downloaderDriverConfigId}
-                >
-                  <option disabled value=""></option>
-                  {data.downloaderDriverConfigOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div>
-          <div className="cols group">
-            <div className="col">
-              <label htmlFor="username">Username</label>
-              <input
-                disabled={disabled || isSelectFromSettings}
-                id="username"
-                name="username"
-                onChange={(e) => onUsernameChange(e.target.value)}
-                type="text"
-                value={data.username}
-              />
-            </div>
-            <div className="col">
-              <label htmlFor="password">Password</label>
-              <input
-                disabled={disabled || isSelectFromSettings}
-                id="password"
-                name="password"
-                onChange={(e) => onPasswordChange(e.target.value)}
-                type="text"
-                value={data.password}
-              />
-            </div>
-          </div>
-        </>
+        <FormStandardDriver
+          data={data}
+          disabled={disabled}
+          isSelectFromSettings={isSelectFromSettings}
+          onDataEntryFormatChange={(e) =>
+            onDataEntryFormatChange(e.target.value as DataEntryFormat)
+          }
+          onDownloaderDriverConfigChange={(e) =>
+            onDownloaderDriverConfigChange(Number(e.target.value))
+          }
+          onHostChange={(e) => onHostChange(e.target.value)}
+          onPasswordChange={(e) => onPasswordChange(e.target.value)}
+          onTimeoutSecondsChange={(e) =>
+            onTimeoutSecondsChange(Number(e.target.value))
+          }
+          onUsernameChange={(e) => onUsernameChange(e.target.value)}
+        />
       )}
     </fieldset>
   );
