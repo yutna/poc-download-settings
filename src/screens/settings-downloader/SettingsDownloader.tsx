@@ -81,6 +81,7 @@ export default function SettingsDownloader() {
         <FormProcessSettings
           data={state.downloaderDriver}
           disabled={disabled}
+          onCommandSetChange={handleEvent("SET_COMMAND_SET")}
           onDataEntryFormatChange={handleEvent("SET_DATA_ENTRY_FORMAT")}
           onDownloaderDriverConfigChange={handleEvent(
             "SET_DOWNLOADER_DRIVER_CONFIG_ID"

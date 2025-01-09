@@ -14,6 +14,7 @@ import type { Option } from "@/types/form";
 export type Action =
   | { type: "SET_AGENCY_ID"; payload: number }
   | { type: "SET_AGENCY_OPTIONS"; payload: Option[] }
+  | { type: "SET_COMMAND_SET"; payload: string }
   | { type: "SET_DATA_ENTRY_FORMAT"; payload: DataEntryFormat }
   | { type: "SET_DATA_SUB_TYPE"; payload: string }
   | { type: "SET_DATA_TYPE"; payload: string }

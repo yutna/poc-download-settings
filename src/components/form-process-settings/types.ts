@@ -8,6 +8,7 @@ export type DownloaderDriverType =
   | "POST_PROCESSING";
 
 export interface FormProcessSettingsData {
+  commandSet: string;
   dataEntryFormat: DataEntryFormat;
   downloaderDriverConfigId: number | undefined;
   downloaderDriverConfigOptions: Option[];
@@ -20,9 +21,17 @@ export interface FormProcessSettingsData {
   username: string;
 }
 
+export interface FormPostProcessingDriverProps {
+  data: FormProcessSettingsData;
+  disabled: boolean;
+  onCommandSetChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onHostChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
 export interface FormProcessSettingsProps {
   data: FormProcessSettingsData;
   disabled: boolean;
+  onCommandSetChange: (value: string) => void;
   onDataEntryFormatChange: (value: DataEntryFormat) => void;
   onDownloaderDriverConfigChange: (value: number) => void;
   onDownloaderDriverTypeChange: (value: DownloaderDriverType) => void;

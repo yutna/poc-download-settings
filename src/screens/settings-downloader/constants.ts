@@ -22,6 +22,7 @@ export const initialState: State = {
     timePreview: "",
   },
   downloaderDriver: {
+    commandSet: "",
     dataEntryFormat: "SELF_FILL_DATA_ENTRY",
     downloaderDriverConfigId: undefined,
     downloaderDriverConfigOptions: [],

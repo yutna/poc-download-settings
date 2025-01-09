@@ -1,3 +1,4 @@
+import FormPostProcessingDriver from "./FormPostProcessingDriver";
 import FormStandardDriver from "./FormStandardDriver";
 
 import type {
@@ -9,6 +10,7 @@ import type {
 export default function FormProcessSettings({
   data,
   disabled,
+  onCommandSetChange,
   onDataEntryFormatChange,
   onDownloaderDriverConfigChange,
   onDownloaderDriverTypeChange,
@@ -19,8 +21,10 @@ export default function FormProcessSettings({
   onUsernameChange,
 }: FormProcessSettingsProps) {
   // Variables
-  const isStandardDriver = data.downloaderDriverType === "STANDARD";
+  const isPostProcessingDriver =
+    data.downloaderDriverType === "POST_PROCESSING";
   const isSelectFromSettings = data.dataEntryFormat === "SELECT_FROM_SETTINGS";
+  const isStandardDriver = data.downloaderDriverType === "STANDARD";
 
   return (
     <fieldset>
@@ -82,6 +86,16 @@ export default function FormProcessSettings({
             onTimeoutSecondsChange(Number(e.target.value))
           }
           onUsernameChange={(e) => onUsernameChange(e.target.value)}
+        />
+      )}
+
+      {/* Case 3 */}
+      {isPostProcessingDriver && (
+        <FormPostProcessingDriver
+          data={data}
+          disabled={disabled}
+          onCommandSetChange={(e) => onCommandSetChange(e.target.value)}
+          onHostChange={(e) => onHostChange(e.target.value)}
         />
       )}
     </fieldset>

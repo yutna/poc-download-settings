@@ -51,6 +51,9 @@ export default function reducer(draft: State, action: Action) {
       break;
 
     // Process Settings
+    case "SET_COMMAND_SET":
+      draft.downloaderDriver.commandSet = action.payload;
+      break;
     case "SET_DATA_ENTRY_FORMAT":
       draft.downloaderDriver.dataEntryFormat = action.payload;
       break;

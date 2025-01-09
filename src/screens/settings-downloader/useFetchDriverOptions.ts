@@ -18,6 +18,7 @@ export default function useFetchDropdownOptions({
 }) {
   useEffect(() => {
     // TODO: fetch downloader driver options
+    // TODO: implement clear data when driver change
     switch (state.downloaderDriver.downloaderDriverType) {
       case "STANDARD":
         dispatch({
