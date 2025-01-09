@@ -28,7 +28,9 @@ export type Action =
   | { type: "SET_DOWNLOADER_TYPE"; payload: DownloaderType }
   | { type: "SET_DRIVER_ID"; payload: number }
   | { type: "SET_DRIVER_OPTIONS"; payload: Option[] }
+  | { type: "SET_HAS_PARAMETER"; payload: boolean }
   | { type: "SET_HOST"; payload: string }
+  | { type: "SET_PARAMETER"; payload: Record<string, string> }
   | { type: "SET_PASSWORD"; payload: string }
   | { type: "SET_RETRY_COUNT"; payload: number }
   | { type: "SET_SCHEDULE_INTERVAL"; payload: string }

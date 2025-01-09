@@ -72,8 +72,14 @@ export default function reducer(draft: State, action: Action) {
     case "SET_DRIVER_OPTIONS":
       draft.downloaderDriver.driverOptions = action.payload;
       break;
+    case "SET_HAS_PARAMETER":
+      draft.downloaderDriver.hasParameter = action.payload;
+      break;
     case "SET_HOST":
       draft.downloaderDriver.host = action.payload;
+      break;
+    case "SET_PARAMETER":
+      draft.downloaderDriver.parameter = action.payload;
       break;
     case "SET_PASSWORD":
       draft.downloaderDriver.password = action.payload;

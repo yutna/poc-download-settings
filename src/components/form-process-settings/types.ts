@@ -7,6 +7,11 @@ export type DownloaderDriverType =
   | "NON_STANDARD"
   | "POST_PROCESSING";
 
+export interface ParameterRow {
+  key: string;
+  value: string;
+}
+
 export interface FormProcessSettingsData {
   commandSet: string;
   dataEntryFormat: DataEntryFormat;
@@ -15,10 +20,27 @@ export interface FormProcessSettingsData {
   downloaderDriverType: DownloaderDriverType;
   driverId: number | undefined;
   driverOptions: Option[];
+  hasParameter: boolean;
   host: string;
+  parameter: Record<string, string>;
   password: string;
   timeoutSeconds: number;
   username: string;
+}
+
+export interface FormNonStandardDriverProps {
+  data: FormProcessSettingsData;
+  disabled: boolean;
+  onDeleteParameter: (index: number) => void;
+  onHasParameterChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onHostChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onParameterChange: (
+    index: number,
+    field: "key" | "value",
+    value: string
+  ) => void;
+  onTimeoutSecondsChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  parameterRows: ParameterRow[];
 }
 
 export interface FormPostProcessingDriverProps {
@@ -33,13 +55,21 @@ export interface FormProcessSettingsProps {
   disabled: boolean;
   onCommandSetChange: (value: string) => void;
   onDataEntryFormatChange: (value: DataEntryFormat) => void;
+  onDeleteParameter: (index: number) => void;
   onDownloaderDriverConfigChange: (value: number) => void;
   onDownloaderDriverTypeChange: (value: DownloaderDriverType) => void;
   onDriverChange: (value: number) => void;
+  onHasParameterChange: (checked: boolean) => void;
   onHostChange: (value: string) => void;
+  onParameterChange: (
+    index: number,
+    field: "key" | "value",
+    value: string
+  ) => void;
   onPasswordChange: (value: string) => void;
   onTimeoutSecondsChange: (value: number) => void;
   onUsernameChange: (value: string) => void;
+  parameterRows: ParameterRow[];
 }
 
 export interface FormStandardDriverProps {

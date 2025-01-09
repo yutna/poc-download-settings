@@ -1,3 +1,4 @@
+import FormNonStandardDriver from "./FormNonStandardDriver";
 import FormPostProcessingDriver from "./FormPostProcessingDriver";
 import FormStandardDriver from "./FormStandardDriver";
 
@@ -12,15 +13,20 @@ export default function FormProcessSettings({
   disabled,
   onCommandSetChange,
   onDataEntryFormatChange,
+  onDeleteParameter,
   onDownloaderDriverConfigChange,
   onDownloaderDriverTypeChange,
   onDriverChange,
+  onHasParameterChange,
   onHostChange,
+  onParameterChange,
   onPasswordChange,
   onTimeoutSecondsChange,
   onUsernameChange,
+  parameterRows,
 }: FormProcessSettingsProps) {
   // Variables
+  const isNonStandardDriver = data.downloaderDriverType === "NON_STANDARD";
   const isPostProcessingDriver =
     data.downloaderDriverType === "POST_PROCESSING";
   const isSelectFromSettings = data.dataEntryFormat === "SELECT_FROM_SETTINGS";
@@ -86,6 +92,22 @@ export default function FormProcessSettings({
             onTimeoutSecondsChange(Number(e.target.value))
           }
           onUsernameChange={(e) => onUsernameChange(e.target.value)}
+        />
+      )}
+
+      {/* Case 2 */}
+      {isNonStandardDriver && (
+        <FormNonStandardDriver
+          data={data}
+          disabled={disabled}
+          onDeleteParameter={onDeleteParameter}
+          onHasParameterChange={(e) => onHasParameterChange(e.target.checked)}
+          onHostChange={(e) => onHostChange(e.target.value)}
+          onParameterChange={onParameterChange}
+          onTimeoutSecondsChange={(e) =>
+            onTimeoutSecondsChange(Number(e.target.value))
+          }
+          parameterRows={parameterRows}
         />
       )}
 
