@@ -24,6 +24,7 @@ export const initialState: State = {
   downloaderDriver: {
     commandSet: "",
     dataEntryFormat: "SELF_FILL_DATA_ENTRY",
+    deleteOldFile: 0,
     downloaderDriverConfigId: undefined,
     downloaderDriverConfigOptions: [],
     downloaderDriverType: "STANDARD",

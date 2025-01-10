@@ -3,15 +3,22 @@ import type { FormNonStandardDriverProps } from "./types";
 export default function FormNonStandardDriver({
   data,
   disabled,
+  isSelectFromSettings,
+  onDataEntryFormatChange,
   onDeleteParameter,
+  onDeleteOldFileChange,
+  onDownloaderDriverConfigChange,
   onHasParameterChange,
   onHostChange,
   onParameterChange,
+  onPasswordChange,
   onTimeoutSecondsChange,
+  onUsernameChange,
   parameterRows,
 }: FormNonStandardDriverProps) {
   // Variables
   const isDisabledAdditionalParameters = disabled || !data.hasParameter;
+  const isNonStandardFtpSftp = data.driverTemplate === "NON_STANDARD_FTP_SFTP";
 
   // Functions
   function isLastRow(index: number, key: string, value: string): boolean {
@@ -50,6 +57,88 @@ export default function FormNonStandardDriver({
           />
         </div>
       </div>
+
+      {isNonStandardFtpSftp && (
+        <>
+          <div className="group">
+            <label htmlFor="deleteOldFile">ลบไฟล์เก่า</label>
+            <input
+              disabled={disabled}
+              id="deleteOldFile"
+              name="deleteOldFile"
+              onChange={onDeleteOldFileChange}
+              required
+              type="number"
+              value={data.deleteOldFile}
+            />
+          </div>
+          <div className="cols group">
+            <div className="col">
+              <label htmlFor="dataEntryFormat">รูปแบบการกรอกข้อมูล</label>
+              <select
+                disabled={disabled}
+                id="dataEntryFormat"
+                name="dataEntryFormat"
+                onChange={onDataEntryFormatChange}
+                required
+                value={data.dataEntryFormat}
+              >
+                <option value="SELF_FILL_DATA_ENTRY">
+                  กรอกข้อมูลด้วยตัวเอง
+                </option>
+                <option value="SELECT_FROM_SETTINGS">เลือกจากการตั้งค่า</option>
+              </select>
+            </div>
+            {isSelectFromSettings && (
+              <div className="col">
+                <label htmlFor="downloaderDriverConfigId">Config Name</label>
+                <select
+                  defaultValue={data.downloaderDriverConfigId ?? ""}
+                  disabled={disabled}
+                  id="downloaderDriverConfigId"
+                  name="downloaderDriverConfigId"
+                  onChange={onDownloaderDriverConfigChange}
+                  required
+                  value={data.downloaderDriverConfigId}
+                >
+                  <option value=""></option>
+                  {data.downloaderDriverConfigOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+          <div className="cols group">
+            <div className="col">
+              <label htmlFor="username">Username</label>
+              <input
+                disabled={disabled || isSelectFromSettings}
+                id="username"
+                name="username"
+                onChange={onUsernameChange}
+                required
+                type="text"
+                value={data.username}
+              />
+            </div>
+            <div className="col">
+              <label htmlFor="password">Password</label>
+              <input
+                disabled={disabled || isSelectFromSettings}
+                id="password"
+                name="password"
+                onChange={onPasswordChange}
+                required
+                type="text"
+                value={data.password}
+              />
+            </div>
+          </div>
+        </>
+      )}
 
       <div className="group">
         <input

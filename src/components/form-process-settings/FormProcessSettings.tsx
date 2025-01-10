@@ -13,6 +13,7 @@ export default function FormProcessSettings({
   disabled,
   onCommandSetChange,
   onDataEntryFormatChange,
+  onDeleteOldFileChange,
   onDeleteParameter,
   onDownloaderDriverConfigChange,
   onDownloaderDriverTypeChange,
@@ -102,13 +103,25 @@ export default function FormProcessSettings({
         <FormNonStandardDriver
           data={data}
           disabled={disabled}
+          isSelectFromSettings={isSelectFromSettings}
+          onDataEntryFormatChange={(e) =>
+            onDataEntryFormatChange(e.target.value as DataEntryFormat)
+          }
+          onDeleteOldFileChange={(e) =>
+            onDeleteOldFileChange(Number(e.target.value))
+          }
           onDeleteParameter={onDeleteParameter}
+          onDownloaderDriverConfigChange={(e) =>
+            onDownloaderDriverConfigChange(Number(e.target.value))
+          }
           onHasParameterChange={(e) => onHasParameterChange(e.target.checked)}
           onHostChange={(e) => onHostChange(e.target.value)}
           onParameterChange={onParameterChange}
+          onPasswordChange={(e) => onPasswordChange(e.target.value)}
           onTimeoutSecondsChange={(e) =>
             onTimeoutSecondsChange(Number(e.target.value))
           }
+          onUsernameChange={(e) => onUsernameChange(e.target.value)}
           parameterRows={parameterRows}
         />
       )}

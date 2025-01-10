@@ -15,6 +15,7 @@ export interface ParameterRow {
 export interface FormProcessSettingsData {
   commandSet: string;
   dataEntryFormat: DataEntryFormat;
+  deleteOldFile: number;
   downloaderDriverConfigId: number | undefined;
   downloaderDriverConfigOptions: Option[];
   downloaderDriverType: DownloaderDriverType;
@@ -32,7 +33,11 @@ export interface FormProcessSettingsData {
 export interface FormNonStandardDriverProps {
   data: FormProcessSettingsData;
   disabled: boolean;
+  isSelectFromSettings: boolean;
+  onDataEntryFormatChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   onDeleteParameter: (index: number) => void;
+  onDeleteOldFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onDownloaderDriverConfigChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   onHasParameterChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onHostChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onParameterChange: (
@@ -40,7 +45,9 @@ export interface FormNonStandardDriverProps {
     field: "key" | "value",
     value: string
   ) => void;
+  onPasswordChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onTimeoutSecondsChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onUsernameChange: (e: ChangeEvent<HTMLInputElement>) => void;
   parameterRows: ParameterRow[];
 }
 
@@ -56,6 +63,7 @@ export interface FormProcessSettingsProps {
   disabled: boolean;
   onCommandSetChange: (value: string) => void;
   onDataEntryFormatChange: (value: DataEntryFormat) => void;
+  onDeleteOldFileChange: (value: number) => void;
   onDeleteParameter: (index: number) => void;
   onDownloaderDriverConfigChange: (value: number) => void;
   onDownloaderDriverTypeChange: (value: DownloaderDriverType) => void;
