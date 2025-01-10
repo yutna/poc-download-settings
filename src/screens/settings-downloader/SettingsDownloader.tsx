@@ -100,7 +100,7 @@ export default function SettingsDownloader() {
           onAgencyChange={handleEvent("SET_AGENCY_ID")}
           onDownloaderChange={handleEvent("SET_DOWNLOADER")}
           onDownloaderDescriptionChange={handleEvent(
-            "SET_DOWNLOADER_DESCRIPTION"
+            "SET_DOWNLOADER_DESCRIPTION",
           )}
           onDownloaderTypeChange={handleEvent("SET_DOWNLOADER_TYPE")}
           onStatusChange={handleEvent("SET_STATUS")}
