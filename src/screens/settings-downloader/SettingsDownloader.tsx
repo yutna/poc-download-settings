@@ -15,13 +15,14 @@ import useFetchDownloaderDriverConfigOptions from "./useFetchDownloaderDriverCon
 import useFetchDownloaderFileOptions from "./useFetchDownloaderFileOptions";
 import useFetchDriverOptions from "./useFetchDriverOptions";
 import useFetchStorage from "./useFetchStorage";
+import useUpdateDriverTemplate from "./useUpdateDriverTemplate";
 
 import type { FormEvent } from "react";
 import type { Action } from "./types";
 
 export default function SettingsDownloader() {
   // Hooks
-  const [showPreview] = useState(false);
+  const [showPreview] = useState(true);
   const [state, dispatch] = useImmerReducer(reducer, initialState);
   const [parameterRows, setParameterRows] = useImmer(
     getParameterRows(state.downloaderDriver.parameter)
@@ -76,6 +77,7 @@ export default function SettingsDownloader() {
   useDisplayTimePreview({ state, dispatch });
   useFetchDriverOptions({ state, dispatch });
   useFetchDownloaderDriverConfigOptions({ state, dispatch });
+  useUpdateDriverTemplate({ state, dispatch });
 
   // TODO: just debug value, remove this when finished implementation.
   useEffect(() => {

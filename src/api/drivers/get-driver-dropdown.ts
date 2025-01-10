@@ -8,6 +8,7 @@ export default async function getDriverDropdown(
   const searchParams = new URLSearchParams({
     driverType,
     withContext: String(withContext),
+    limit: String(-1),
   }).toString();
 
   const url = `${BASE_API_URL}/v3/driver/dropdown?${searchParams}`;

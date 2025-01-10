@@ -30,7 +30,7 @@ export type Action =
   | { type: "SET_DOWNLOADER_TYPE"; payload: DownloaderType }
   | { type: "SET_DRIVER_ID"; payload: number | undefined }
   | { type: "SET_DRIVER_OPTIONS"; payload: Option[] }
-  | { type: "SET_DRIVER_TEMPLATE"; payload: string }
+  | { type: "SET_DRIVER_TEMPLATE"; payload: string | undefined }
   | { type: "SET_HAS_PARAMETER"; payload: boolean }
   | { type: "SET_HOST"; payload: string }
   | { type: "SET_PARAMETER"; payload: Record<string, string> }
