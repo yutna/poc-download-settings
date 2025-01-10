@@ -58,6 +58,7 @@ export default function FormProcessSettings({
         <div className="col">
           <label htmlFor="driverId">ชื่อไดรเวอร์</label>
           <select
+            defaultValue={data.driverId ?? ""}
             disabled={disabled}
             id="driverId"
             name="driverId"
@@ -65,6 +66,7 @@ export default function FormProcessSettings({
             required
             value={data.driverId}
           >
+            <option value=""></option>
             {data.driverOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}

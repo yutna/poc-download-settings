@@ -50,10 +50,13 @@ body {
 }
 
 .col {
+  flex: 1 1 auto;
+}
+
+.dynamic-field {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex: 1 1 auto;
 }
 
 .col + .col {

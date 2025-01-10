@@ -20,6 +20,7 @@ export interface FormProcessSettingsData {
   downloaderDriverType: DownloaderDriverType;
   driverId: number | undefined;
   driverOptions: Option[];
+  driverTemplate: string | undefined;
   hasParameter: boolean;
   host: string;
   parameter: Record<string, string>;

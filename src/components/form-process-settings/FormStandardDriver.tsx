@@ -58,6 +58,7 @@ export default function FormStandardDriver({
           <div className="col">
             <label htmlFor="downloaderDriverConfigId">Config Name</label>
             <select
+              defaultValue={data.downloaderDriverConfigId ?? ""}
               disabled={disabled}
               id="downloaderDriverConfigId"
               name="downloaderDriverConfigId"
@@ -65,7 +66,7 @@ export default function FormStandardDriver({
               required
               value={data.downloaderDriverConfigId}
             >
-              <option disabled value=""></option>
+              <option value=""></option>
               {data.downloaderDriverConfigOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}

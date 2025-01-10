@@ -75,7 +75,7 @@ export default function FormNonStandardDriver({
               value={key}
             />
           </div>
-          <div className="col">
+          <div className="col dynamic-field">
             <input
               disabled={isDisabledAdditionalParameters}
               id={`v${index}`}

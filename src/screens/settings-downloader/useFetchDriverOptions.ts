@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 
-import {
-  NON_STANDARD_OPTIONS,
-  POST_PROCESSING,
-  STANDARD_OPTIONS,
-} from "./fixtures";
+import { getDriverDropdown } from "@/api/drivers";
 
 import type { Dispatch } from "react";
+import type { Option } from "@/types/form";
 import type { Action, State } from "./types";
 
 export default function useFetchDropdownOptions({
@@ -17,39 +14,41 @@ export default function useFetchDropdownOptions({
   state: State;
 }) {
   useEffect(() => {
-    // TODO: fetch downloader driver options
     // TODO: implement clear data when driver change
-    switch (state.downloaderDriver.downloaderDriverType) {
-      case "STANDARD":
-        dispatch({
-          type: "SET_DRIVER_OPTIONS",
-          payload: STANDARD_OPTIONS,
-        });
+    const driverType = state.downloaderDriver.downloaderDriverType;
 
-        dispatch({
-          type: "SET_DATA_ENTRY_FORMAT",
-          payload: "SELF_FILL_DATA_ENTRY",
-        });
-        break;
-      case "NON_STANDARD":
-        dispatch({
-          type: "SET_DRIVER_OPTIONS",
-          payload: NON_STANDARD_OPTIONS,
-        });
-        break;
-      case "POST_PROCESSING":
-        dispatch({
-          type: "SET_DRIVER_OPTIONS",
-          payload: POST_PROCESSING,
-        });
+    dispatch({
+      type: "SET_TEMP_DRIVER_DROPDOWN",
+      payload: { data: [], isPending: true },
+    });
 
-        dispatch({
-          type: "SET_TIMEOUT_SECONDS",
-          payload: 0,
-        });
-        break;
-      default:
-        throw new Error("Unknown download driver option");
+    getDriverDropdown(driverType).then((drivers) => {
+      dispatch({
+        type: "SET_TEMP_DRIVER_DROPDOWN",
+        payload: { data: drivers, isPending: false },
+      });
+
+      const options: Option[] = drivers
+        .filter((driver) => driver.context.driverTemplate.includes(driverType))
+        .sort((a, b) => a.id - b.id)
+        .map(({ id, label }) => ({ label, value: id.toString() }));
+
+      dispatch({ type: "SET_DRIVER_ID", payload: undefined });
+      dispatch({ type: "SET_DRIVER_OPTIONS", payload: options });
+    });
+
+    if (driverType === "STANDARD") {
+      dispatch({
+        type: "SET_DATA_ENTRY_FORMAT",
+        payload: "SELF_FILL_DATA_ENTRY",
+      });
+    }
+
+    if (driverType === "POST_PROCESSING") {
+      dispatch({
+        type: "SET_TIMEOUT_SECONDS",
+        payload: 0,
+      });
     }
   }, [dispatch, state.downloaderDriver.downloaderDriverType]);
 }

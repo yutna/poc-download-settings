@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useImmer, useImmerReducer } from "use-immer";
 
 import FormDataStorageFolder from "@/components/form-data-storage-folder";
@@ -21,6 +21,7 @@ import type { Action } from "./types";
 
 export default function SettingsDownloader() {
   // Hooks
+  const [showPreview] = useState(false);
   const [state, dispatch] = useImmerReducer(reducer, initialState);
   const [parameterRows, setParameterRows] = useImmer(
     getParameterRows(state.downloaderDriver.parameter)
@@ -84,7 +85,10 @@ export default function SettingsDownloader() {
 
   return (
     <div className="container">
-      <div className="preview">
+      <div
+        className="preview"
+        style={{ display: showPreview ? "block" : "none" }}
+      >
         <pre>{JSON.stringify(state, null, 2)}</pre>
       </div>
       <form onSubmit={handleSubmit}>

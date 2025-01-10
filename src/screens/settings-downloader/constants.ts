@@ -29,6 +29,7 @@ export const initialState: State = {
     downloaderDriverType: "STANDARD",
     driverId: undefined,
     driverOptions: [],
+    driverTemplate: undefined,
     hasParameter: true,
     host: "",
     parameter: {
@@ -44,5 +45,11 @@ export const initialState: State = {
     password: "",
     timeoutSeconds: 0,
     username: "",
+  },
+  temp: {
+    driverDropdown: {
+      data: [],
+      isPending: false,
+    },
   },
 };

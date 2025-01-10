@@ -72,6 +72,9 @@ export default function reducer(draft: State, action: Action) {
     case "SET_DRIVER_OPTIONS":
       draft.downloaderDriver.driverOptions = action.payload;
       break;
+    case "SET_DRIVER_TEMPLATE":
+      draft.downloaderDriver.driverTemplate = action.payload;
+      break;
     case "SET_HAS_PARAMETER":
       draft.downloaderDriver.hasParameter = action.payload;
       break;
@@ -89,6 +92,11 @@ export default function reducer(draft: State, action: Action) {
       break;
     case "SET_USERNAME":
       draft.downloaderDriver.username = action.payload;
+      break;
+
+    // Temp
+    case "SET_TEMP_DRIVER_DROPDOWN":
+      draft.temp.driverDropdown = action.payload;
       break;
 
     default:
