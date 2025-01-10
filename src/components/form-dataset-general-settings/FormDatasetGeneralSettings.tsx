@@ -1,10 +1,10 @@
-import type { FormDataSetGeneralSettingsProps } from "./types";
+import type { FormDatasetGeneralSettingsProps } from "./types";
 
-export default function FormDataSetGeneralSettings({
+export default function FormDatasetGeneralSettings({
   data,
-  onDataSetChange,
-  onDataSetDescriptionChange,
-}: FormDataSetGeneralSettingsProps) {
+  onDatasetChange,
+  onDatasetDescriptionChange,
+}: FormDatasetGeneralSettingsProps) {
   return (
     <fieldset>
       <legend>ข้อมูลทั่วไป</legend>
@@ -13,7 +13,7 @@ export default function FormDataSetGeneralSettings({
         <input
           id="dataset"
           name="dataset"
-          onChange={(e) => onDataSetChange(e.target.value)}
+          onChange={(e) => onDatasetChange(e.target.value)}
           required
           type="text"
           value={data.dataset}
@@ -22,7 +22,7 @@ export default function FormDataSetGeneralSettings({
         <input
           id="datasetDescription"
           name="datasetDescription"
-          onChange={(e) => onDataSetDescriptionChange(e.target.value)}
+          onChange={(e) => onDatasetDescriptionChange(e.target.value)}
           required
           type="text"
           value={data.datasetDescription}

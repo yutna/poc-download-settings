@@ -1,10 +1,10 @@
-import { FormDataSetChangeAndImportProps } from "./types";
+import { FormDatasetChangeAndImportProps } from "./types";
 
-export default function FormDataSetChangeAndImport({
+export default function FormDatasetChangeAndImport({
   data,
   onFieldChange,
   onSomeSelectChange,
-}: FormDataSetChangeAndImportProps) {
+}: FormDatasetChangeAndImportProps) {
   return (
     <fieldset>
       <legend>ข้อมูลการเปลี่ยนแปลงและนำเข้าข้อมูล</legend>

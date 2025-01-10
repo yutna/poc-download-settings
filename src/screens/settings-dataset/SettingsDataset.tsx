@@ -1,22 +1,24 @@
 import { useImmerReducer } from "use-immer";
 
-import FormDataSetChangeAndImport from "@/components/form-data-set-change-and-import";
-import FormDataSetFieldSettings from "@/components/form-data-set-field-settings";
-import FormDataSetGeneralSettings from "@/components/form-data-set-general-settings";
+import FormDataSetChangeAndImport from "@/components/form-dataset-change-and-import";
+import FormDataSetFieldSettings from "@/components/form-dataset-field-settings";
+import FormDatasetGeneralSettings from "@/components/form-dataset-general-settings";
 
 import { initialState } from "./constants";
 import reducer from "./reducer";
+import useFetchMetadataDropdown from "./useFetchMetadataDropdown";
+import useFetchDatasetTransformDropdown from "./useFetchDatasetTranformDropdown";
 
 import type { FormEvent } from "react";
 import type { Action } from "./types";
 
-export default function SettingsDataSet() {
+export default function SettingsDataset() {
   // Hooks
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
   // Event handlers
   function handleEvent(type: string) {
-    return function (payload: unknown) {
+    return function(payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -27,7 +29,8 @@ export default function SettingsDataSet() {
   }
 
   // Effect hooks
-  // useFetchAgencyOptions({ dispatch });
+  useFetchMetadataDropdown({ dispatch });
+  useFetchDatasetTransformDropdown({ dispatch });
 
   return (
     <div className="container">
@@ -35,10 +38,10 @@ export default function SettingsDataSet() {
         <pre>{JSON.stringify(state, null, 2)}</pre>
       </div>
       <form onSubmit={handleSubmit}>
-        <FormDataSetGeneralSettings
+        <FormDatasetGeneralSettings
           data={state.general}
-          onDataSetChange={handleEvent("SET_DATASET")}
-          onDataSetDescriptionChange={handleEvent("SET_DATASET_DESCRIPTION")}
+          onDatasetChange={handleEvent("SET_DATASET")}
+          onDatasetDescriptionChange={handleEvent("SET_DATASET_DESCRIPTION")}
         />
         <FormDataSetChangeAndImport
           data={state.changeAndImport}

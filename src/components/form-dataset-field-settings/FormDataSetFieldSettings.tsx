@@ -1,13 +1,13 @@
-import { initialFieldSettingsData } from "@/screens/settings-data-set/constants";
+import { initialFieldSettingsData } from "@/screens/settings-dataset/constants";
 
-import { type FormDataSetFieldSettingsProps } from "./types";
+import { type FormDatasetFieldSettingsProps } from "./types";
 
-export default function FormDataSetFieldSettings({
+export default function FormDatasetFieldSettings({
   data,
   onSomeFieldChange,
   onFieldSettingsStatusChange,
   onAppendNewFieldSetting,
-}: FormDataSetFieldSettingsProps) {
+}: FormDatasetFieldSettingsProps) {
   return (
     <fieldset>
       <legend>ตั้งค่าฟิลด์</legend>

@@ -1,4 +1,4 @@
-import type { FormDataSetFieldSettingsData } from "@/components/form-data-set-field-settings";
+import type { FormDatasetFieldSettingsData } from "@/components/form-dataset-field-settings";
 
 export const initialState = {
   general: {
@@ -8,6 +8,7 @@ export const initialState = {
   changeAndImport: {
     field1: "",
     someSelect: "",
+    metadataDropdown: [],
   },
   fieldSettings: [
     {
@@ -17,7 +18,7 @@ export const initialState = {
   ],
 };
 
-export const initialFieldSettingsData: FormDataSetFieldSettingsData = {
+export const initialFieldSettingsData: FormDatasetFieldSettingsData = {
   someField: "",
   status: true,
 };

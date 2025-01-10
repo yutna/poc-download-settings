@@ -17,6 +17,12 @@ export default function reducer(draft: State, action: Action) {
     case "SET_SOME_SELECT":
       draft.changeAndImport.someSelect = action.payload;
       break;
+    case "SET_METADATA_DROPDOWN":
+      draft.changeAndImport.metadataDropdown = action.payload;
+      break;
+    case "SET_METADATA_DROPDOWN":
+      draft.changeAndImport.metadataDropdown = action.payload;
+      break;
 
     // Data Set Field Settings Form
     case "SET_SOME_FIELD":
