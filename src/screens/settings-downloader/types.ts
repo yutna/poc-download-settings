@@ -1,3 +1,4 @@
+import type { DownloaderDriverConfigDropdown } from "@/api/downloaders";
 import type { DriverDropdown } from "@/api/drivers";
 import type { FormDataStorageFolderData } from "@/components/form-data-storage-folder";
 import type { FormDownloadSettingsData } from "@/components/form-download-settings";
@@ -41,6 +42,10 @@ export type Action =
   | { type: "SET_STATUS"; payload: boolean }
   | { type: "SET_STORAGE_PREVIEW"; payload: string }
   | {
+      type: "SET_TEMP_DRIVER_CONFIG";
+      payload: ApiRequestState<DownloaderDriverConfigDropdown[]>;
+    }
+  | {
       type: "SET_TEMP_DRIVER_DROPDOWN";
       payload: ApiRequestState<DriverDropdown[]>;
     }
@@ -54,6 +59,7 @@ export type DataStorageFolder = Omit<
 >;
 
 export interface TempData {
+  driverConfig: ApiRequestState<DownloaderDriverConfigDropdown[]>;
   driverDropdown: ApiRequestState<DriverDropdown[]>;
 }
 

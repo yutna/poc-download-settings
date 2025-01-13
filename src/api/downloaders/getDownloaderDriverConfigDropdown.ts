@@ -1,8 +1,14 @@
 import { AUTH_TOKEN, BASE_API_URL } from "@/config/env";
 import type { DownloaderDriverConfigDropdown } from "./types";
 
-export default async function getDownloaderDriverConfigDropdown() {
-  const url = `${BASE_API_URL}/v3/downloader_driver_config/dropdown`;
+export default async function getDownloaderDriverConfigDropdown(
+  driverId: number
+) {
+  const searchParams = new URLSearchParams({
+    driverId: String(driverId),
+  }).toString();
+
+  const url = `${BASE_API_URL}/v3/downloader_driver_configs/dropdown?${searchParams}`;
   const options: RequestInit = {
     method: "GET",
     headers: {
@@ -19,7 +25,7 @@ export default async function getDownloaderDriverConfigDropdown() {
       );
     }
 
-    const data = (await response.json()) as DownloaderDriverConfigDropdown;
+    const data = (await response.json()) as DownloaderDriverConfigDropdown[];
 
     return data;
   } catch (error) {

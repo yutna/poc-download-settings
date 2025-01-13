@@ -1,17 +1,20 @@
+export type AdditionalFieldsTuple = Record<string, string>;
+
+export interface Fields {
+  username: string;
+  password: string;
+}
+
+export interface Context {
+  fields: Fields;
+  additionalFieldsTuple: AdditionalFieldsTuple[];
+}
+
 export interface DownloaderDriverConfigDropdown {
   id: number;
   label: "string";
-  context: {
-    fields: {
-      username: string;
-      password: string;
-    };
-  };
+  context: Context;
 }
-
-// TODO:
-// Yut ต้องส่ง driver id มาใน dropdown config API
-// Robert แก้ field เป็น username password ไปก่อน ตาม UI
 
 export interface DownloaderFileDropdown {
   id: number;

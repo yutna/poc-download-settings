@@ -98,6 +98,9 @@ export default function reducer(draft: State, action: Action) {
       break;
 
     // Temp
+    case "SET_TEMP_DRIVER_CONFIG":
+      draft.temp.driverConfig = action.payload;
+      break;
     case "SET_TEMP_DRIVER_DROPDOWN":
       draft.temp.driverDropdown = action.payload;
       break;

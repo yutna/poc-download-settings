@@ -48,6 +48,10 @@ export const initialState: State = {
     username: "",
   },
   temp: {
+    driverConfig: {
+      data: [],
+      isPending: false,
+    },
     driverDropdown: {
       data: [],
       isPending: false,

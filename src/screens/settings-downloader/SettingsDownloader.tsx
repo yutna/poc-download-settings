@@ -16,6 +16,7 @@ import useFetchDownloaderFileOptions from "./useFetchDownloaderFileOptions";
 import useFetchDriverOptions from "./useFetchDriverOptions";
 import useFetchStorage from "./useFetchStorage";
 import useUpdateDriverTemplate from "./useUpdateDriverTemplate";
+import useUpdateFields from "./useUpdateFields";
 
 import type { FormEvent } from "react";
 import type { Action } from "./types";
@@ -78,6 +79,7 @@ export default function SettingsDownloader() {
   useFetchDriverOptions({ state, dispatch });
   useFetchDownloaderDriverConfigOptions({ state, dispatch });
   useUpdateDriverTemplate({ state, dispatch });
+  useUpdateFields({ state, dispatch });
 
   // TODO: just debug value, remove this when finished implementation.
   useEffect(() => {
@@ -128,6 +130,7 @@ export default function SettingsDownloader() {
           onCommandSetChange={handleEvent("SET_COMMAND_SET")}
           onDataEntryFormatChange={handleEvent("SET_DATA_ENTRY_FORMAT")}
           onDeleteParameter={handleDeleteParameter}
+          onDeleteOldFileChange={handleEvent("SET_DELETE_OLD_FILE")}
           onDownloaderDriverConfigChange={handleEvent(
             "SET_DOWNLOADER_DRIVER_CONFIG_ID",
           )}
