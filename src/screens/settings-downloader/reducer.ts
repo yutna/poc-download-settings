@@ -57,6 +57,9 @@ export default function reducer(draft: State, action: Action) {
     case "SET_DATA_ENTRY_FORMAT":
       draft.downloaderDriver.dataEntryFormat = action.payload;
       break;
+    case "SET_DELETE_OLD_FILE":
+      draft.downloaderDriver.deleteOldFile = action.payload;
+      break;
     case "SET_DOWNLOADER_DRIVER_CONFIG_ID":
       draft.downloaderDriver.downloaderDriverConfigId = action.payload;
       break;

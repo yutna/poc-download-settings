@@ -1,4 +1,4 @@
-export { default as getDriverDropdown } from "./get-driver-dropdown";
+export { default as getDriverDropdown } from "./getDriverDropdown";
 export type {
   DriverDropdown,
   DriverDropdownContext,

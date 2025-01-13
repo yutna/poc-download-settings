@@ -1,1 +1,1 @@
-export { default as getAgencies } from "./get-agencies";
+export { default as getAgencies } from "./getAgencies";

@@ -14,7 +14,6 @@ export default function useFetchDropdownOptions({
   state: State;
 }) {
   useEffect(() => {
-    // TODO: implement clear data when driver change
     const driverType = state.downloaderDriver.downloaderDriverType;
 
     dispatch({
@@ -37,11 +36,28 @@ export default function useFetchDropdownOptions({
       dispatch({ type: "SET_DRIVER_OPTIONS", payload: options });
     });
 
-    if (driverType === "STANDARD") {
+    if (driverType === "STANDARD" || driverType === "NON_STANDARD") {
       dispatch({
         type: "SET_DATA_ENTRY_FORMAT",
         payload: "SELF_FILL_DATA_ENTRY",
       });
+
+      dispatch({
+        type: "SET_DOWNLOADER_DRIVER_CONFIG_ID",
+        payload: undefined,
+      });
+
+      dispatch({
+        type: "SET_DOWNLOADER_DRIVER_CONFIG_OPTIONS",
+        payload: [],
+      });
+
+      dispatch({ type: "SET_USERNAME", payload: "" });
+      dispatch({ type: "SET_PASSWORD", payload: "" });
+    }
+
+    if (driverType === "NON_STANDARD") {
+      dispatch({ type: "SET_DELETE_OLD_FILE", payload: 0 });
     }
 
     if (driverType === "POST_PROCESSING") {

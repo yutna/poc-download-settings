@@ -20,6 +20,7 @@ export type Action =
   | { type: "SET_DATA_ENTRY_FORMAT"; payload: DataEntryFormat }
   | { type: "SET_DATA_SUB_TYPE"; payload: string }
   | { type: "SET_DATA_TYPE"; payload: string }
+  | { type: "SET_DELETE_OLD_FILE"; payload: number }
   | { type: "SET_DOWNLOADER"; payload: string }
   | { type: "SET_DOWNLOADER_DESCRIPTION"; payload: string }
   | { type: "SET_DOWNLOADER_DRIVER_CONFIG_ID"; payload: number | undefined }
