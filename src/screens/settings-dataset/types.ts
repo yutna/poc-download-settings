@@ -3,17 +3,44 @@ import { FormDatasetGeneralSettingsData } from "@/components/form-dataset-genera
 
 import type { FormDatasetChangeAndImportData } from "@/components/form-dataset-change-and-import/types";
 import type {
-  DatasetFieldSettingsSomeField,
+  DatasetFieldSettingsDestinationColumn,
+  DatasetFieldSettingsDestinationOptionType,
+  DatasetFieldSettingsSourceOptionSourceColumn,
+  DatasetFieldSettingsSourceOptionTransformMethod,
   DatasetFieldSettingsStatus,
 } from "@/components/form-dataset-field-settings/types";
+import type { DatasetDropdownOption } from "@/types/form";
 
 export type Action =
   | { type: "SET_DATASET"; payload: string }
   | { type: "SET_DATASET_DESCRIPTION"; payload: string }
   | { type: "SET_FIELD"; payload: string }
-  | { type: "SET_SOME_SELECT"; payload: string }
-  | { type: "SET_METADATA_DROPDOWN"; payload: unknown[] }
-  | { type: "SET_SOME_FIELD"; payload: DatasetFieldSettingsSomeField }
+  | { type: "SET_DATASET_TRANSFORM_ID"; payload: number }
+  | { type: "SET_HEADER_ROW"; payload: number }
+  | { type: "SET_DOWNLOADER_ID"; payload: number }
+  | { type: "SET_METADATA_ID"; payload: number }
+  | { type: "SET_DESTINATION_UNIQUE_KEY"; payload: string }
+  | { type: "SET_DESTINATION_PARTITION_COLUMN"; payload: string }
+  | { type: "SET_DESTINATION_NULL_OPTION"; payload: string }
+  | { type: "SET_METADATA_DROPDOWN"; payload: DatasetDropdownOption[] }
+  | { type: "SET_DATASET_TRANSFORM_DROPDOWN"; payload: DatasetDropdownOption[] }
+  | { type: "SET_DOWNLOADER_DROPDOWN"; payload: DatasetDropdownOption[] }
+  | {
+    type: "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN";
+    payload: DatasetFieldSettingsDestinationColumn;
+  }
+  | {
+    type: "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD";
+    payload: DatasetFieldSettingsSourceOptionTransformMethod;
+  }
+  | {
+    type: "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE";
+    payload: DatasetFieldSettingsDestinationOptionType;
+  }
+  | {
+    type: "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_SOURCE_COLUMN";
+    payload: DatasetFieldSettingsSourceOptionSourceColumn;
+  }
   | {
     type: "SET_DATASET_FIELD_SETTING_STATUS";
     payload: DatasetFieldSettingsStatus;

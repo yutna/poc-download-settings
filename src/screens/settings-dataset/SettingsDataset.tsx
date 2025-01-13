@@ -6,8 +6,9 @@ import FormDatasetGeneralSettings from "@/components/form-dataset-general-settin
 
 import { initialState } from "./constants";
 import reducer from "./reducer";
-import useFetchMetadataDropdown from "./useFetchMetadataDropdown";
 import useFetchDatasetTransformDropdown from "./useFetchDatasetTranformDropdown";
+import useFetchDownloaderDropdown from "./useFetchDownloaderDropdown";
+import useFetchMetadataDropdown from "./useFetchMetadataDropdown";
 
 import type { FormEvent } from "react";
 import type { Action } from "./types";
@@ -18,7 +19,7 @@ export default function SettingsDataset() {
 
   // Event handlers
   function handleEvent(type: string) {
-    return function(payload: unknown) {
+    return function (payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -31,6 +32,7 @@ export default function SettingsDataset() {
   // Effect hooks
   useFetchMetadataDropdown({ dispatch });
   useFetchDatasetTransformDropdown({ dispatch });
+  useFetchDownloaderDropdown({ dispatch });
 
   return (
     <div className="container">
@@ -45,12 +47,34 @@ export default function SettingsDataset() {
         />
         <FormDataSetChangeAndImport
           data={state.changeAndImport}
-          onFieldChange={handleEvent("SET_FIELD")}
-          onSomeSelectChange={handleEvent("SET_SOME_SELECT")}
+          onDatasetTransformIdChange={handleEvent("SET_DATASET_TRANSFORM_ID")}
+          onHeaderRowChange={handleEvent("SET_HEADER_ROW")}
+          onDownloaderIdChange={handleEvent("SET_DOWNLOADER_ID")}
+          onMetadataIdChange={handleEvent("SET_METADATA_ID")}
+          onDestinationUniqueKeyChange={handleEvent(
+            "SET_DESTINATION_UNIQUE_KEY",
+          )}
+          onDestinationPartitionColumnChange={handleEvent(
+            "SET_DESTINATION_PARTITION_COLUMN",
+          )}
+          onDestinationNullOptionChange={handleEvent(
+            "SET_DESTINATION_NULL_OPTION",
+          )}
         />
         <FormDataSetFieldSettings
           data={state.fieldSettings}
-          onSomeFieldChange={handleEvent("SET_SOME_FIELD")}
+          onDestinationColumnChange={handleEvent(
+            "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN",
+          )}
+          onSourceOptionTransformMethodChange={handleEvent(
+            "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD",
+          )}
+          onDestinationOptionType={handleEvent(
+            "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE",
+          )}
+          onSourceOptionSourceColumn={handleEvent(
+            "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_SOURCE_COLUMN",
+          )}
           onFieldSettingsStatusChange={handleEvent(
             "SET_DATASET_FIELD_SETTING_STATUS",
           )}

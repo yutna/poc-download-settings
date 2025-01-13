@@ -1,2 +1,2 @@
-export { default } from "./FormDatasetFieldSettings";
+export { default } from "./FormDataSetFieldSettings";
 export type { FormDatasetFieldSettingsData } from "./types";

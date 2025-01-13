@@ -4,18 +4,54 @@ export enum DatasetFieldSettingStatusType {
 }
 
 export interface FormDatasetFieldSettingsData {
-  someField: string;
-  status: boolean;
+  destinationColumn: string;
+  destinationOptions: {
+    type: string;
+    status: boolean;
+  };
+  sourceOptions: {
+    sourceColumn: string;
+    transform: {
+      method: string;
+    };
+  };
 }
 
 export interface FormDatasetFieldSettingsProps {
   data: Array<FormDatasetFieldSettingsData>;
-  onSomeFieldChange: (payload: DatasetFieldSettingsSomeField) => void;
+  onDestinationColumnChange: (
+    payload: DatasetFieldSettingsDestinationColumn,
+  ) => void;
+  onSourceOptionTransformMethodChange: (
+    payload: DatasetFieldSettingsSourceOptionTransformMethod,
+  ) => void;
+  onDestinationOptionType: (
+    payload: DatasetFieldSettingsDestinationOptionType,
+  ) => void;
+  onSourceOptionSourceColumn: (
+    payload: DatasetFieldSettingsSourceOptionSourceColumn,
+  ) => void;
   onFieldSettingsStatusChange: (payload: DatasetFieldSettingsStatus) => void;
   onAppendNewFieldSetting: (payload: FormDatasetFieldSettingsData) => void;
 }
 
-export interface DatasetFieldSettingsSomeField extends BaseFieldSettings {
+export interface DatasetFieldSettingsSourceOptionSourceColumn
+  extends BaseFieldSettings {
+  value: string;
+}
+
+export interface DatasetFieldSettingsDestinationOptionType
+  extends BaseFieldSettings {
+  value: string;
+}
+
+export interface DatasetFieldSettingsSourceOptionTransformMethod
+  extends BaseFieldSettings {
+  value: string;
+}
+
+export interface DatasetFieldSettingsDestinationColumn
+  extends BaseFieldSettings {
   value: string;
 }
 

@@ -11,26 +11,57 @@ export default function reducer(draft: State, action: Action) {
       break;
 
     // Data Set Change And Import Form
-    case "SET_FIELD":
-      draft.changeAndImport.field1 = action.payload;
+    case "SET_DATASET_TRANSFORM_ID":
+      draft.changeAndImport.datasetTransformId = action.payload;
       break;
-    case "SET_SOME_SELECT":
-      draft.changeAndImport.someSelect = action.payload;
+    case "SET_HEADER_ROW":
+      draft.changeAndImport.headerRow = action.payload;
+      break;
+    case "SET_DOWNLOADER_ID":
+      draft.changeAndImport.downloaderId = action.payload;
+      break;
+    case "SET_METADATA_ID":
+      draft.changeAndImport.metadataId = action.payload;
+      break;
+    case "SET_DESTINATION_UNIQUE_KEY":
+      draft.changeAndImport.destinationUniqueKey = action.payload;
+      break;
+    case "SET_DESTINATION_PARTITION_COLUMN":
+      draft.changeAndImport.destinationPartitionColumn = action.payload;
+      break;
+    case "SET_DESTINATION_NULL_OPTION":
+      draft.changeAndImport.destinationNullOption = action.payload;
       break;
     case "SET_METADATA_DROPDOWN":
       draft.changeAndImport.metadataDropdown = action.payload;
       break;
-    case "SET_METADATA_DROPDOWN":
-      draft.changeAndImport.metadataDropdown = action.payload;
+    case "SET_DATASET_TRANSFORM_DROPDOWN":
+      draft.changeAndImport.datasetTransformDropdown = action.payload;
+      break;
+    case "SET_DOWNLOADER_DROPDOWN":
+      draft.changeAndImport.downloaderDropdown = action.payload;
       break;
 
     // Data Set Field Settings Form
-    case "SET_SOME_FIELD":
-      draft.fieldSettings[action.payload.index].someField =
+    case "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN":
+      draft.fieldSettings[action.payload.index].destinationColumn =
+        action.payload.value;
+      break;
+    case "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD":
+      draft.fieldSettings[action.payload.index].sourceOptions.transform.method =
+        action.payload.value;
+      break;
+    case "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE":
+      draft.fieldSettings[action.payload.index].destinationOptions.type =
+        action.payload.value;
+      break;
+    case "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_SOURCE_COLUMN":
+      draft.fieldSettings[action.payload.index].sourceOptions.sourceColumn =
         action.payload.value;
       break;
     case "SET_DATASET_FIELD_SETTING_STATUS":
-      draft.fieldSettings[action.payload.index].status = action.payload.value;
+      draft.fieldSettings[action.payload.index].destinationOptions.status =
+        action.payload.value;
       break;
     case "APPEND_DATASET_NEW_FIELD_SETTING":
       draft.fieldSettings = [...draft.fieldSettings, action.payload];

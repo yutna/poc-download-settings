@@ -10,18 +10,20 @@ export default async function postDatasets() {
     },
   };
 
+  console.log(options);
+
   try {
-    const response = await fetch(url, options);
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to POST downloader data folder: ${response.statusText}`,
-      );
-    }
-
-    const data = await response.json();
-
-    return data;
+    // const response = await fetch(url, options);
+    //
+    // if (!response.ok) {
+    //   throw new Error(
+    //     `Failed to POST downloader data folder: ${response.statusText}`,
+    //   );
+    // }
+    //
+    // const data = await response.json();
+    //
+    // return data;
   } catch (error) {
     console.error("Error POST datasets:", error);
     throw error;

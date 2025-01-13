@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 
-import { getDatasetTransformDropdown } from "@/api/dataset-transform";
+import { getDownloaderDropdown } from "@/api/downloaders";
 
 import type { Dispatch } from "react";
 import type { Action } from "./types";
 
-export default function useFetchDatasetTransformDropdown({
+export default function useFetchDownloaderDropdown({
   dispatch,
 }: {
   dispatch: Dispatch<Action>;
 }) {
   useEffect(() => {
-    getDatasetTransformDropdown().then((payload) => {
+    getDownloaderDropdown().then((payload) => {
       dispatch({
-        type: "SET_DATASET_TRANSFORM_DROPDOWN",
+        type: "SET_DOWNLOADER_DROPDOWN",
         payload,
       });
     });

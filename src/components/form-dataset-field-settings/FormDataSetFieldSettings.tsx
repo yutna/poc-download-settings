@@ -4,7 +4,10 @@ import { type FormDatasetFieldSettingsProps } from "./types";
 
 export default function FormDatasetFieldSettings({
   data,
-  onSomeFieldChange,
+  onDestinationColumnChange,
+  onSourceOptionTransformMethodChange,
+  onDestinationOptionType,
+  onSourceOptionSourceColumn,
   onFieldSettingsStatusChange,
   onAppendNewFieldSetting,
 }: FormDatasetFieldSettingsProps) {
@@ -16,24 +19,79 @@ export default function FormDatasetFieldSettings({
         return (
           <fieldset>
             <legend>Field #{index + 1}</legend>
-            <div className="group">
-              <label htmlFor="someField">someField</label>
-              <input
-                id="someField"
-                name="someField"
-                onChange={(e) =>
-                  onSomeFieldChange({ index, value: e.target.value })
-                }
-                required
-                type="text"
-                value={item.someField}
-              />
+            <div className="cols group">
+              <div className="col">
+                <label htmlFor="destinationColumn">
+                  ชื่อคอลัมน์ที่จะนำข้อมูลเข้า
+                </label>
+                <input
+                  id="destinationColumn"
+                  name="destinationColumn"
+                  onChange={(e) =>
+                    onDestinationColumnChange({ index, value: e.target.value })
+                  }
+                  required
+                  type="text"
+                  value={item.destinationColumn}
+                />
+              </div>
+
+              <div className="col">
+                <label htmlFor="sourceOptionsTransformMethod">
+                  กระบวนการเปลี่ยนแปลง
+                </label>
+                <input
+                  id="sourceOptionsTransformMethod"
+                  name="sourceOptionsTransformMethod"
+                  onChange={(e) =>
+                    onSourceOptionTransformMethodChange({
+                      index,
+                      value: e.target.value,
+                    })
+                  }
+                  required
+                  type="text"
+                  value={item.sourceOptions.transform.method}
+                />
+              </div>
+            </div>
+
+            <div className="cols group">
+              <div className="col">
+                <label htmlFor="destinationOptionsType">ชนิดฟิลด์ข้อมูล</label>
+                <input
+                  id="destinationOptionsType"
+                  name="destinationOptionsType"
+                  onChange={(e) =>
+                    onDestinationOptionType({ index, value: e.target.value })
+                  }
+                  required
+                  type="text"
+                  value={item.destinationOptions.type}
+                />
+              </div>
+
+              <div className="col">
+                <label htmlFor="sourceOptionsSourceColumn">
+                  ชื่อฟิลด์ตั้งต้นสำหรับการแปลง
+                </label>
+                <input
+                  id="sourceOptionsSourceColumn"
+                  name="sourceOptionsSourceColumn"
+                  onChange={(e) =>
+                    onSourceOptionSourceColumn({ index, value: e.target.value })
+                  }
+                  required
+                  type="text"
+                  value={item.sourceOptions.sourceColumn}
+                />
+              </div>
             </div>
 
             <input
-              checked={item.status}
-              id={`status-${index + 1}`}
-              name="status"
+              checked={item.destinationOptions.status}
+              id={`sourceOptionStatus-${index + 1}`}
+              name="sourceOptionStatus"
               onChange={(e) =>
                 onFieldSettingsStatusChange({
                   index,
@@ -42,7 +100,9 @@ export default function FormDatasetFieldSettings({
               }
               type="checkbox"
             />
-            <label htmlFor={`status-${index + 1}`}>สถานะการใช้งาน</label>
+            <label htmlFor={`sourceOptionStatus-${index + 1}`}>
+              สถานะการใช้งาน
+            </label>
           </fieldset>
         );
       })}

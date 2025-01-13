@@ -6,19 +6,51 @@ export const initialState = {
     datasetDescription: "",
   },
   changeAndImport: {
-    field1: "",
-    someSelect: "",
+    datasetTransformId: undefined,
+    datasetTransformDropdown: [],
+    headerRow: undefined,
+
+    downloaderId: undefined,
+    downloaderDropdown: [],
+
+    metadataId: undefined,
     metadataDropdown: [],
+
+    // relevantInformation: "",
+    // pathForFileAndInput: "",
+
+    destination: "",
+    destinationUniqueKey: "",
+    destinationPartitionColumn: "",
+    destinationNullOption: "",
   },
   fieldSettings: [
     {
-      someField: "",
-      status: true,
+      destinationColumn: "",
+      destinationOptions: {
+        type: "",
+        status: true,
+      },
+      sourceOptions: {
+        sourceColumn: "",
+        transform: {
+          method: "",
+        },
+      },
     },
   ],
 };
 
 export const initialFieldSettingsData: FormDatasetFieldSettingsData = {
-  someField: "",
-  status: true,
+  destinationColumn: "",
+  destinationOptions: {
+    type: "",
+    status: true,
+  },
+  sourceOptions: {
+    sourceColumn: "",
+    transform: {
+      method: "",
+    },
+  },
 };
