@@ -48,6 +48,10 @@ export type Action =
   | {
     type: "APPEND_DATASET_NEW_FIELD_SETTING";
     payload: FormDatasetFieldSettingsData;
+  }
+  | {
+    type: "SET_ENTIRE_DATASET_FORM";
+    payload: State;
   };
 
 export interface State {

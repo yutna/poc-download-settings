@@ -67,6 +67,13 @@ export default function reducer(draft: State, action: Action) {
       draft.fieldSettings = [...draft.fieldSettings, action.payload];
       break;
 
+    // NOTE: using for fetch dataset form by id + also clear state
+    case "SET_ENTIRE_DATASET_FORM":
+      draft.general = action.payload.general;
+      draft.changeAndImport = action.payload.changeAndImport;
+      draft.fieldSettings = action.payload.fieldSettings;
+      break;
+
     default:
       throw new Error(`Unhandled action type`);
   }

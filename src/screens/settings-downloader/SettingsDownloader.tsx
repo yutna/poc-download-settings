@@ -25,7 +25,7 @@ export default function SettingsDownloader() {
   const [showPreview] = useState(true);
   const [state, dispatch] = useImmerReducer(reducer, initialState);
   const [parameterRows, setParameterRows] = useImmer(
-    getParameterRows(state.downloaderDriver.parameter)
+    getParameterRows(state.downloaderDriver.parameter),
   );
 
   // Variables
@@ -41,7 +41,7 @@ export default function SettingsDownloader() {
   }
 
   function handleEvent(type: Action["type"]) {
-    return function (payload: unknown) {
+    return function(payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -49,7 +49,7 @@ export default function SettingsDownloader() {
   function handleParameterChange(
     index: number,
     field: "key" | "value",
-    value: string
+    value: string,
   ) {
     setParameterRows((draft) => {
       draft[index][field] = value;
@@ -129,10 +129,10 @@ export default function SettingsDownloader() {
           onDataEntryFormatChange={handleEvent("SET_DATA_ENTRY_FORMAT")}
           onDeleteParameter={handleDeleteParameter}
           onDownloaderDriverConfigChange={handleEvent(
-            "SET_DOWNLOADER_DRIVER_CONFIG_ID"
+            "SET_DOWNLOADER_DRIVER_CONFIG_ID",
           )}
           onDownloaderDriverTypeChange={handleEvent(
-            "SET_DOWNLOADER_DRIVER_TYPE"
+            "SET_DOWNLOADER_DRIVER_TYPE",
           )}
           onDriverChange={handleEvent("SET_DRIVER_ID")}
           onHasParameterChange={handleEvent("SET_HAS_PARAMETER")}

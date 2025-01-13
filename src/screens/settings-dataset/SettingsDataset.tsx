@@ -19,7 +19,7 @@ export default function SettingsDataset() {
 
   // Event handlers
   function handleEvent(type: string) {
-    return function (payload: unknown) {
+    return function(payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -27,6 +27,7 @@ export default function SettingsDataset() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     // TODO: implement validation and submit form.
+    // TODO: wrap and convert raw data to match the api dtos
   }
 
   // Effect hooks
@@ -82,6 +83,9 @@ export default function SettingsDataset() {
             "APPEND_DATASET_NEW_FIELD_SETTING",
           )}
         />
+        <div className="action">
+          <button type="submit">บันทึก</button>
+        </div>
       </form>
     </div>
   );
