@@ -2,6 +2,10 @@ import type { Action, State } from "./types";
 
 export default function reducer(draft: State, action: Action) {
   switch (action.type) {
+    case "SET_DATASET_ID":
+      draft.datasetId = action.payload;
+      break;
+
     // Data Set General Settings Form
     case "SET_DATASET":
       draft.general.dataset = action.payload;

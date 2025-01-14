@@ -19,11 +19,13 @@ export default function SettingsDataset() {
   // Hooks
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
+  // Variables
   const disabled = !state.editable;
+  const destinationFieldDisabled = !state.datasetId;
 
   // Event handlers
   function handleEvent(type: string) {
-    return function (payload: unknown) {
+    return function(payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -59,6 +61,7 @@ export default function SettingsDataset() {
         <FormDataSetChangeAndImport
           data={state.changeAndImport}
           disabled={disabled}
+          destinationFieldDisabled={destinationFieldDisabled}
           onDatasetTransformIdChange={handleEvent("SET_DATASET_TRANSFORM_ID")}
           onHeaderRowChange={handleEvent("SET_HEADER_ROW")}
           onDownloaderIdChange={handleEvent("SET_DOWNLOADER_ID")}

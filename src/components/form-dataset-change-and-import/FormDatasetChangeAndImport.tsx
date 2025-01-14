@@ -3,6 +3,7 @@ import { FormDatasetChangeAndImportProps } from "./types";
 export default function FormDatasetChangeAndImport({
   data,
   disabled,
+  destinationFieldDisabled,
 
   onDatasetTransformIdChange,
   onHeaderRowChange,
@@ -158,7 +159,7 @@ export default function FormDatasetChangeAndImport({
             id="destination"
             name="destination"
             value={data.destination}
-            disabled={disabled}
+            disabled={disabled || destinationFieldDisabled}
           // onChange={(e) => onDestinationChange(e.target.value)}
           >
             <option disabled selected value={undefined}>

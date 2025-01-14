@@ -31,6 +31,7 @@ export interface FormDatasetChangeAndImportData {
 export interface FormDatasetChangeAndImportProps {
   data: FormDatasetChangeAndImportData;
   disabled: boolean;
+  destinationFieldDisabled: boolean;
 
   onDatasetTransformIdChange: (payload: number) => void;
   onHeaderRowChange: (payload: number) => void;

@@ -15,6 +15,7 @@ import type {
 } from "@/types/form";
 
 export type Action =
+  | { type: "SET_DATASET_ID"; payload: number }
   | { type: "SET_DATASET"; payload: string }
   | { type: "SET_DATASET_DESCRIPTION"; payload: string }
   | { type: "SET_GENERAL_SETTING_STATUS"; payload: boolean }
@@ -63,6 +64,7 @@ export type Action =
 
 export interface State {
   editable: boolean;
+  datasetId: number | undefined;
   general: FormDatasetGeneralSettingsData;
   changeAndImport: FormDatasetChangeAndImportData;
   fieldSettings: Array<FormDatasetFieldSettingsData>;

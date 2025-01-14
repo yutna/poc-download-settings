@@ -2,6 +2,8 @@ import type { FormDatasetFieldSettingsData } from "@/components/form-dataset-fie
 
 export const initialState = {
   editable: true,
+  // TODO: use this for conditional editable field named "ชื่อตารางข้อมูลที่จะนำเข้า"
+  datasetId: undefined,
   general: {
     dataset: "",
     datasetDescription: "",
