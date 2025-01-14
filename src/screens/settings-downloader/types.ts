@@ -1,5 +1,8 @@
 import type { Agency } from "@/api/agencies";
-import type { DownloaderDriverConfigDropdown } from "@/api/downloaders";
+import type {
+  DownloaderDriverConfigDropdown,
+  DownloaderFileDropdown,
+} from "@/api/downloaders";
 import type { DriverDropdown } from "@/api/drivers";
 import type { FormDataStorageFolderData } from "@/components/form-data-storage-folder";
 import type { FormDownloadSettingsData } from "@/components/form-download-settings";
@@ -52,6 +55,10 @@ export type Action =
       type: "SET_TEMP_DRIVER_DROPDOWN";
       payload: ApiRequestState<DriverDropdown[]>;
     }
+  | {
+      type: "SET_TEMP_DOWNLOADER_FILE_DROPDOWN";
+      payload: ApiRequestState<DownloaderFileDropdown[]>;
+    }
   | { type: "SET_TIME_PREVIEW"; payload: string }
   | { type: "SET_TIMEOUT_SECONDS"; payload: number }
   | { type: "SET_USERNAME"; payload: string };
@@ -65,6 +72,7 @@ export interface TempData {
   agencies: ApiRequestState<Agency[]>;
   driverConfig: ApiRequestState<DownloaderDriverConfigDropdown[]>;
   driverDropdown: ApiRequestState<DriverDropdown[]>;
+  downloaderFileDropdown: ApiRequestState<DownloaderFileDropdown[]>;
 }
 
 export interface State {

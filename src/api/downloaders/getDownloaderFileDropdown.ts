@@ -1,9 +1,9 @@
 import { AUTH_TOKEN, BASE_API_URL } from "@/config/env";
+import type { DownloaderFileDropdown } from "./types";
 
-import type { Option } from "@/types/form";
-import type { DownloaderFileDropdown } from './types';
-
-export default async function getDownloaderFileDropdown(): Promise<Option[]> {
+export default async function getDownloaderFileDropdown(): Promise<
+  DownloaderFileDropdown[]
+> {
   const url = `${BASE_API_URL}/v3/downloader_files/dropdown`;
   const options: RequestInit = {
     method: "GET",
@@ -23,10 +23,7 @@ export default async function getDownloaderFileDropdown(): Promise<Option[]> {
 
     const files = (await response.json()) as DownloaderFileDropdown[];
 
-    return files.map((file) => ({
-      label: file.label,
-      value: file.id.toString(),
-    }));
+    return files;
   } catch (error) {
     console.error("Error fetching downloader file dropdown:", error);
     throw error;

@@ -39,11 +39,19 @@ export const initialState: State = {
     username: "",
   },
   temp: {
+    agencies: {
+      data: [],
+      isPending: false,
+    },
     driverConfig: {
       data: [],
       isPending: false,
     },
     driverDropdown: {
+      data: [],
+      isPending: false,
+    },
+    downloaderFileDropdown: {
       data: [],
       isPending: false,
     },

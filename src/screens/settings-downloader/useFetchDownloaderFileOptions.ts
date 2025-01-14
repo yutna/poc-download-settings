@@ -11,10 +11,25 @@ export default function useFetchDownloaderFileOptions({
   dispatch: Dispatch<Action>;
 }) {
   useEffect(() => {
-    getDownloaderFileDropdown().then((payload) => {
+    dispatch({
+      type: "SET_TEMP_DOWNLOADER_FILE_DROPDOWN",
+      payload: { data: [], isPending: true },
+    });
+
+    getDownloaderFileDropdown().then((files) => {
+      const options = files.map((file) => ({
+        label: file.label,
+        value: file.id.toString(),
+      }));
+
+      dispatch({
+        type: "SET_TEMP_DOWNLOADER_FILE_DROPDOWN",
+        payload: { data: files, isPending: false },
+      });
+
       dispatch({
         type: "SET_DOWNLOADER_FILE_OPTIONS",
-        payload,
+        payload: options,
       });
     });
   }, [dispatch]);
