@@ -9,6 +9,9 @@ export default function reducer(draft: State, action: Action) {
     case "SET_DATASET_DESCRIPTION":
       draft.general.datasetDescription = action.payload;
       break;
+    case "SET_GENERAL_SETTING_STATUS":
+      draft.general.status = action.payload;
+      break;
 
     // Data Set Change And Import Form
     case "SET_DATASET_TRANSFORM_ID":

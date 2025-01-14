@@ -23,7 +23,7 @@ export default function SettingsDataset() {
 
   // Event handlers
   function handleEvent(type: string) {
-    return function(payload: unknown) {
+    return function (payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -52,6 +52,9 @@ export default function SettingsDataset() {
           disabled={disabled}
           onDatasetChange={handleEvent("SET_DATASET")}
           onDatasetDescriptionChange={handleEvent("SET_DATASET_DESCRIPTION")}
+          onDatasetGeneralSettingStatusChange={handleEvent(
+            "SET_GENERAL_SETTING_STATUS",
+          )}
         />
         <FormDataSetChangeAndImport
           data={state.changeAndImport}

@@ -5,6 +5,7 @@ export const initialState = {
   general: {
     dataset: "",
     datasetDescription: "",
+    status: true,
   },
   changeAndImport: {
     datasetTransformId: undefined,

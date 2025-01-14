@@ -17,6 +17,7 @@ import type {
 export type Action =
   | { type: "SET_DATASET"; payload: string }
   | { type: "SET_DATASET_DESCRIPTION"; payload: string }
+  | { type: "SET_GENERAL_SETTING_STATUS"; payload: boolean }
   | { type: "SET_FIELD"; payload: string }
   | { type: "SET_DATASET_TRANSFORM_ID"; payload: number }
   | { type: "SET_HEADER_ROW"; payload: number }
