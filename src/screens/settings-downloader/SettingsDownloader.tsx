@@ -24,9 +24,11 @@ import useUpdateDriverTemplate from "./useUpdateDriverTemplate";
 import useUpdateFields from "./useUpdateFields";
 
 import type { FormEvent } from "react";
-import type { Action } from "./types";
+import type { Action, SettingsDownloaderProps } from "./types";
 
-export default function SettingsDownloader() {
+export default function SettingsDownloader({
+  locale = "en",
+}: SettingsDownloaderProps) {
   // Hooks
   const [showPreview] = useState(true);
   const [state, dispatch] = useImmerReducer(reducer, initialState);
@@ -98,7 +100,7 @@ export default function SettingsDownloader() {
   }
 
   // Effect hooks
-  useFetchAgencyOptions({ dispatch });
+  useFetchAgencyOptions({ dispatch, locale });
   useFetchDownloaderFileOptions({ dispatch });
   useFetchStorage({ state, dispatch });
   useDisplayTimePreview({ state, dispatch });

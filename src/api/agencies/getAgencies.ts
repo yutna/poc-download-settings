@@ -1,12 +1,7 @@
 import { AUTH_TOKEN, BASE_API_URL } from "@/config/env";
+import type { Agency } from "./types";
 
-import type { Option } from "@/types/form";
-import type { Locale } from "@/types/locale";
-import type { Agencies } from "./types";
-
-export default async function getAgencies(
-  locale: Locale = "en"
-): Promise<Option[]> {
+export default async function getAgencies(): Promise<Agency[]> {
   const url = `${BASE_API_URL}/v3/big_data/agencies/dropdown`;
   const options: RequestInit = {
     method: "GET",
@@ -22,12 +17,8 @@ export default async function getAgencies(
       throw new Error(`Failed to fetch agencies: ${response.statusText}`);
     }
 
-    const agencies = (await response.json()) as Agencies;
-
-    return agencies.map((agency) => ({
-      label: agency.label[locale],
-      value: agency.id.toString(),
-    }));
+    const agencies = (await response.json()) as Agency[];
+    return agencies;
   } catch (error) {
     console.error("Error fetching agencies:", error);
     throw error;

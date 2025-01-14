@@ -7,5 +7,3 @@ export type Agency = {
   id: number;
   label: Label;
 };
-
-export type Agencies = Agency[];

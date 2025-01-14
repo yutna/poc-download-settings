@@ -1,3 +1,4 @@
+import type { Agency } from "@/api/agencies";
 import type { DownloaderDriverConfigDropdown } from "@/api/downloaders";
 import type { DriverDropdown } from "@/api/drivers";
 import type { FormDataStorageFolderData } from "@/components/form-data-storage-folder";
@@ -13,6 +14,7 @@ import type {
 } from "@/components/form-process-settings";
 import type { ApiRequestState } from "@/types/api";
 import type { Option } from "@/types/form";
+import type { Locale } from "@/types/locale";
 
 export type Action =
   | { type: "SET_AGENCY_ID"; payload: number }
@@ -41,6 +43,7 @@ export type Action =
   | { type: "SET_SCHEDULE_INTERVAL"; payload: string }
   | { type: "SET_STATUS"; payload: boolean }
   | { type: "SET_STORAGE_PREVIEW"; payload: string[] }
+  | { type: "SET_TEMP_AGENCIES"; payload: ApiRequestState<Agency[]> }
   | {
       type: "SET_TEMP_DRIVER_CONFIG";
       payload: ApiRequestState<DownloaderDriverConfigDropdown[]>;
@@ -59,6 +62,7 @@ export type DataStorageFolder = Omit<
 >;
 
 export interface TempData {
+  agencies: ApiRequestState<Agency[]>;
   driverConfig: ApiRequestState<DownloaderDriverConfigDropdown[]>;
   driverDropdown: ApiRequestState<DriverDropdown[]>;
 }
@@ -69,4 +73,8 @@ export interface State {
   download: FormDownloadSettingsData;
   downloaderDriver: FormProcessSettingsData;
   temp: TempData;
+}
+
+export interface SettingsDownloaderProps {
+  locale?: Locale;
 }
