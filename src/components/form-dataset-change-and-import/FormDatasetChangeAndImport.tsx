@@ -122,20 +122,18 @@ export default function FormDatasetChangeAndImport({
 
       <div className="group">
         {data.processFolders.length > 0 ? (
-          data.processFolders.map((item, index) => (
-            <>
-              <label htmlFor={`processFolder-${index + 1}`}>
-                พาธสำหรับวางไฟล์แปลง และ นำเข้า
-              </label>
-              <input
-                id={`processFolder-${index + 1}`}
-                name={`processFolder-${index + 1}`}
-                type="text"
-                disabled
-                value={item}
-              />
-            </>
-          ))
+          <>
+            <label htmlFor="processFolder">
+              พาธสำหรับวางไฟล์แปลง และ นำเข้า
+            </label>
+            <input
+              id="processFolder"
+              name="processFolder"
+              type="text"
+              disabled
+              value={data.processFolders.join(", ")}
+            />
+          </>
         ) : (
           <>
             <label htmlFor="processFolder">

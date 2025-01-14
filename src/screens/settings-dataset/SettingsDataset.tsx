@@ -36,6 +36,10 @@ export default function SettingsDataset() {
     // TODO: wrap and convert raw data to match the api dtos
   }
 
+  // function handleSourceOptionMethodChange(type) {
+  //
+  // }
+
   // Effect hooks
   useFetchDatasetTransformDropdown({ dispatch });
   useFetchDownloaderDropdown({ dispatch });

@@ -1,6 +1,7 @@
 import { initialFieldSettingsData } from "@/screens/settings-dataset/constants";
 
 import { type FormDatasetFieldSettingsProps } from "./types";
+import FormDatasetFieldConstant from "./FormDataSetFieldConstant";
 
 export default function FormDatasetFieldSettings({
   data,
@@ -18,7 +19,7 @@ export default function FormDatasetFieldSettings({
 
       {data.map((item, index) => {
         return (
-          <fieldset>
+          <fieldset key={`datasetField-${index + 1}`}>
             <legend>Field #{index + 1}</legend>
             <div className="cols group">
               <div className="col">
@@ -54,44 +55,52 @@ export default function FormDatasetFieldSettings({
                   required
                   disabled={disabled}
                   type="text"
-                  value={item.sourceOptions.transform.method}
+                  value={item.sourceOptions.transformOptions.method}
                 />
               </div>
             </div>
 
-            <div className="cols group">
-              <div className="col">
-                <label htmlFor="destinationOptionsType">ชนิดฟิลด์ข้อมูล</label>
-                <input
-                  id="destinationOptionsType"
-                  name="destinationOptionsType"
-                  onChange={(e) =>
-                    onDestinationOptionType({ index, value: e.target.value })
-                  }
-                  required
-                  disabled={disabled}
-                  type="text"
-                  value={item.destinationOptions.type}
-                />
-              </div>
+            <FormDatasetFieldConstant
+              data={item}
+              disabled={disabled}
+              index={index}
+              onDestinationOptionType={onDestinationOptionType}
+              onSourceOptionSourceColumn={onSourceOptionSourceColumn}
+            />
 
-              <div className="col">
-                <label htmlFor="sourceOptionsSourceColumn">
-                  ชื่อฟิลด์ตั้งต้นสำหรับการแปลง
-                </label>
-                <input
-                  id="sourceOptionsSourceColumn"
-                  name="sourceOptionsSourceColumn"
-                  onChange={(e) =>
-                    onSourceOptionSourceColumn({ index, value: e.target.value })
-                  }
-                  required
-                  disabled={disabled}
-                  type="text"
-                  value={item.sourceOptions.sourceColumn}
-                />
-              </div>
-            </div>
+            {/* <div className="cols group"> */}
+            {/*   <div className="col"> */}
+            {/*     <label htmlFor="destinationOptionsType">ชนิดฟิลด์ข้อมูล</label> */}
+            {/*     <input */}
+            {/*       id="destinationOptionsType" */}
+            {/*       name="destinationOptionsType" */}
+            {/*       onChange={(e) => */}
+            {/*         onDestinationOptionType({ index, value: e.target.value }) */}
+            {/*       } */}
+            {/*       required */}
+            {/*       disabled={disabled} */}
+            {/*       type="text" */}
+            {/*       value={item.destinationOptions.type} */}
+            {/*     /> */}
+            {/*   </div> */}
+            {/**/}
+            {/*   <div className="col"> */}
+            {/*     <label htmlFor="sourceOptionsSourceColumn"> */}
+            {/*       ชื่อฟิลด์ตั้งต้นสำหรับการแปลง */}
+            {/*     </label> */}
+            {/*     <input */}
+            {/*       id="sourceOptionsSourceColumn" */}
+            {/*       name="sourceOptionsSourceColumn" */}
+            {/*       onChange={(e) => */}
+            {/*         onSourceOptionSourceColumn({ index, value: e.target.value }) */}
+            {/*       } */}
+            {/*       required */}
+            {/*       disabled={disabled} */}
+            {/*       type="text" */}
+            {/*       value={item.sourceOptions.sourceColumnInput} */}
+            {/*     /> */}
+            {/*   </div> */}
+            {/* </div> */}
 
             <input
               checked={item.destinationOptions.status}

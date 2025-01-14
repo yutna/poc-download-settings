@@ -64,16 +64,18 @@ export default function reducer(draft: State, action: Action) {
         action.payload.value;
       break;
     case "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD":
-      draft.fieldSettings[action.payload.index].sourceOptions.transform.method =
-        action.payload.value;
+      draft.fieldSettings[
+        action.payload.index
+      ].sourceOptions.transformOptions.method = action.payload.value;
       break;
     case "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE":
       draft.fieldSettings[action.payload.index].destinationOptions.type =
         action.payload.value;
       break;
     case "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_SOURCE_COLUMN":
-      draft.fieldSettings[action.payload.index].sourceOptions.sourceColumn =
-        action.payload.value;
+      draft.fieldSettings[
+        action.payload.index
+      ].sourceOptions.sourceColumnInput = action.payload.value;
       break;
     case "SET_DATASET_FIELD_SETTING_STATUS":
       draft.fieldSettings[action.payload.index].destinationOptions.status =

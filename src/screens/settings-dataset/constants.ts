@@ -1,9 +1,12 @@
 import type { FormDatasetFieldSettingsData } from "@/components/form-dataset-field-settings";
+import { SourceOptionMethods } from "@/components/form-dataset-field-settings/types";
 
 export const initialState = {
   editable: true,
+
   // TODO: use this for conditional editable field named "ชื่อตารางข้อมูลที่จะนำเข้า"
   datasetId: undefined,
+
   general: {
     dataset: "",
     datasetDescription: "",
@@ -36,9 +39,10 @@ export const initialState = {
         status: true,
       },
       sourceOptions: {
-        sourceColumn: "",
-        transform: {
-          method: "",
+        sourceColumnInput: "",
+        transformOptions: {
+          method: SourceOptionMethods.DEFAULT,
+          kwargs: {},
         },
       },
     },
@@ -52,9 +56,10 @@ export const initialFieldSettingsData: FormDatasetFieldSettingsData = {
     status: true,
   },
   sourceOptions: {
-    sourceColumn: "",
-    transform: {
-      method: "",
+    sourceColumnInput: "",
+    transformOptions: {
+      method: SourceOptionMethods.DEFAULT,
+      kwargs: {},
     },
   },
 };

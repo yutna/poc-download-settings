@@ -3,6 +3,15 @@ export enum DatasetFieldSettingStatusType {
   INACTIVE = "INACTIVE",
 }
 
+export enum SourceOptionMethods {
+  DEFAULT = "default",
+  CONSTANT = "constant",
+  CUSTOM = "custom",
+  DATE_TIME = "datetime",
+  MAPPING = "mapping",
+  MAPPING_NIL = "mappingnil",
+}
+
 export interface FormDatasetFieldSettingsData {
   destinationColumn: string;
   destinationOptions: {
@@ -10,9 +19,16 @@ export interface FormDatasetFieldSettingsData {
     status: boolean;
   };
   sourceOptions: {
-    sourceColumn: string;
-    transform: {
-      method: string;
+    sourceColumnInput: string;
+    transformOptions: {
+      method: SourceOptionMethods;
+      kwargs:
+      | Record<string, never>
+      | KwargsConstant
+      | KwargsCustom
+      | KwargsDateTime
+      | KwargsMapping
+      | KwargsMappingNil;
     };
   };
 }
@@ -34,6 +50,18 @@ export interface FormDatasetFieldSettingsProps {
   ) => void;
   onFieldSettingsStatusChange: (payload: DatasetFieldSettingsStatus) => void;
   onAppendNewFieldSetting: (payload: FormDatasetFieldSettingsData) => void;
+}
+
+export interface FormDatasetFieldConstantProps {
+  data: FormDatasetFieldSettingsData;
+  index: number;
+  disabled: boolean;
+  onDestinationOptionType: (
+    payload: DatasetFieldSettingsDestinationOptionType,
+  ) => void;
+  onSourceOptionSourceColumn: (
+    payload: DatasetFieldSettingsSourceOptionSourceColumn,
+  ) => void;
 }
 
 export interface DatasetFieldSettingsSourceOptionSourceColumn
@@ -62,4 +90,36 @@ export interface DatasetFieldSettingsStatus extends BaseFieldSettings {
 
 export interface BaseFieldSettings {
   index: number;
+}
+
+export interface KwargsConstant {
+  value: number;
+}
+
+export interface KwargsCustom {
+  eval: string;
+}
+
+export interface KwargsDateTime {
+  isCustom: boolean;
+  format: string;
+}
+
+export interface KwargsMapping {
+  fieldName: string;
+  destinationMap: string;
+  isCustomFunction: boolean;
+  inputFieldValidation: string;
+  options: Array<KwargsMappingOption> | Array<Record<string, never>>;
+}
+
+export interface KwargsMappingOption {
+  field: string;
+  default: string;
+}
+
+export interface KwargsMappingNil {
+  fieldName: string;
+  destinationMap: string;
+  inputFieldValidation: string;
 }
