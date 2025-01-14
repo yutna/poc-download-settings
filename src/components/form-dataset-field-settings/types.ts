@@ -19,6 +19,7 @@ export interface FormDatasetFieldSettingsData {
 
 export interface FormDatasetFieldSettingsProps {
   data: Array<FormDatasetFieldSettingsData>;
+  disabled: boolean;
   onDestinationColumnChange: (
     payload: DatasetFieldSettingsDestinationColumn,
   ) => void;

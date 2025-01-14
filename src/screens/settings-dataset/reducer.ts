@@ -20,8 +20,17 @@ export default function reducer(draft: State, action: Action) {
     case "SET_DOWNLOADER_ID":
       draft.changeAndImport.downloaderId = action.payload;
       break;
+    case "SET_PROCESS_FILES":
+      draft.changeAndImport.processFiles = action.payload;
+      break;
+    case "SET_PROCESS_FOLDERS":
+      draft.changeAndImport.processFolders = action.payload;
+      break;
     case "SET_METADATA_ID":
       draft.changeAndImport.metadataId = action.payload;
+      break;
+    case "SET_DATASET_DISPLAY":
+      draft.changeAndImport.datasetDisplay = action.payload;
       break;
     case "SET_DESTINATION_UNIQUE_KEY":
       draft.changeAndImport.destinationUniqueKey = action.payload;

@@ -2,6 +2,7 @@ import type { FormDatasetGeneralSettingsProps } from "./types";
 
 export default function FormDatasetGeneralSettings({
   data,
+  disabled,
   onDatasetChange,
   onDatasetDescriptionChange,
 }: FormDatasetGeneralSettingsProps) {
@@ -15,6 +16,7 @@ export default function FormDatasetGeneralSettings({
           name="dataset"
           onChange={(e) => onDatasetChange(e.target.value)}
           required
+          disabled={disabled}
           type="text"
           value={data.dataset}
         />
@@ -24,6 +26,7 @@ export default function FormDatasetGeneralSettings({
           name="datasetDescription"
           onChange={(e) => onDatasetDescriptionChange(e.target.value)}
           required
+          disabled={disabled}
           type="text"
           value={data.datasetDescription}
         />

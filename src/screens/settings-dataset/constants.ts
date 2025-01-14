@@ -1,6 +1,7 @@
 import type { FormDatasetFieldSettingsData } from "@/components/form-dataset-field-settings";
 
 export const initialState = {
+  editable: true,
   general: {
     dataset: "",
     datasetDescription: "",
@@ -12,12 +13,12 @@ export const initialState = {
 
     downloaderId: undefined,
     downloaderDropdown: [],
+    processFiles: [],
+    processFolders: [],
+    datasetDisplay: "",
 
     metadataId: undefined,
     metadataDropdown: [],
-
-    // relevantInformation: "",
-    // pathForFileAndInput: "",
 
     destination: "",
     destinationUniqueKey: "",

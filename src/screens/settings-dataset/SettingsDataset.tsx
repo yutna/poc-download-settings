@@ -8,6 +8,8 @@ import { initialState } from "./constants";
 import reducer from "./reducer";
 import useFetchDatasetTransformDropdown from "./useFetchDatasetTranformDropdown";
 import useFetchDownloaderDropdown from "./useFetchDownloaderDropdown";
+import useFetchDownloaderRefs from "./useFetchDownloaderRefs";
+import useFetchMetadataDatasets from "./useFetchMetadataDatasets";
 import useFetchMetadataDropdown from "./useFetchMetadataDropdown";
 
 import type { FormEvent } from "react";
@@ -16,6 +18,8 @@ import type { Action } from "./types";
 export default function SettingsDataset() {
   // Hooks
   const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+  const disabled = !state.editable;
 
   // Event handlers
   function handleEvent(type: string) {
@@ -31,9 +35,11 @@ export default function SettingsDataset() {
   }
 
   // Effect hooks
-  useFetchMetadataDropdown({ dispatch });
   useFetchDatasetTransformDropdown({ dispatch });
   useFetchDownloaderDropdown({ dispatch });
+  useFetchDownloaderRefs({ state, dispatch });
+  useFetchMetadataDatasets({ state, dispatch });
+  useFetchMetadataDropdown({ dispatch });
 
   return (
     <div className="container">
@@ -43,11 +49,13 @@ export default function SettingsDataset() {
       <form onSubmit={handleSubmit}>
         <FormDatasetGeneralSettings
           data={state.general}
+          disabled={disabled}
           onDatasetChange={handleEvent("SET_DATASET")}
           onDatasetDescriptionChange={handleEvent("SET_DATASET_DESCRIPTION")}
         />
         <FormDataSetChangeAndImport
           data={state.changeAndImport}
+          disabled={disabled}
           onDatasetTransformIdChange={handleEvent("SET_DATASET_TRANSFORM_ID")}
           onHeaderRowChange={handleEvent("SET_HEADER_ROW")}
           onDownloaderIdChange={handleEvent("SET_DOWNLOADER_ID")}
@@ -64,6 +72,7 @@ export default function SettingsDataset() {
         />
         <FormDataSetFieldSettings
           data={state.fieldSettings}
+          disabled={disabled}
           onDestinationColumnChange={handleEvent(
             "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN",
           )}

@@ -9,7 +9,10 @@ import type {
   DatasetFieldSettingsSourceOptionTransformMethod,
   DatasetFieldSettingsStatus,
 } from "@/components/form-dataset-field-settings/types";
-import type { DatasetDropdownOption } from "@/types/form";
+import type {
+  DatasetDropdownOption,
+  MetadataDropdownOption,
+} from "@/types/form";
 
 export type Action =
   | { type: "SET_DATASET"; payload: string }
@@ -18,11 +21,14 @@ export type Action =
   | { type: "SET_DATASET_TRANSFORM_ID"; payload: number }
   | { type: "SET_HEADER_ROW"; payload: number }
   | { type: "SET_DOWNLOADER_ID"; payload: number }
+  | { type: "SET_PROCESS_FILES"; payload: Array<string> }
+  | { type: "SET_PROCESS_FOLDERS"; payload: Array<string> }
   | { type: "SET_METADATA_ID"; payload: number }
+  | { type: "SET_DATASET_DISPLAY"; payload: string }
   | { type: "SET_DESTINATION_UNIQUE_KEY"; payload: string }
   | { type: "SET_DESTINATION_PARTITION_COLUMN"; payload: string }
   | { type: "SET_DESTINATION_NULL_OPTION"; payload: string }
-  | { type: "SET_METADATA_DROPDOWN"; payload: DatasetDropdownOption[] }
+  | { type: "SET_METADATA_DROPDOWN"; payload: MetadataDropdownOption[] }
   | { type: "SET_DATASET_TRANSFORM_DROPDOWN"; payload: DatasetDropdownOption[] }
   | { type: "SET_DOWNLOADER_DROPDOWN"; payload: DatasetDropdownOption[] }
   | {
@@ -55,6 +61,7 @@ export type Action =
   };
 
 export interface State {
+  editable: boolean;
   general: FormDatasetGeneralSettingsData;
   changeAndImport: FormDatasetChangeAndImportData;
   fieldSettings: Array<FormDatasetFieldSettingsData>;

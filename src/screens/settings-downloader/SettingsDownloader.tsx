@@ -42,7 +42,7 @@ export default function SettingsDownloader() {
   }
 
   function handleEvent(type: Action["type"]) {
-    return function(payload: unknown) {
+    return function (payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }

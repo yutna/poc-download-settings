@@ -1,4 +1,7 @@
-import type { DatasetDropdownOption } from "@/types/form";
+import type {
+  DatasetDropdownOption,
+  MetadataDropdownOption,
+} from "@/types/form";
 
 export interface FormDatasetChangeAndImportData {
   // dataset transform
@@ -10,10 +13,13 @@ export interface FormDatasetChangeAndImportData {
   // downloader
   downloaderId?: number;
   downloaderDropdown: Array<DatasetDropdownOption>;
+  processFiles: Array<string>;
+  processFolders: Array<string>;
+  datasetDisplay: string;
 
   // metadata
   metadataId?: number;
-  metadataDropdown: Array<DatasetDropdownOption>;
+  metadataDropdown: Array<MetadataDropdownOption>;
 
   // destination
   destination: string;
@@ -24,8 +30,7 @@ export interface FormDatasetChangeAndImportData {
 
 export interface FormDatasetChangeAndImportProps {
   data: FormDatasetChangeAndImportData;
-  // onFieldChange: (payload: string) => void;
-  // onSomeSelectChange: (payload: string) => void;
+  disabled: boolean;
 
   onDatasetTransformIdChange: (payload: number) => void;
   onHeaderRowChange: (payload: number) => void;

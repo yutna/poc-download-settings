@@ -4,6 +4,7 @@ import { type FormDatasetFieldSettingsProps } from "./types";
 
 export default function FormDatasetFieldSettings({
   data,
+  disabled,
   onDestinationColumnChange,
   onSourceOptionTransformMethodChange,
   onDestinationOptionType,
@@ -31,6 +32,7 @@ export default function FormDatasetFieldSettings({
                     onDestinationColumnChange({ index, value: e.target.value })
                   }
                   required
+                  disabled={disabled}
                   type="text"
                   value={item.destinationColumn}
                 />
@@ -50,6 +52,7 @@ export default function FormDatasetFieldSettings({
                     })
                   }
                   required
+                  disabled={disabled}
                   type="text"
                   value={item.sourceOptions.transform.method}
                 />
@@ -66,6 +69,7 @@ export default function FormDatasetFieldSettings({
                     onDestinationOptionType({ index, value: e.target.value })
                   }
                   required
+                  disabled={disabled}
                   type="text"
                   value={item.destinationOptions.type}
                 />
@@ -82,6 +86,7 @@ export default function FormDatasetFieldSettings({
                     onSourceOptionSourceColumn({ index, value: e.target.value })
                   }
                   required
+                  disabled={disabled}
                   type="text"
                   value={item.sourceOptions.sourceColumn}
                 />
@@ -99,6 +104,7 @@ export default function FormDatasetFieldSettings({
                 })
               }
               type="checkbox"
+              disabled={disabled}
             />
             <label htmlFor={`sourceOptionStatus-${index + 1}`}>
               สถานะการใช้งาน
