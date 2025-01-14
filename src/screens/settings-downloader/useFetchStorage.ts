@@ -40,7 +40,7 @@ export default function useFetchStorage({
         });
       }, delay);
     } else {
-      dispatch({ type: "SET_STORAGE_PREVIEW", payload: "" });
+      dispatch({ type: "SET_STORAGE_PREVIEW", payload: [] });
     }
 
     return () => {

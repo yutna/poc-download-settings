@@ -7,7 +7,7 @@ export interface FormDataStorageFolderData {
   dataType: string;
   downloaderFileIds: number[];
   downloaderFileOptions: Option[];
-  storagePreview: string;
+  storagePreview: string[];
 }
 
 export interface FormDataStorageFolderProps {

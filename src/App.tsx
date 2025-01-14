@@ -1,5 +1,5 @@
-import SettingsDataset from "@/screens/settings-dataset";
+import SettingsDownloader from "@/screens/settings-downloader";
 
 export default function App() {
-  return <SettingsDataset />;
+  return <SettingsDownloader />;
 }

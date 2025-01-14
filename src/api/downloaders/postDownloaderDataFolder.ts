@@ -10,14 +10,15 @@ export default async function postDownloaderDataFolder({
   dataSubType: string;
   dataType: string;
   fileIds: number[];
-}): Promise<string> {
+}): Promise<string[]> {
   const url = `${BASE_API_URL}/v3/downloaders/data_folder`;
   const options: RequestInit = {
     method: "POST",
     headers: {
       authorization: `Bearer ${AUTH_TOKEN}`,
-      body: JSON.stringify({ agencyId, dataSubType, dataType, fileIds }),
+      "content-type": "application/json",
     },
+    body: JSON.stringify({ agencyId, dataSubType, dataType, fileIds }),
   };
 
   try {
@@ -34,7 +35,7 @@ export default async function postDownloaderDataFolder({
       dataFolders: string[];
     };
 
-    return data.dataFolders.length ? data.dataFolders[0] : "";
+    return data.dataFolders;
   } catch (error) {
     console.error("Error POST downloader data folder:", error);
     throw error;

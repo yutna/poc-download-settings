@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useImmer, useImmerReducer } from "use-immer";
+
+import { postDownloaders } from "@/api/downloaders";
 
 import FormDataStorageFolder from "@/components/form-data-storage-folder";
 import FormDownloadSettings from "@/components/form-download-settings";
 import FormGeneralSettings from "@/components/form-general-settings";
 import FormProcessSettings from "@/components/form-process-settings";
 
+import { settingsDownloaderSchema as schema } from "@/schemas/settingsDownloaderSchema";
+
 import { initialState } from "./constants";
-import { convertRowsToObject, getParameterRows } from "./helpers";
+import { convertStateToSchemaFormat, getParameterRows } from "./helpers";
 import reducer from "./reducer";
 import useDisplayTimePreview from "./useDisplayTimePreview";
 import useFetchAgencyOptions from "./useFetchAgencyOptions";
@@ -15,6 +19,7 @@ import useFetchDownloaderDriverConfigOptions from "./useFetchDownloaderDriverCon
 import useFetchDownloaderFileOptions from "./useFetchDownloaderFileOptions";
 import useFetchDriverOptions from "./useFetchDriverOptions";
 import useFetchStorage from "./useFetchStorage";
+import useUpdateAdditionalFields from "./useUpdateAdditionalFields";
 import useUpdateDriverTemplate from "./useUpdateDriverTemplate";
 import useUpdateFields from "./useUpdateFields";
 
@@ -26,7 +31,7 @@ export default function SettingsDownloader() {
   const [showPreview] = useState(true);
   const [state, dispatch] = useImmerReducer(reducer, initialState);
   const [parameterRows, setParameterRows] = useImmer(
-    getParameterRows(state.downloaderDriver.parameter),
+    getParameterRows(state.downloaderDriver.parameter)
   );
 
   // Variables
@@ -50,7 +55,7 @@ export default function SettingsDownloader() {
   function handleParameterChange(
     index: number,
     field: "key" | "value",
-    value: string,
+    value: string
   ) {
     setParameterRows((draft) => {
       draft[index][field] = value;
@@ -67,8 +72,29 @@ export default function SettingsDownloader() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // TODO: implement validation and submit form.
-    // TODO: convert parameter row to parameter obj.
+
+    const convertedData = convertStateToSchemaFormat(state);
+    const result = schema.safeParse(convertedData);
+
+    if (!result.success) {
+      const errors = result.error.errors.map((err) => ({
+        key: err.path.join("."),
+        message: err.message,
+      }));
+
+      // TODO: handle error and highlight fields
+      console.log(errors);
+
+      return;
+    }
+
+    postDownloaders(result.data)
+      .then(() => {
+        // TODO: handle something after submit form success.
+      })
+      .catch(() => {
+        // TODO: show toast about submit error.
+      });
   }
 
   // Effect hooks
@@ -80,12 +106,7 @@ export default function SettingsDownloader() {
   useFetchDownloaderDriverConfigOptions({ state, dispatch });
   useUpdateDriverTemplate({ state, dispatch });
   useUpdateFields({ state, dispatch });
-
-  // TODO: just debug value, remove this when finished implementation.
-  useEffect(() => {
-    const payload = convertRowsToObject(parameterRows);
-    dispatch({ type: "SET_PARAMETER", payload });
-  }, [dispatch, parameterRows]);
+  useUpdateAdditionalFields({ parameterRows, dispatch });
 
   return (
     <div className="container">
@@ -102,7 +123,7 @@ export default function SettingsDownloader() {
           onAgencyChange={handleEvent("SET_AGENCY_ID")}
           onDownloaderChange={handleEvent("SET_DOWNLOADER")}
           onDownloaderDescriptionChange={handleEvent(
-            "SET_DOWNLOADER_DESCRIPTION",
+            "SET_DOWNLOADER_DESCRIPTION"
           )}
           onDownloaderTypeChange={handleEvent("SET_DOWNLOADER_TYPE")}
           onStatusChange={handleEvent("SET_STATUS")}
@@ -132,10 +153,10 @@ export default function SettingsDownloader() {
           onDeleteParameter={handleDeleteParameter}
           onDeleteOldFileChange={handleEvent("SET_DELETE_OLD_FILE")}
           onDownloaderDriverConfigChange={handleEvent(
-            "SET_DOWNLOADER_DRIVER_CONFIG_ID",
+            "SET_DOWNLOADER_DRIVER_CONFIG_ID"
           )}
           onDownloaderDriverTypeChange={handleEvent(
-            "SET_DOWNLOADER_DRIVER_TYPE",
+            "SET_DOWNLOADER_DRIVER_TYPE"
           )}
           onDriverChange={handleEvent("SET_DRIVER_ID")}
           onHasParameterChange={handleEvent("SET_HAS_PARAMETER")}

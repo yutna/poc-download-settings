@@ -13,6 +13,7 @@
     "cron-parser": "4.9.0",
     "cronstrue": "2.52.0",
     "immer": "10.1.1",
+    "radash": "12.1.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "use-immer": "0.11.0",

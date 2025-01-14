@@ -40,7 +40,7 @@ export type Action =
   | { type: "SET_RETRY_COUNT"; payload: number }
   | { type: "SET_SCHEDULE_INTERVAL"; payload: string }
   | { type: "SET_STATUS"; payload: boolean }
-  | { type: "SET_STORAGE_PREVIEW"; payload: string }
+  | { type: "SET_STORAGE_PREVIEW"; payload: string[] }
   | {
       type: "SET_TEMP_DRIVER_CONFIG";
       payload: ApiRequestState<DownloaderDriverConfigDropdown[]>;
