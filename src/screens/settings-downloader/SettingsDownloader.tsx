@@ -19,6 +19,7 @@ import useFetchDownloaderDriverConfigOptions from "./useFetchDownloaderDriverCon
 import useFetchDownloaderFileOptions from "./useFetchDownloaderFileOptions";
 import useFetchDriverOptions from "./useFetchDriverOptions";
 import useFetchStorage from "./useFetchStorage";
+import usePendingMemo from "./usePendingMemo";
 import useUpdateAdditionalFields from "./useUpdateAdditionalFields";
 import useUpdateDriverTemplate from "./useUpdateDriverTemplate";
 import useUpdateFields from "./useUpdateFields";
@@ -38,6 +39,9 @@ export default function SettingsDownloader({
 
   // Variables
   const disabled = !state.general.status;
+
+  // Computed variables
+  const isPending = usePendingMemo({ state });
 
   // Event handlers
   function handleDeleteParameter(index: number) {
@@ -90,12 +94,17 @@ export default function SettingsDownloader({
       return;
     }
 
+    dispatch({ type: "SET_TEMP_IS_SUBMITTING", payload: true });
+
     postDownloaders(result.data)
       .then(() => {
         // TODO: handle something after submit form success.
       })
       .catch(() => {
         // TODO: show toast about submit error.
+      })
+      .finally(() => {
+        dispatch({ type: "SET_TEMP_IS_SUBMITTING", payload: false });
       });
   }
 
@@ -170,7 +179,9 @@ export default function SettingsDownloader({
           parameterRows={parameterRows}
         />
         <div className="action">
-          <button type="submit">บันทึก</button>
+          <button disabled={isPending} type="submit">
+            บันทึก
+          </button>
         </div>
       </form>
     </div>

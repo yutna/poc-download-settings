@@ -110,6 +110,12 @@ export default function reducer(draft: State, action: Action) {
     case "SET_TEMP_DOWNLOADER_FILE_DROPDOWN":
       draft.temp.downloaderFileDropdown = action.payload;
       break;
+    case "SET_TEMP_IS_SUBMITTING":
+      draft.temp.isSubmitting = action.payload;
+      break;
+    case "SET_TEMP_STORAGE":
+      draft.temp.storage = action.payload;
+      break;
 
     default:
       throw new Error(`Unhandled action type`);

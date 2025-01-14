@@ -55,5 +55,10 @@ export const initialState: State = {
       data: [],
       isPending: false,
     },
+    isSubmitting: false,
+    storage: {
+      data: [],
+      isPending: false,
+    },
   },
 };

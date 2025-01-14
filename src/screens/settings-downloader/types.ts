@@ -59,6 +59,8 @@ export type Action =
       type: "SET_TEMP_DOWNLOADER_FILE_DROPDOWN";
       payload: ApiRequestState<DownloaderFileDropdown[]>;
     }
+  | { type: "SET_TEMP_IS_SUBMITTING"; payload: boolean }
+  | { type: "SET_TEMP_STORAGE"; payload: ApiRequestState<string[]> }
   | { type: "SET_TIME_PREVIEW"; payload: string }
   | { type: "SET_TIMEOUT_SECONDS"; payload: number }
   | { type: "SET_USERNAME"; payload: string };
@@ -73,6 +75,8 @@ export interface TempData {
   driverConfig: ApiRequestState<DownloaderDriverConfigDropdown[]>;
   driverDropdown: ApiRequestState<DriverDropdown[]>;
   downloaderFileDropdown: ApiRequestState<DownloaderFileDropdown[]>;
+  isSubmitting: boolean;
+  storage: ApiRequestState<string[]>;
 }
 
 export interface State {

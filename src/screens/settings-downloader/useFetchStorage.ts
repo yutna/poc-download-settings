@@ -30,12 +30,22 @@ export default function useFetchStorage({
 
     if (isValid) {
       timeout = setTimeout(() => {
+        dispatch({
+          type: "SET_TEMP_STORAGE",
+          payload: { data: [], isPending: true },
+        });
+
         postDownloaderDataFolder({
           agencyId,
           dataSubType,
           dataType,
           fileIds,
         }).then((payload) => {
+          dispatch({
+            type: "SET_TEMP_STORAGE",
+            payload: { data: payload, isPending: true },
+          });
+
           dispatch({ type: "SET_STORAGE_PREVIEW", payload });
         });
       }, delay);
