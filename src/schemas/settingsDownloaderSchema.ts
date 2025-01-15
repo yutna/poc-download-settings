@@ -2,8 +2,20 @@ import { z } from "zod";
 
 export const settingsDownloaderSchema = z.object({
   agencyId: z.number().int().positive(), //
-  dataSubType: z.string().min(1, "dataSubType cannot be an empty string"),
-  dataType: z.string().min(1, "dataType cannot be an empty string"),
+  dataSubType: z
+    .string()
+    .min(1, "dataSubType cannot be an empty string")
+    .refine(
+      (value) => !value.includes(" ") && !value.includes("_"),
+      "dataSubType cannot contain spaces or underscores"
+    ),
+  dataType: z
+    .string()
+    .min(1, "dataType cannot be an empty string")
+    .refine(
+      (value) => !value.includes(" ") && !value.includes("_"),
+      "dataType cannot contain spaces or underscores"
+    ),
   downloader: z.string().min(1, "downloader cannot be an empty string"),
   downloaderDescription: z
     .string()
