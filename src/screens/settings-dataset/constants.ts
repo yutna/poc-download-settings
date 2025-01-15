@@ -1,5 +1,5 @@
 import type { FormDatasetFieldSettingsData } from "@/components/form-dataset-field-settings";
-import { SourceOptionMethods } from "@/components/form-dataset-field-settings/types";
+import { TransformOptionsMethods } from "@/components/form-dataset-field-settings/types";
 
 export const initialState = {
   editable: true,
@@ -41,7 +41,7 @@ export const initialState = {
       sourceOptions: {
         sourceColumnInput: "",
         transformOptions: {
-          method: SourceOptionMethods.DEFAULT,
+          method: TransformOptionsMethods.DEFAULT,
           kwargs: {},
         },
       },
@@ -58,8 +58,61 @@ export const initialFieldSettingsData: FormDatasetFieldSettingsData = {
   sourceOptions: {
     sourceColumnInput: "",
     transformOptions: {
-      method: SourceOptionMethods.DEFAULT,
+      method: TransformOptionsMethods.DEFAULT,
       kwargs: {},
     },
   },
+};
+
+export const transformOptionsMethods = [
+  "default",
+  "constant",
+  "custom",
+  "datetime",
+  "mapping",
+  "mappingnil",
+];
+
+export const initialSourceOptions = {
+  sourceColumnInput: "",
+  transfromOptions: {
+    method: TransformOptionsMethods.DEFAULT,
+    kwargs: {},
+  },
+};
+
+export const initialKwargsConstant = {
+  value: 0,
+};
+
+export const initialKwargsCustom = {
+  eval: "",
+};
+
+export const initialKwargsDateTime = {
+  isCustom: false,
+  format: "%Y-%m-%d %H:%M:%S",
+};
+
+export const initialKwargsMapping = {
+  fieldName: "",
+  destinationMap: "",
+  isCustomFunction: false,
+  inputFieldValidation: "",
+  options: [],
+};
+
+export const initialKwargsMappingNil = {
+  fieldName: "",
+  destinationMap: "",
+  inputFieldValidation: "",
+};
+
+export const initialKwargs = {
+  [TransformOptionsMethods.DEFAULT]: {},
+  [TransformOptionsMethods.CONSTANT]: initialKwargsConstant,
+  [TransformOptionsMethods.CUSTOM]: initialKwargsCustom,
+  [TransformOptionsMethods.DATE_TIME]: initialKwargsDateTime,
+  [TransformOptionsMethods.MAPPING]: initialKwargsMapping,
+  [TransformOptionsMethods.MAPPING_NIL]: initialKwargsMappingNil,
 };

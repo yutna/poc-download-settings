@@ -6,8 +6,11 @@ import type {
   DatasetFieldSettingsDestinationColumn,
   DatasetFieldSettingsDestinationOptionType,
   DatasetFieldSettingsSourceOptionSourceColumn,
+  DatasetFieldSettingsSourceOptionTransformKwargs,
   DatasetFieldSettingsSourceOptionTransformMethod,
   DatasetFieldSettingsStatus,
+  KwargsConstantPayload,
+  KwargsCustomPayload,
 } from "@/components/form-dataset-field-settings/types";
 import type {
   DatasetDropdownOption,
@@ -40,6 +43,18 @@ export type Action =
   | {
     type: "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD";
     payload: DatasetFieldSettingsSourceOptionTransformMethod;
+  }
+  | {
+    type: "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_KWARGS";
+    payload: DatasetFieldSettingsSourceOptionTransformKwargs;
+  }
+  | {
+    type: "SET_KWARGS_CONSTANT_VALUE";
+    payload: KwargsConstantPayload;
+  }
+  | {
+    type: "SET_KWARGS_CUSTOM_EVAL";
+    payload: KwargsCustomPayload;
   }
   | {
     type: "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE";

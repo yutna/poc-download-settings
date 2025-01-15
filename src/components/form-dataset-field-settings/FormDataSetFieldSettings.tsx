@@ -1,17 +1,31 @@
-import { initialFieldSettingsData } from "@/screens/settings-dataset/constants";
+import {
+  initialFieldSettingsData,
+  transformOptionsMethods,
+} from "@/screens/settings-dataset/constants";
 
-import { type FormDatasetFieldSettingsProps } from "./types";
 import FormDatasetFieldConstant from "./FormDataSetFieldConstant";
+// import FormDatasetFieldCustom from "./FormDataSetFieldCustom";
+import FormDatasetFieldDefault from "./FormDataSetFieldDefault";
+import { TransformOptionsMethods } from "./types";
+
+import type { FormDatasetFieldSettingsProps } from "./types";
+import FormDatasetFieldCustom from "./FormDataSetFieldCustom";
+import FormDatasetFieldDateTime from "./FormDataSetFieldDateTime";
 
 export default function FormDatasetFieldSettings({
   data,
   disabled,
+
   onDestinationColumnChange,
   onSourceOptionTransformMethodChange,
-  onDestinationOptionType,
-  onSourceOptionSourceColumn,
+  onDestinationOptionTypeChange,
+  onSourceOptionSourceColumnChange,
   onFieldSettingsStatusChange,
   onAppendNewFieldSetting,
+
+  // Kwargs Action
+  onKwargsConstantValueChange,
+  onKwargsCustomEvalChange,
 }: FormDatasetFieldSettingsProps) {
   return (
     <fieldset>
@@ -43,64 +57,78 @@ export default function FormDatasetFieldSettings({
                 <label htmlFor="sourceOptionsTransformMethod">
                   กระบวนการเปลี่ยนแปลง
                 </label>
-                <input
+                <select
                   id="sourceOptionsTransformMethod"
                   name="sourceOptionsTransformMethod"
+                  value={item.sourceOptions.transformOptions.method}
+                  disabled={disabled}
                   onChange={(e) =>
                     onSourceOptionTransformMethodChange({
                       index,
-                      value: e.target.value,
+                      value: e.target.value as TransformOptionsMethods,
                     })
                   }
-                  required
-                  disabled={disabled}
-                  type="text"
-                  value={item.sourceOptions.transformOptions.method}
-                />
+                >
+                  {transformOptionsMethods.map((method) => {
+                    return (
+                      <option
+                        value={method}
+                        key={`transformOptionsMethod-${method}`}
+                        selected={method === TransformOptionsMethods.DEFAULT}
+                      >
+                        {method}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
             </div>
 
-            <FormDatasetFieldConstant
-              data={item}
-              disabled={disabled}
-              index={index}
-              onDestinationOptionType={onDestinationOptionType}
-              onSourceOptionSourceColumn={onSourceOptionSourceColumn}
-            />
+            {item.sourceOptions.transformOptions.method ===
+              TransformOptionsMethods.DEFAULT && (
+                <FormDatasetFieldDefault
+                  data={item}
+                  disabled={disabled}
+                  index={index}
+                  onDestinationOptionTypeChange={onDestinationOptionTypeChange}
+                  onSourceOptionSourceColumnChange={
+                    onSourceOptionSourceColumnChange
+                  }
+                />
+              )}
 
-            {/* <div className="cols group"> */}
-            {/*   <div className="col"> */}
-            {/*     <label htmlFor="destinationOptionsType">ชนิดฟิลด์ข้อมูล</label> */}
-            {/*     <input */}
-            {/*       id="destinationOptionsType" */}
-            {/*       name="destinationOptionsType" */}
-            {/*       onChange={(e) => */}
-            {/*         onDestinationOptionType({ index, value: e.target.value }) */}
-            {/*       } */}
-            {/*       required */}
-            {/*       disabled={disabled} */}
-            {/*       type="text" */}
-            {/*       value={item.destinationOptions.type} */}
-            {/*     /> */}
-            {/*   </div> */}
-            {/**/}
-            {/*   <div className="col"> */}
-            {/*     <label htmlFor="sourceOptionsSourceColumn"> */}
-            {/*       ชื่อฟิลด์ตั้งต้นสำหรับการแปลง */}
-            {/*     </label> */}
-            {/*     <input */}
-            {/*       id="sourceOptionsSourceColumn" */}
-            {/*       name="sourceOptionsSourceColumn" */}
-            {/*       onChange={(e) => */}
-            {/*         onSourceOptionSourceColumn({ index, value: e.target.value }) */}
-            {/*       } */}
-            {/*       required */}
-            {/*       disabled={disabled} */}
-            {/*       type="text" */}
-            {/*       value={item.sourceOptions.sourceColumnInput} */}
-            {/*     /> */}
-            {/*   </div> */}
-            {/* </div> */}
+            {item.sourceOptions.transformOptions.method ===
+              TransformOptionsMethods.CONSTANT && (
+                <FormDatasetFieldConstant
+                  data={item}
+                  disabled={disabled}
+                  index={index}
+                  onDestinationOptionTypeChange={onDestinationOptionTypeChange}
+                  onKwargsConstantValueChange={onKwargsConstantValueChange}
+                />
+              )}
+
+            {item.sourceOptions.transformOptions.method ===
+              TransformOptionsMethods.CUSTOM && (
+                <FormDatasetFieldCustom
+                  data={item}
+                  disabled={disabled}
+                  index={index}
+                  onDestinationOptionTypeChange={onDestinationOptionTypeChange}
+                  onKwargsCustomEvalChange={onKwargsCustomEvalChange}
+                />
+              )}
+
+            {item.sourceOptions.transformOptions.method ===
+              TransformOptionsMethods.CUSTOM && (
+                <FormDatasetFieldDateTime
+                  data={item}
+                  disabled={disabled}
+                  index={index}
+                  onDestinationOptionTypeChange={onDestinationOptionTypeChange}
+                // onKwargsCustomEvalChange={onKwargsCustomEvalChange}
+                />
+              )}
 
             <input
               checked={item.destinationOptions.status}

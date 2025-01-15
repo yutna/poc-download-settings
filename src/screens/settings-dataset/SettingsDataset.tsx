@@ -1,10 +1,9 @@
 import { useImmerReducer } from "use-immer";
-
 import FormDataSetChangeAndImport from "@/components/form-dataset-change-and-import";
 import FormDataSetFieldSettings from "@/components/form-dataset-field-settings";
 import FormDatasetGeneralSettings from "@/components/form-dataset-general-settings";
 
-import { initialState } from "./constants";
+import { initialKwargs, initialState } from "./constants";
 import reducer from "./reducer";
 import useFetchDatasetTransformDropdown from "./useFetchDatasetTranformDropdown";
 import useFetchDownloaderDropdown from "./useFetchDownloaderDropdown";
@@ -14,6 +13,7 @@ import useFetchMetadataDropdown from "./useFetchMetadataDropdown";
 
 import type { FormEvent } from "react";
 import type { Action } from "./types";
+import { TransformOptionsMethods } from "@/components/form-dataset-field-settings/types";
 
 export default function SettingsDataset() {
   // Hooks
@@ -25,7 +25,7 @@ export default function SettingsDataset() {
 
   // Event handlers
   function handleEvent(type: string) {
-    return function(payload: unknown) {
+    return function (payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -36,9 +36,42 @@ export default function SettingsDataset() {
     // TODO: wrap and convert raw data to match the api dtos
   }
 
-  // function handleSourceOptionMethodChange(type) {
-  //
-  // }
+  function handleTransformOptionMethodChange() {
+    return function ({
+      index,
+      value,
+    }: {
+      index: number;
+      value: TransformOptionsMethods;
+    }) {
+      // UPDATE TRANSFORM METHOD
+      dispatch({
+        type: "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD",
+        payload: {
+          index,
+          value,
+        },
+      } as Action);
+
+      // UPDATE SOURCE COLUMN INPUT
+      dispatch({
+        type: "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_SOURCE_COLUMN",
+        payload: {
+          index,
+          value: null,
+        },
+      } as Action);
+
+      // UPDATE TRANSFORM KWARGS
+      dispatch({
+        type: "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_KWARGS",
+        payload: {
+          index,
+          value: initialKwargs[value],
+        },
+      } as Action);
+    };
+  }
 
   // Effect hooks
   useFetchDatasetTransformDropdown({ dispatch });
@@ -86,13 +119,14 @@ export default function SettingsDataset() {
           onDestinationColumnChange={handleEvent(
             "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN",
           )}
-          onSourceOptionTransformMethodChange={handleEvent(
-            "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD",
-          )}
-          onDestinationOptionType={handleEvent(
+          // onSourceOptionTransformMethodChange={handleEvent(
+          //   "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD",
+          // )}
+          onSourceOptionTransformMethodChange={handleTransformOptionMethodChange()}
+          onDestinationOptionTypeChange={handleEvent(
             "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE",
           )}
-          onSourceOptionSourceColumn={handleEvent(
+          onSourceOptionSourceColumnChange={handleEvent(
             "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_SOURCE_COLUMN",
           )}
           onFieldSettingsStatusChange={handleEvent(
@@ -101,6 +135,11 @@ export default function SettingsDataset() {
           onAppendNewFieldSetting={handleEvent(
             "APPEND_DATASET_NEW_FIELD_SETTING",
           )}
+          // Kwargs Action
+          onKwargsConstantValueChange={handleEvent("SET_KWARGS_CONSTANT_VALUE")}
+          onKwargsCustomEvalChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
+        // onKwargsDateTimeIsCustomChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
+        // onKwargsDateTimeFormatChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
         />
         <div className="action">
           <button type="submit">บันทึก</button>

@@ -1,11 +1,11 @@
-import type { FormDatasetFieldConstantProps } from "./types";
+import type { FormDatasetFieldConstantProps, KwargsConstant } from "./types";
 
 export default function FormDatasetFieldConstant({
   data,
   index,
   disabled,
-  onDestinationOptionType,
-  onSourceOptionSourceColumn,
+  onDestinationOptionTypeChange,
+  onKwargsConstantValueChange,
 }: FormDatasetFieldConstantProps) {
   return (
     <>
@@ -16,7 +16,7 @@ export default function FormDatasetFieldConstant({
             id="destinationOptionsType"
             name="destinationOptionsType"
             onChange={(e) =>
-              onDestinationOptionType({ index, value: e.target.value })
+              onDestinationOptionTypeChange({ index, value: e.target.value })
             }
             required
             disabled={disabled}
@@ -26,19 +26,27 @@ export default function FormDatasetFieldConstant({
         </div>
 
         <div className="col">
-          <label htmlFor="sourceOptionsSourceColumn">
-            ชื่อฟิลด์ตั้งต้นสำหรับการแปลง
+          <label htmlFor={`kwargsConstantValue-${index + 1}`}>
+            พารามิเตอร์ของการแปลง
           </label>
           <input
-            id="sourceOptionsSourceColumn"
-            name="sourceOptionsSourceColumn"
+            id={`kwargsConstantValue-${index + 1}`}
+            name={`kwargsConstantValue-${index + 1}`}
             onChange={(e) =>
-              onSourceOptionSourceColumn({ index, value: e.target.value })
+              onKwargsConstantValueChange({
+                index,
+                value: {
+                  value: Number(e.target.value),
+                },
+              })
             }
             required
             disabled={disabled}
-            type="text"
-            value={data.sourceOptions.sourceColumnInput}
+            type="number"
+            value={
+              (data.sourceOptions.transformOptions.kwargs as KwargsConstant)
+                .value
+            }
           />
         </div>
       </div>

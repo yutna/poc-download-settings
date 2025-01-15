@@ -1,3 +1,7 @@
+import {
+  KwargsConstant,
+  KwargsCustom,
+} from "@/components/form-dataset-field-settings/types";
 import type { Action, State } from "./types";
 
 export default function reducer(draft: State, action: Action) {
@@ -68,6 +72,11 @@ export default function reducer(draft: State, action: Action) {
         action.payload.index
       ].sourceOptions.transformOptions.method = action.payload.value;
       break;
+    case "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_KWARGS":
+      draft.fieldSettings[
+        action.payload.index
+      ].sourceOptions.transformOptions.kwargs = action.payload.value;
+      break;
     case "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE":
       draft.fieldSettings[action.payload.index].destinationOptions.type =
         action.payload.value;
@@ -83,6 +92,20 @@ export default function reducer(draft: State, action: Action) {
       break;
     case "APPEND_DATASET_NEW_FIELD_SETTING":
       draft.fieldSettings = [...draft.fieldSettings, action.payload];
+      break;
+
+    // Kwargs Reducer
+    case "SET_KWARGS_CONSTANT_VALUE":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsConstant
+      ).value = action.payload.value.value;
+      break;
+    case "SET_KWARGS_CUSTOM_EVAL":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsCustom
+      ).eval = action.payload.value.eval;
       break;
 
     // NOTE: using for fetch dataset form by id + also clear state

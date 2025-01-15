@@ -3,7 +3,7 @@ export enum DatasetFieldSettingStatusType {
   INACTIVE = "INACTIVE",
 }
 
-export enum SourceOptionMethods {
+export enum TransformOptionsMethods {
   DEFAULT = "default",
   CONSTANT = "constant",
   CUSTOM = "custom",
@@ -19,16 +19,16 @@ export interface FormDatasetFieldSettingsData {
     status: boolean;
   };
   sourceOptions: {
-    sourceColumnInput: string;
+    sourceColumnInput: string | null;
     transformOptions: {
-      method: SourceOptionMethods;
+      method: TransformOptionsMethods;
       kwargs:
       | Record<string, never>
       | KwargsConstant
       | KwargsCustom
-      | KwargsDateTime
-      | KwargsMapping
-      | KwargsMappingNil;
+      | KwargsDateTime;
+      // | KwargsMapping
+      // | KwargsMappingNil;
     };
   };
 }
@@ -42,31 +42,63 @@ export interface FormDatasetFieldSettingsProps {
   onSourceOptionTransformMethodChange: (
     payload: DatasetFieldSettingsSourceOptionTransformMethod,
   ) => void;
-  onDestinationOptionType: (
+  onDestinationOptionTypeChange: (
     payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
-  onSourceOptionSourceColumn: (
+  onSourceOptionSourceColumnChange: (
     payload: DatasetFieldSettingsSourceOptionSourceColumn,
   ) => void;
   onFieldSettingsStatusChange: (payload: DatasetFieldSettingsStatus) => void;
   onAppendNewFieldSetting: (payload: FormDatasetFieldSettingsData) => void;
+  onKwargsConstantValueChange: (payload: KwargsConstantPayload) => void;
+  onKwargsCustomEvalChange: (payload: KwargsCustomPayload) => void;
+}
+
+export interface FormDatasetFieldDefaultProps {
+  data: FormDatasetFieldSettingsData;
+  index: number;
+  disabled: boolean;
+  onDestinationOptionTypeChange: (
+    payload: DatasetFieldSettingsDestinationOptionType,
+  ) => void;
+  onSourceOptionSourceColumnChange: (
+    payload: DatasetFieldSettingsSourceOptionSourceColumn,
+  ) => void;
 }
 
 export interface FormDatasetFieldConstantProps {
   data: FormDatasetFieldSettingsData;
   index: number;
   disabled: boolean;
-  onDestinationOptionType: (
+  onDestinationOptionTypeChange: (
     payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
-  onSourceOptionSourceColumn: (
-    payload: DatasetFieldSettingsSourceOptionSourceColumn,
+  onKwargsConstantValueChange: (payload: KwargsConstantPayload) => void;
+}
+
+export interface FormDatasetFieldCustomProps {
+  data: FormDatasetFieldSettingsData;
+  index: number;
+  disabled: boolean;
+  onDestinationOptionTypeChange: (
+    payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
+  onKwargsCustomEvalChange: (payload: KwargsCustomPayload) => void;
+}
+
+export interface FormDatasetFieldDateTimeProps {
+  data: FormDatasetFieldSettingsData;
+  index: number;
+  disabled: boolean;
+  onDestinationOptionTypeChange: (
+    payload: DatasetFieldSettingsDestinationOptionType,
+  ) => void;
+  onKwargsDateTimeFormatChange: (payload: KwargsDateTimePayload) => void;
 }
 
 export interface DatasetFieldSettingsSourceOptionSourceColumn
   extends BaseFieldSettings {
-  value: string;
+  value: string | null;
 }
 
 export interface DatasetFieldSettingsDestinationOptionType
@@ -76,7 +108,14 @@ export interface DatasetFieldSettingsDestinationOptionType
 
 export interface DatasetFieldSettingsSourceOptionTransformMethod
   extends BaseFieldSettings {
-  value: string;
+  value: TransformOptionsMethods;
+}
+
+export interface DatasetFieldSettingsSourceOptionTransformKwargs
+  extends BaseFieldSettings {
+  value: Record<string, never> | KwargsConstant | KwargsCustom | KwargsDateTime;
+  // | KwargsMapping
+  // | KwargsMappingNil;
 }
 
 export interface DatasetFieldSettingsDestinationColumn
@@ -96,13 +135,25 @@ export interface KwargsConstant {
   value: number;
 }
 
+export interface KwargsConstantPayload extends BaseFieldSettings {
+  value: KwargsConstant;
+}
+
 export interface KwargsCustom {
   eval: string;
 }
 
+export interface KwargsCustomPayload extends BaseFieldSettings {
+  value: KwargsCustom;
+}
+
 export interface KwargsDateTime {
-  isCustom: boolean;
-  format: string;
+  isCustom?: boolean;
+  format?: string;
+}
+
+export interface KwargsDateTimePayload extends BaseFieldSettings {
+  value: KwargsDateTime;
 }
 
 export interface KwargsMapping {
