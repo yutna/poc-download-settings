@@ -25,7 +25,7 @@ export default function SettingsDataset() {
 
   // Event handlers
   function handleEvent(type: string) {
-    return function (payload: unknown) {
+    return function(payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -37,7 +37,7 @@ export default function SettingsDataset() {
   }
 
   function handleTransformOptionMethodChange() {
-    return function ({
+    return function({
       index,
       value,
     }: {
@@ -138,8 +138,10 @@ export default function SettingsDataset() {
           // Kwargs Action
           onKwargsConstantValueChange={handleEvent("SET_KWARGS_CONSTANT_VALUE")}
           onKwargsCustomEvalChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
+          onKwargsDateTimeFormatChange={handleEvent(
+            "SET_KWARGS_DATE_TIME_FORMAT",
+          )}
         // onKwargsDateTimeIsCustomChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
-        // onKwargsDateTimeFormatChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
         />
         <div className="action">
           <button type="submit">บันทึก</button>

@@ -26,6 +26,7 @@ export default function FormDatasetFieldSettings({
   // Kwargs Action
   onKwargsConstantValueChange,
   onKwargsCustomEvalChange,
+  onKwargsDateTimeFormatChange,
 }: FormDatasetFieldSettingsProps) {
   return (
     <fieldset>
@@ -120,13 +121,16 @@ export default function FormDatasetFieldSettings({
               )}
 
             {item.sourceOptions.transformOptions.method ===
-              TransformOptionsMethods.CUSTOM && (
+              TransformOptionsMethods.DATE_TIME && (
                 <FormDatasetFieldDateTime
                   data={item}
                   disabled={disabled}
                   index={index}
                   onDestinationOptionTypeChange={onDestinationOptionTypeChange}
-                // onKwargsCustomEvalChange={onKwargsCustomEvalChange}
+                  onKwargsDateTimeFormatChange={onKwargsDateTimeFormatChange}
+                  onSourceOptionSourceColumnChange={
+                    onSourceOptionSourceColumnChange
+                  }
                 />
               )}
 

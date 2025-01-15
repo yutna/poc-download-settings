@@ -1,4 +1,4 @@
-import type { FormDatasetFieldDateTimeProps, KwargsCustom } from "./types";
+import type { FormDatasetFieldDateTimeProps, KwargsDateTime } from "./types";
 
 export default function FormDatasetFieldDateTime({
   data,
@@ -6,15 +6,18 @@ export default function FormDatasetFieldDateTime({
   disabled,
   onDestinationOptionTypeChange,
   onKwargsDateTimeFormatChange,
+  onSourceOptionSourceColumnChange,
 }: FormDatasetFieldDateTimeProps) {
   return (
     <>
       <div className="cols group">
         <div className="col">
-          <label htmlFor="destinationOptionsType">ชนิดฟิลด์ข้อมูล</label>
+          <label htmlFor={`destinationOptionsType-${index}`}>
+            ชนิดฟิลด์ข้อมูล
+          </label>
           <input
-            id="destinationOptionsType"
-            name="destinationOptionsType"
+            id={`destinationOptionsType-${index}`}
+            name={`destinationOptionsType-${index}`}
             onChange={(e) =>
               onDestinationOptionTypeChange({ index, value: e.target.value })
             }
@@ -26,28 +29,49 @@ export default function FormDatasetFieldDateTime({
         </div>
 
         <div className="col">
-          <label htmlFor={`kwargsDateTimeFormatValue-${index + 1}`}>
-            พารามิเตอร์ของการแปลง
+          <label htmlFor={`sourceOptionsSourceColumn-${index}`}>
+            ชื่อฟิลด์ตั้งต้นสำหรับการแปลง
           </label>
           <input
-            id={`kwargsDateTimeFormatValue-${index + 1}`}
-            name={`kwargsDateTimeFormatValue-${index + 1}`}
+            id={`sourceOptionsSourceColumn-${index}`}
+            name={`sourceOptionsSourceColumn-${index}`}
             onChange={(e) =>
-              onKwargsDateTimeFormatChange({
-                index,
-                value: {
-                  format: e.target.value,
-                },
-              })
+              onSourceOptionSourceColumnChange({ index, value: e.target.value })
             }
             required
             disabled={disabled}
             type="text"
-            value={
-              (data.sourceOptions.transformOptions.kwargs as KwargsCustom).eval
-            }
+            value={data.sourceOptions.sourceColumnInput as string}
           />
         </div>
+      </div>
+
+      <div className="col">
+        <label htmlFor={`kwargsDateTimeFormatValue-${index + 1}`}>
+          รูปแบบของวันเวลา
+        </label>
+        <input
+          id={`kwargsDateTimeFormatValue-${index + 1}`}
+          name={`kwargsDateTimeFormatValue-${index + 1}`}
+          onChange={(e) =>
+            onKwargsDateTimeFormatChange({
+              index,
+              value: {
+                format: e.target.value,
+              },
+            })
+          }
+          required
+          disabled={
+            !(data.sourceOptions.transformOptions.kwargs as KwargsDateTime)
+              .isCustom
+          }
+          type="text"
+          value={
+            (data.sourceOptions.transformOptions.kwargs as KwargsDateTime)
+              .format
+          }
+        />
       </div>
     </>
   );

@@ -9,8 +9,8 @@ import type {
   DatasetFieldSettingsSourceOptionTransformKwargs,
   DatasetFieldSettingsSourceOptionTransformMethod,
   DatasetFieldSettingsStatus,
-  KwargsConstantPayload,
-  KwargsCustomPayload,
+  KwargsDateTimePayload,
+  KwargsMappingPayload,
 } from "@/components/form-dataset-field-settings/types";
 import type {
   DatasetDropdownOption,
@@ -50,11 +50,19 @@ export type Action =
   }
   | {
     type: "SET_KWARGS_CONSTANT_VALUE";
-    payload: KwargsConstantPayload;
+    payload: { index: number; value: number };
   }
   | {
     type: "SET_KWARGS_CUSTOM_EVAL";
-    payload: KwargsCustomPayload;
+    payload: { index: number; value: string };
+  }
+  | {
+    type: "SET_KWARGS_DATE_TIME_FORMAT";
+    payload: KwargsDateTimePayload;
+  }
+  | {
+    type: "SET_KWARGS_MAPPING_FIELD_NAME";
+    payload: KwargsMappingPayload;
   }
   | {
     type: "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE";

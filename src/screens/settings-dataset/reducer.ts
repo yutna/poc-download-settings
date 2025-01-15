@@ -1,6 +1,8 @@
 import {
   KwargsConstant,
   KwargsCustom,
+  KwargsDateTime,
+  KwargsMapping,
 } from "@/components/form-dataset-field-settings/types";
 import type { Action, State } from "./types";
 
@@ -95,17 +97,36 @@ export default function reducer(draft: State, action: Action) {
       break;
 
     // Kwargs Reducer
+    // Kwargs Constant Method
     case "SET_KWARGS_CONSTANT_VALUE":
       (
         draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
           .kwargs as KwargsConstant
-      ).value = action.payload.value.value;
+      ).value = action.payload.value;
       break;
+
+    // Kwargs Custom Method
     case "SET_KWARGS_CUSTOM_EVAL":
       (
         draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
           .kwargs as KwargsCustom
-      ).eval = action.payload.value.eval;
+      ).eval = action.payload.value;
+      break;
+
+    // Kwargs Date Time Method
+    case "SET_KWARGS_DATE_TIME_FORMAT":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsDateTime
+      ).format = action.payload.value.format;
+      break;
+
+    // Kwargs Mapping Method
+    case "SET_KWARGS_MAPPING_FIELD_NAME":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsMapping
+      ).fieldName = action.payload.value.fieldName;
       break;
 
     // NOTE: using for fetch dataset form by id + also clear state

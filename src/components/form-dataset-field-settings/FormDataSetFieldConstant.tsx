@@ -11,10 +11,12 @@ export default function FormDatasetFieldConstant({
     <>
       <div className="cols group">
         <div className="col">
-          <label htmlFor="destinationOptionsType">ชนิดฟิลด์ข้อมูล</label>
+          <label htmlFor={`destinationOptionsType-${index}`}>
+            ชนิดฟิลด์ข้อมูล
+          </label>
           <input
-            id="destinationOptionsType"
-            name="destinationOptionsType"
+            id={`destinationOptionsType-${index}`}
+            name={`destinationOptionsType-${index}`}
             onChange={(e) =>
               onDestinationOptionTypeChange({ index, value: e.target.value })
             }
@@ -35,9 +37,7 @@ export default function FormDatasetFieldConstant({
             onChange={(e) =>
               onKwargsConstantValueChange({
                 index,
-                value: {
-                  value: Number(e.target.value),
-                },
+                value: Number(e.target.value),
               })
             }
             required

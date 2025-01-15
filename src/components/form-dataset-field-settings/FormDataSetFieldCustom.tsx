@@ -11,10 +11,12 @@ export default function FormDatasetFieldCustom({
     <>
       <div className="cols group">
         <div className="col">
-          <label htmlFor="destinationOptionsType">ชนิดฟิลด์ข้อมูล</label>
+          <label htmlFor={`destinationOptionsType-${index}`}>
+            ชนิดฟิลด์ข้อมูล
+          </label>
           <input
-            id="destinationOptionsType"
-            name="destinationOptionsType"
+            id={`destinationOptionsType-${index}`}
+            name={`destinationOptionsType-${index}`}
             onChange={(e) =>
               onDestinationOptionTypeChange({ index, value: e.target.value })
             }
@@ -35,9 +37,10 @@ export default function FormDatasetFieldCustom({
             onChange={(e) =>
               onKwargsCustomEvalChange({
                 index,
-                value: {
-                  eval: e.target.value,
-                },
+                // value: {
+                //   eval: e.target.value,
+                // },
+                value: e.target.value,
               })
             }
             required

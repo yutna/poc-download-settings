@@ -26,8 +26,8 @@ export interface FormDatasetFieldSettingsData {
       | Record<string, never>
       | KwargsConstant
       | KwargsCustom
-      | KwargsDateTime;
-      // | KwargsMapping
+      | KwargsDateTime
+      | KwargsMapping;
       // | KwargsMappingNil;
     };
   };
@@ -50,8 +50,12 @@ export interface FormDatasetFieldSettingsProps {
   ) => void;
   onFieldSettingsStatusChange: (payload: DatasetFieldSettingsStatus) => void;
   onAppendNewFieldSetting: (payload: FormDatasetFieldSettingsData) => void;
-  onKwargsConstantValueChange: (payload: KwargsConstantPayload) => void;
-  onKwargsCustomEvalChange: (payload: KwargsCustomPayload) => void;
+  onKwargsConstantValueChange: (payload: {
+    index: number;
+    value: number;
+  }) => void;
+  onKwargsCustomEvalChange: (payload: { index: number; value: string }) => void;
+  onKwargsDateTimeFormatChange: (payload: KwargsDateTimePayload) => void;
 }
 
 export interface FormDatasetFieldDefaultProps {
@@ -73,7 +77,10 @@ export interface FormDatasetFieldConstantProps {
   onDestinationOptionTypeChange: (
     payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
-  onKwargsConstantValueChange: (payload: KwargsConstantPayload) => void;
+  onKwargsConstantValueChange: (payload: {
+    index: number;
+    value: number;
+  }) => void;
 }
 
 export interface FormDatasetFieldCustomProps {
@@ -83,7 +90,7 @@ export interface FormDatasetFieldCustomProps {
   onDestinationOptionTypeChange: (
     payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
-  onKwargsCustomEvalChange: (payload: KwargsCustomPayload) => void;
+  onKwargsCustomEvalChange: (payload: { index: number; value: string }) => void;
 }
 
 export interface FormDatasetFieldDateTimeProps {
@@ -94,6 +101,22 @@ export interface FormDatasetFieldDateTimeProps {
     payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
   onKwargsDateTimeFormatChange: (payload: KwargsDateTimePayload) => void;
+  onSourceOptionSourceColumnChange: (
+    payload: DatasetFieldSettingsSourceOptionSourceColumn,
+  ) => void;
+}
+
+export interface FormDatasetFieldMappingProps {
+  data: FormDatasetFieldSettingsData;
+  index: number;
+  disabled: boolean;
+  onDestinationOptionTypeChange: (
+    payload: DatasetFieldSettingsDestinationOptionType,
+  ) => void;
+  onKwargsMappingFieldNameChange: (payload: KwargsMappingPayload) => void;
+  onSourceOptionSourceColumnChange: (
+    payload: DatasetFieldSettingsSourceOptionSourceColumn,
+  ) => void;
 }
 
 export interface DatasetFieldSettingsSourceOptionSourceColumn
@@ -161,7 +184,7 @@ export interface KwargsMapping {
   destinationMap: string;
   isCustomFunction: boolean;
   inputFieldValidation: string;
-  options: Array<KwargsMappingOption> | Array<Record<string, never>>;
+  options: Array<KwargsMappingOption> | Array<[]>;
 }
 
 export interface KwargsMappingOption {
@@ -169,8 +192,16 @@ export interface KwargsMappingOption {
   default: string;
 }
 
+export interface KwargsMappingPayload extends BaseFieldSettings {
+  value: KwargsMapping;
+}
+
 export interface KwargsMappingNil {
   fieldName: string;
   destinationMap: string;
   inputFieldValidation: string;
+}
+
+export interface KwargsMappingNilPayload extends BaseFieldSettings {
+  value: KwargsMappingNil;
 }
