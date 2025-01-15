@@ -30,6 +30,10 @@ export default function FormDatasetFieldSettings({
   onKwargsDateTimeFormatChange,
   onKwargsMappingFieldNameChange,
   onKwargsMappingInputValidationFieldChange,
+  onKwargsMappingIsCustomFunctionChange,
+  onKwargsMappingOptionFieldChange,
+  onKwargsMappingOptionDefaultChange,
+  onAppendNewKwargsMappingOption,
 }: FormDatasetFieldSettingsProps) {
   return (
     <fieldset>
@@ -151,6 +155,16 @@ export default function FormDatasetFieldSettings({
                   onSourceOptionSourceColumnChange={
                     onSourceOptionSourceColumnChange
                   }
+                  onKwargsMappingIsCustomFunctionChange={
+                    onKwargsMappingIsCustomFunctionChange
+                  }
+                  onKwargsMappingOptionFieldChange={
+                    onKwargsMappingOptionFieldChange
+                  }
+                  onKwargsMappingOptionDefaultChange={
+                    onKwargsMappingOptionDefaultChange
+                  }
+                  onAppendNewKwargsMappingOption={onAppendNewKwargsMappingOption}
                 />
               )}
 

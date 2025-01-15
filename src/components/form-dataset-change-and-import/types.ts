@@ -32,13 +32,13 @@ export interface FormDatasetChangeAndImportData {
 export interface FormDatasetChangeAndImportProps {
   data: FormDatasetChangeAndImportData;
   disabled: boolean;
-  destinationFieldDisabled: boolean;
 
   onDatasetTransformIdChange: (payload: number) => void;
   onHeaderRowChange: (payload: number) => void;
   onDownloaderIdChange: (payload: number) => void;
   onMetadataIdChange: (payload: number) => void;
 
+  onDestinationChange: (payload: string) => void;
   onDestinationUniqueKeyChange: (payload: string) => void;
   onDestinationPartitionColumnChange: (payload: string) => void;
   onDestinationNullOptionChange: (payload: string) => void;

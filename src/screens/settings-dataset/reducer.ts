@@ -3,6 +3,7 @@ import {
   KwargsCustom,
   KwargsDateTime,
   KwargsMapping,
+  KwargsMappingOption,
 } from "@/components/form-dataset-field-settings/types";
 import type { Action, State } from "./types";
 
@@ -44,6 +45,9 @@ export default function reducer(draft: State, action: Action) {
       break;
     case "SET_DATASET_DISPLAY":
       draft.changeAndImport.datasetDisplay = action.payload;
+      break;
+    case "SET_DESTINATION":
+      draft.changeAndImport.destination = action.payload;
       break;
     case "SET_DESTINATION_UNIQUE_KEY":
       draft.changeAndImport.destinationUniqueKey = action.payload;
@@ -136,6 +140,48 @@ export default function reducer(draft: State, action: Action) {
         draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
           .kwargs as KwargsMapping
       ).inputFieldValidation = action.payload.value;
+      break;
+    case "SET_KWARGS_MAPPING_IS_CUSTOM_FUNCTION":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsMapping
+      ).isCustomFunction = action.payload.value;
+      break;
+
+    // Kwargs Mapping Method (Option)
+    case "APPEND_KWARGS_MAPPING_OPTION":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsMapping
+      ).options = [
+          ...(
+            draft.fieldSettings[action.payload.index].sourceOptions
+              .transformOptions.kwargs as KwargsMapping
+          ).options,
+          action.payload.value,
+        ];
+      break;
+    case "SET_KWARGS_MAPPING_OPTION":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsMapping
+      ).options = action.payload.value;
+      break;
+    case "SET_KWARGS_MAPPING_OPTION_FIELD":
+      (
+        (
+          draft.fieldSettings[action.payload.index].sourceOptions
+            .transformOptions.kwargs as KwargsMapping
+        ).options[action.payload.optionIndex] as KwargsMappingOption
+      ).field = action.payload.value;
+      break;
+    case "SET_KWARGS_MAPPING_OPTION_DEFAULT":
+      (
+        (
+          draft.fieldSettings[action.payload.index].sourceOptions
+            .transformOptions.kwargs as KwargsMapping
+        ).options[action.payload.optionIndex] as KwargsMappingOption
+      ).default = action.payload.value;
       break;
 
     // NOTE: using for fetch dataset form by id + also clear state

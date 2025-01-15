@@ -9,6 +9,7 @@ import type {
   DatasetFieldSettingsSourceOptionTransformKwargs,
   DatasetFieldSettingsSourceOptionTransformMethod,
   DatasetFieldSettingsStatus,
+  KwargsMappingOption,
 } from "@/components/form-dataset-field-settings/types";
 import type {
   DatasetDropdownOption,
@@ -28,6 +29,7 @@ export type Action =
   | { type: "SET_PROCESS_FOLDERS"; payload: Array<string> }
   | { type: "SET_METADATA_ID"; payload: number }
   | { type: "SET_DATASET_DISPLAY"; payload: string }
+  | { type: "SET_DESTINATION"; payload: string }
   | { type: "SET_DESTINATION_UNIQUE_KEY"; payload: string }
   | { type: "SET_DESTINATION_PARTITION_COLUMN"; payload: string }
   | { type: "SET_DESTINATION_NULL_OPTION"; payload: string }
@@ -69,6 +71,37 @@ export type Action =
   | {
     type: "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD";
     payload: { index: number; value: string };
+  }
+  | {
+    type: "SET_KWARGS_MAPPING_IS_CUSTOM_FUNCTION";
+    payload: { index: number; value: boolean };
+  }
+  | {
+    type: "APPEND_KWARGS_MAPPING_OPTION";
+    payload: { index: number; value: KwargsMappingOption };
+  }
+  | {
+    type: "SET_KWARGS_MAPPING_OPTION";
+    payload: {
+      index: number;
+      value: (KwargsMappingOption | [])[];
+    };
+  }
+  | {
+    type: "SET_KWARGS_MAPPING_OPTION_FIELD";
+    payload: {
+      index: number;
+      optionIndex: number;
+      value: string;
+    };
+  }
+  | {
+    type: "SET_KWARGS_MAPPING_OPTION_DEFAULT";
+    payload: {
+      index: number;
+      optionIndex: number;
+      value: string;
+    };
   }
   | {
     type: "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE";

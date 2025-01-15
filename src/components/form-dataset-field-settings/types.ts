@@ -67,6 +67,24 @@ export interface FormDatasetFieldSettingsProps {
     index: number;
     value: string;
   }) => void;
+  onKwargsMappingIsCustomFunctionChange: (payload: {
+    index: number;
+    value: boolean;
+  }) => void;
+  onKwargsMappingOptionFieldChange: (payload: {
+    index: number;
+    optionIndex: number;
+    value: string;
+  }) => void;
+  onKwargsMappingOptionDefaultChange: (payload: {
+    index: number;
+    optionIndex: number;
+    value: string;
+  }) => void;
+  onAppendNewKwargsMappingOption: (payload: {
+    index: number;
+    value: KwargsMappingOption;
+  }) => void;
 }
 
 export interface FormDatasetFieldDefaultProps {
@@ -135,9 +153,44 @@ export interface FormDatasetFieldMappingProps {
     index: number;
     value: string;
   }) => void;
+  onKwargsMappingIsCustomFunctionChange: (payload: {
+    index: number;
+    value: boolean;
+  }) => void;
+  onKwargsMappingOptionFieldChange: (payload: {
+    index: number;
+    optionIndex: number;
+    value: string;
+  }) => void;
+  onKwargsMappingOptionDefaultChange: (payload: {
+    index: number;
+    optionIndex: number;
+    value: string;
+  }) => void;
   onSourceOptionSourceColumnChange: (
     payload: DatasetFieldSettingsSourceOptionSourceColumn,
   ) => void;
+  onAppendNewKwargsMappingOption: (payload: {
+    index: number;
+    value: KwargsMappingOption;
+  }) => void;
+}
+
+export interface FormDatasetFieldMappingOptionProps {
+  data: KwargsMappingOption | [];
+  index: number;
+  optionIndex: number;
+  disabled: boolean;
+  onKwargsMappingOptionFieldChange: (payload: {
+    index: number;
+    optionIndex: number;
+    value: string;
+  }) => void;
+  onKwargsMappingOptionDefaultChange: (payload: {
+    index: number;
+    optionIndex: number;
+    value: string;
+  }) => void;
 }
 
 export interface DatasetFieldSettingsSourceOptionSourceColumn
@@ -205,7 +258,7 @@ export interface KwargsMapping {
   destinationMap: string;
   isCustomFunction: boolean;
   inputFieldValidation: string;
-  options: Array<KwargsMappingOption> | Array<[]>;
+  options: Array<KwargsMappingOption | []>;
 }
 
 export interface KwargsMappingOption {

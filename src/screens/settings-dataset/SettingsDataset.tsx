@@ -3,7 +3,11 @@ import FormDataSetChangeAndImport from "@/components/form-dataset-change-and-imp
 import FormDataSetFieldSettings from "@/components/form-dataset-field-settings";
 import FormDatasetGeneralSettings from "@/components/form-dataset-general-settings";
 
-import { initialKwargs, initialState } from "./constants";
+import {
+  initialKwargs,
+  initialKwargsMappingOption,
+  initialState,
+} from "./constants";
 import reducer from "./reducer";
 import useFetchDatasetTransformDropdown from "./useFetchDatasetTranformDropdown";
 import useFetchDownloaderDropdown from "./useFetchDownloaderDropdown";
@@ -22,11 +26,10 @@ export default function SettingsDataset() {
 
   // Variables
   const disabled = !state.editable;
-  const destinationFieldDisabled = !state.datasetId;
 
   // Event handlers
   function handleEvent(type: string) {
-    return function(payload: unknown) {
+    return function (payload: unknown) {
       dispatch({ type, payload } as Action);
     };
   }
@@ -37,8 +40,28 @@ export default function SettingsDataset() {
     // TODO: wrap and convert raw data to match the api dtos
   }
 
+  function handleMappingIsCustomFunctionChange() {
+    return function ({ index, value }: { index: number; value: boolean }) {
+      dispatch({
+        type: "SET_KWARGS_MAPPING_IS_CUSTOM_FUNCTION",
+        payload: {
+          index,
+          value,
+        },
+      } as Action);
+
+      dispatch({
+        type: "SET_KWARGS_MAPPING_OPTION",
+        payload: {
+          index,
+          value: value === true ? [{ ...initialKwargsMappingOption }] : [],
+        },
+      } as Action);
+    };
+  }
+
   function handleTransformOptionMethodChange() {
-    return function({
+    return function ({
       index,
       value,
     }: {
@@ -100,11 +123,11 @@ export default function SettingsDataset() {
         <FormDataSetChangeAndImport
           data={state.changeAndImport}
           disabled={disabled}
-          destinationFieldDisabled={destinationFieldDisabled}
           onDatasetTransformIdChange={handleEvent("SET_DATASET_TRANSFORM_ID")}
           onHeaderRowChange={handleEvent("SET_HEADER_ROW")}
           onDownloaderIdChange={handleEvent("SET_DOWNLOADER_ID")}
           onMetadataIdChange={handleEvent("SET_METADATA_ID")}
+          onDestinationChange={handleEvent("SET_DESTINATION")}
           onDestinationUniqueKeyChange={handleEvent(
             "SET_DESTINATION_UNIQUE_KEY",
           )}
@@ -140,12 +163,21 @@ export default function SettingsDataset() {
           onKwargsDateTimeFormatChange={handleEvent(
             "SET_KWARGS_DATE_TIME_FORMAT",
           )}
-          // onKwargsDateTimeIsCustomChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
           onKwargsMappingFieldNameChange={handleEvent(
             "SET_KWARGS_MAPPING_FIELD_NAME",
           )}
           onKwargsMappingInputValidationFieldChange={handleEvent(
             "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD",
+          )}
+          onKwargsMappingIsCustomFunctionChange={handleMappingIsCustomFunctionChange()}
+          onKwargsMappingOptionFieldChange={handleEvent(
+            "SET_KWARGS_MAPPING_OPTION_FIELD",
+          )}
+          onKwargsMappingOptionDefaultChange={handleEvent(
+            "SET_KWARGS_MAPPING_OPTION_DEFAULT",
+          )}
+          onAppendNewKwargsMappingOption={handleEvent(
+            "APPEND_KWARGS_MAPPING_OPTION",
           )}
         />
         <div className="action">

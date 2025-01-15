@@ -109,6 +109,11 @@ export const initialKwargsMappingNil = {
   inputFieldValidation: "",
 };
 
+export const initialKwargsMappingOption = {
+  field: "",
+  default: "",
+};
+
 export const initialKwargs = {
   [TransformOptionsMethods.DEFAULT]: {},
   [TransformOptionsMethods.CONSTANT]: initialKwargsConstant,

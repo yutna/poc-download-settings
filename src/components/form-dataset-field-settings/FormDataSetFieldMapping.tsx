@@ -1,4 +1,6 @@
-import type { FormDatasetFieldMappingProps } from "./types";
+import { initialKwargsMappingOption } from "@/screens/settings-dataset/constants";
+import FormDatasetFieldMappingOption from "./FormDataSetFieldMappingOption";
+import type { FormDatasetFieldMappingProps, KwargsMapping } from "./types";
 
 export default function FormDatasetFieldMapping({
   data,
@@ -7,6 +9,10 @@ export default function FormDatasetFieldMapping({
   onDestinationOptionTypeChange,
   onKwargsMappingFieldNameChange,
   onKwargsMappingInputValidationFieldChange,
+  onKwargsMappingIsCustomFunctionChange,
+  onKwargsMappingOptionFieldChange,
+  onKwargsMappingOptionDefaultChange,
+  onAppendNewKwargsMappingOption,
   onSourceOptionSourceColumnChange,
 }: FormDatasetFieldMappingProps) {
   return (
@@ -79,7 +85,10 @@ export default function FormDatasetFieldMapping({
             required
             disabled={disabled}
             type="text"
-          // value={data.sourceOptions.sourceColumnInput as string}
+            value={
+              (data.sourceOptions.transformOptions.kwargs as KwargsMapping)
+                .inputFieldValidation
+            }
           />
         </div>
       </div>
@@ -96,27 +105,71 @@ export default function FormDatasetFieldMapping({
             required
             disabled={disabled}
             type="text"
-          // value={data.sourceOptions.transformOptions.kwargs.}
+            value={
+              (data.sourceOptions.transformOptions.kwargs as KwargsMapping)
+                .fieldName
+            }
           />
         </div>
 
         <div className="col">
-          <label htmlFor="sourceOptionsSourceColumn">
+          <label htmlFor={`mappingIsCustomFunction-${index}`}>
             การเปิดปิดฟังก์นการเพิ่มข้อมูลสถานี
           </label>
-          <input
-            id="sourceOptionsSourceColumn"
-            name="sourceOptionsSourceColumn"
-            // onChange={(e) =>
-            //   onSourceOptionSourceColumnChange({ index, value: e.target.value })
-            // }
-            required
+
+          <select
+            id={`mappingIsCustomFunction-${index}`}
+            name={`mappingIsCustomFunction-${index}`}
+            value={
+              (data.sourceOptions.transformOptions.kwargs as KwargsMapping)
+                .isCustomFunction === true
+                ? "true"
+                : "false"
+            }
             disabled={disabled}
-            type="text"
-          // value={data.sourceOptions.sourceColumnInput as string}
-          />
+            onChange={(e) =>
+              onKwargsMappingIsCustomFunctionChange({
+                index,
+                value: e.target.value === "true" ? true : false,
+              })
+            }
+          >
+            <option value={"true"}>true</option>
+            <option value={"false"} selected>
+              false
+            </option>
+          </select>
         </div>
       </div>
+
+      {(
+        data.sourceOptions.transformOptions.kwargs as KwargsMapping
+      ).options.map((item, optionIndex) => (
+        <FormDatasetFieldMappingOption
+          data={item}
+          disabled={disabled}
+          index={index}
+          optionIndex={optionIndex}
+          onKwargsMappingOptionFieldChange={onKwargsMappingOptionFieldChange}
+          onKwargsMappingOptionDefaultChange={
+            onKwargsMappingOptionDefaultChange
+          }
+        />
+      ))}
+
+      {(data.sourceOptions.transformOptions.kwargs as KwargsMapping)
+        .isCustomFunction && (
+          <button
+            onClick={() =>
+              onAppendNewKwargsMappingOption({
+                index,
+                value: initialKwargsMappingOption,
+              })
+            }
+          >
+            +
+          </button>
+        )}
     </>
   );
 }

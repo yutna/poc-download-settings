@@ -3,13 +3,13 @@ import { FormDatasetChangeAndImportProps } from "./types";
 export default function FormDatasetChangeAndImport({
   data,
   disabled,
-  destinationFieldDisabled,
 
   onDatasetTransformIdChange,
   onHeaderRowChange,
   onDownloaderIdChange,
   onMetadataIdChange,
 
+  onDestinationChange,
   onDestinationUniqueKeyChange,
   onDestinationPartitionColumnChange,
   onDestinationNullOptionChange,
@@ -150,19 +150,28 @@ export default function FormDatasetChangeAndImport({
       </div>
 
       <div className="cols group">
-        {/* TODO: wait for field mapping and also API ? */}
         <div className="col">
           <label htmlFor="destination">ชื่อตารางข้อมูลที่จะนำเข้า</label>
           <select
             id="destination"
             name="destination"
             value={data.destination}
-            disabled={disabled || destinationFieldDisabled}
-          // onChange={(e) => onDestinationChange(e.target.value)}
+            disabled={disabled}
+            onChange={(e) => onDestinationChange(e.target.value)}
           >
             <option disabled selected value={undefined}>
               -- select an option --
             </option>
+            {data.destinationDropdown.map((dropdownItem, index) => {
+              return (
+                <option
+                  value={dropdownItem}
+                  key={`destinationDropdown-${dropdownItem}-${index}`}
+                >
+                  {dropdownItem}
+                </option>
+              );
+            })}
           </select>
         </div>
 
