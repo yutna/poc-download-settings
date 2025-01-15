@@ -81,6 +81,10 @@ export type Action =
     payload: { index: number; value: KwargsMappingOption };
   }
   | {
+    type: "DELETE_KWARGS_MAPPING_OPTION";
+    payload: { index: number; optionIndex: number };
+  }
+  | {
     type: "SET_KWARGS_MAPPING_OPTION";
     payload: {
       index: number;
@@ -130,4 +134,9 @@ export interface State {
   general: FormDatasetGeneralSettingsData;
   changeAndImport: FormDatasetChangeAndImportData;
   fieldSettings: Array<FormDatasetFieldSettingsData>;
+  temp: TempState;
+}
+
+export interface TempState {
+  destinationDropdown: Array<string>;
 }

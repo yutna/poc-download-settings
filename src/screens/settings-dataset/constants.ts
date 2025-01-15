@@ -26,7 +26,6 @@ export const initialState = {
     metadataId: undefined,
     metadataDropdown: [],
 
-    destinationDropdown: [],
     destination: "",
     destinationUniqueKey: "",
     destinationPartitionColumn: "",
@@ -48,6 +47,9 @@ export const initialState = {
       },
     },
   ],
+  temp: {
+    destinationDropdown: [],
+  },
 };
 
 export const initialFieldSettingsData: FormDatasetFieldSettingsData = {

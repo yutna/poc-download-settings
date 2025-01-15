@@ -122,6 +122,7 @@ export default function SettingsDataset() {
         />
         <FormDataSetChangeAndImport
           data={state.changeAndImport}
+          temp={state.temp}
           disabled={disabled}
           onDatasetTransformIdChange={handleEvent("SET_DATASET_TRANSFORM_ID")}
           onHeaderRowChange={handleEvent("SET_HEADER_ROW")}
@@ -178,6 +179,9 @@ export default function SettingsDataset() {
           )}
           onAppendNewKwargsMappingOption={handleEvent(
             "APPEND_KWARGS_MAPPING_OPTION",
+          )}
+          onDeleteKwargsMappingOption={handleEvent(
+            "DELETE_KWARGS_MAPPING_OPTION",
           )}
         />
         <div className="action">

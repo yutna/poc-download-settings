@@ -2,6 +2,7 @@ import { FormDatasetChangeAndImportProps } from "./types";
 
 export default function FormDatasetChangeAndImport({
   data,
+  temp,
   disabled,
 
   onDatasetTransformIdChange,
@@ -162,7 +163,7 @@ export default function FormDatasetChangeAndImport({
             <option disabled selected value={undefined}>
               -- select an option --
             </option>
-            {data.destinationDropdown.map((dropdownItem, index) => {
+            {temp.destinationDropdown.map((dropdownItem, index) => {
               return (
                 <option
                   value={dropdownItem}

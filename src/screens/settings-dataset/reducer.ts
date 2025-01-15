@@ -68,7 +68,7 @@ export default function reducer(draft: State, action: Action) {
       draft.changeAndImport.downloaderDropdown = action.payload;
       break;
     case "SET_DESTINATION_DROPDOWN":
-      draft.changeAndImport.destinationDropdown = action.payload;
+      draft.temp.destinationDropdown = action.payload;
       break;
 
     // Data Set Field Settings Form
@@ -160,6 +160,12 @@ export default function reducer(draft: State, action: Action) {
           ).options,
           action.payload.value,
         ];
+      break;
+    case "DELETE_KWARGS_MAPPING_OPTION":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsMapping
+      ).options.splice(action.payload.optionIndex, 1);
       break;
     case "SET_KWARGS_MAPPING_OPTION":
       (

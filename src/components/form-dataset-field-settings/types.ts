@@ -85,6 +85,10 @@ export interface FormDatasetFieldSettingsProps {
     index: number;
     value: KwargsMappingOption;
   }) => void;
+  onDeleteKwargsMappingOption: (payload: {
+    index: number;
+    optionIndex: number;
+  }) => void;
 }
 
 export interface FormDatasetFieldDefaultProps {
@@ -174,6 +178,10 @@ export interface FormDatasetFieldMappingProps {
     index: number;
     value: KwargsMappingOption;
   }) => void;
+  onDeleteKwargsMappingOption: (payload: {
+    index: number;
+    optionIndex: number;
+  }) => void;
 }
 
 export interface FormDatasetFieldMappingOptionProps {
@@ -181,6 +189,7 @@ export interface FormDatasetFieldMappingOptionProps {
   index: number;
   optionIndex: number;
   disabled: boolean;
+  isHideDeleteButton: boolean;
   onKwargsMappingOptionFieldChange: (payload: {
     index: number;
     optionIndex: number;
@@ -190,6 +199,10 @@ export interface FormDatasetFieldMappingOptionProps {
     index: number;
     optionIndex: number;
     value: string;
+  }) => void;
+  onDeleteKwargsMappingOption: (payload: {
+    index: number;
+    optionIndex: number;
   }) => void;
 }
 

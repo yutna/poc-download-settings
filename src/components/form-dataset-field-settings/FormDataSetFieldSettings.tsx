@@ -34,6 +34,7 @@ export default function FormDatasetFieldSettings({
   onKwargsMappingOptionFieldChange,
   onKwargsMappingOptionDefaultChange,
   onAppendNewKwargsMappingOption,
+  onDeleteKwargsMappingOption,
 }: FormDatasetFieldSettingsProps) {
   return (
     <fieldset>
@@ -165,6 +166,7 @@ export default function FormDatasetFieldSettings({
                     onKwargsMappingOptionDefaultChange
                   }
                   onAppendNewKwargsMappingOption={onAppendNewKwargsMappingOption}
+                  onDeleteKwargsMappingOption={onDeleteKwargsMappingOption}
                 />
               )}
 

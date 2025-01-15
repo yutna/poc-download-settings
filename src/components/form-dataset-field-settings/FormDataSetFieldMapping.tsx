@@ -1,5 +1,6 @@
-import { initialKwargsMappingOption } from "@/screens/settings-dataset/constants";
 import FormDatasetFieldMappingOption from "./FormDataSetFieldMappingOption";
+import { initialKwargsMappingOption } from "@/screens/settings-dataset/constants";
+
 import type { FormDatasetFieldMappingProps, KwargsMapping } from "./types";
 
 export default function FormDatasetFieldMapping({
@@ -13,16 +14,19 @@ export default function FormDatasetFieldMapping({
   onKwargsMappingOptionFieldChange,
   onKwargsMappingOptionDefaultChange,
   onAppendNewKwargsMappingOption,
+  onDeleteKwargsMappingOption,
   onSourceOptionSourceColumnChange,
 }: FormDatasetFieldMappingProps) {
   return (
     <>
       <div className="cols group">
         <div className="col">
-          <label htmlFor="destinationOptionsType">ชนิดฟิลด์ข้อมูล</label>
+          <label htmlFor={`destinationOptionsType-${index}`}>
+            ชนิดฟิลด์ข้อมูล
+          </label>
           <input
-            id="destinationOptionsType"
-            name="destinationOptionsType"
+            id={`destinationOptionsType-${index}`}
+            name={`destinationOptionsType-${index}`}
             onChange={(e) =>
               onDestinationOptionTypeChange({ index, value: e.target.value })
             }
@@ -34,12 +38,12 @@ export default function FormDatasetFieldMapping({
         </div>
 
         <div className="col">
-          <label htmlFor="sourceOptionsSourceColumn">
+          <label htmlFor={`sourceOptionsSourceColumn-${index}`}>
             ชื่อฟิลด์ตั้งต้นสำหรับการแปลง
           </label>
           <input
-            id="sourceOptionsSourceColumn"
-            name="sourceOptionsSourceColumn"
+            id={`sourceOptionsSourceColumn-${index}`}
+            name={`sourceOptionsSourceColumn-${index}`}
             onChange={(e) =>
               onSourceOptionSourceColumnChange({ index, value: e.target.value })
             }
@@ -53,12 +57,12 @@ export default function FormDatasetFieldMapping({
 
       <div className="cols group">
         <div className="col">
-          <label htmlFor="destinationOptionsType">
+          <label htmlFor={`sourceOptionsDestinationMap-${index}`}>
             ชื่อตารางที่ใช้ในการ map ข้อมูล
           </label>
           <input
-            id="destinationOptionsType"
-            name="destinationOptionsType"
+            id={`sourceOptionsDestinationMap-${index}`}
+            name={`sourceOptionsDestinationMap-${index}`}
             // onChange={(e) =>
             //   onDestinationOptionTypeChange({ index, value: e.target.value })
             // }
@@ -67,6 +71,31 @@ export default function FormDatasetFieldMapping({
             type="text"
           // value={data.destinationOptions.type}
           />
+
+          {/* <select */}
+          {/*   id={`sourceOptionsDestinationMap-${index}`} */}
+          {/*   name={`sourceOptionsDestinationMap-${index}`} */}
+          {/*   value={data.sourceOptions.transformOptions.method} */}
+          {/*   disabled={disabled} */}
+          {/*   onChange={(e) => */}
+          {/*     onSourceOptionTransformMethodChange({ */}
+          {/*       index, */}
+          {/*       value: e.target.value as TransformOptionsMethods, */}
+          {/*     }) */}
+          {/*   } */}
+          {/* > */}
+          {/*   {transformOptionsMethods.map((method) => { */}
+          {/*     return ( */}
+          {/*       <option */}
+          {/*         value={method} */}
+          {/*         key={`transformOptionsMethod-${method}`} */}
+          {/*         selected={method === TransformOptionsMethods.DEFAULT} */}
+          {/*       > */}
+          {/*         {method} */}
+          {/*       </option> */}
+          {/*     ); */}
+          {/*   })} */}
+          {/* </select> */}
         </div>
 
         <div className="col">
@@ -144,18 +173,26 @@ export default function FormDatasetFieldMapping({
 
       {(
         data.sourceOptions.transformOptions.kwargs as KwargsMapping
-      ).options.map((item, optionIndex) => (
-        <FormDatasetFieldMappingOption
-          data={item}
-          disabled={disabled}
-          index={index}
-          optionIndex={optionIndex}
-          onKwargsMappingOptionFieldChange={onKwargsMappingOptionFieldChange}
-          onKwargsMappingOptionDefaultChange={
-            onKwargsMappingOptionDefaultChange
-          }
-        />
-      ))}
+      ).options.map((item, optionIndex) => {
+        const optionLength = (
+          data.sourceOptions.transformOptions.kwargs as KwargsMapping
+        ).options.length;
+
+        return (
+          <FormDatasetFieldMappingOption
+            data={item}
+            disabled={disabled}
+            index={index}
+            optionIndex={optionIndex}
+            onKwargsMappingOptionFieldChange={onKwargsMappingOptionFieldChange}
+            onKwargsMappingOptionDefaultChange={
+              onKwargsMappingOptionDefaultChange
+            }
+            onDeleteKwargsMappingOption={onDeleteKwargsMappingOption}
+            isHideDeleteButton={optionLength === index + 1}
+          />
+        );
+      })}
 
       {(data.sourceOptions.transformOptions.kwargs as KwargsMapping)
         .isCustomFunction && (

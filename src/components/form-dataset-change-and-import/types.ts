@@ -1,3 +1,4 @@
+import type { TempState } from "@/screens/settings-dataset/types";
 import type {
   DatasetDropdownOption,
   MetadataDropdownOption,
@@ -22,7 +23,7 @@ export interface FormDatasetChangeAndImportData {
   metadataDropdown: Array<MetadataDropdownOption>;
 
   // destination
-  destinationDropdown: Array<string>;
+  // destinationDropdown: Array<string>;
   destination: string;
   destinationUniqueKey: string;
   destinationPartitionColumn: string;
@@ -31,6 +32,7 @@ export interface FormDatasetChangeAndImportData {
 
 export interface FormDatasetChangeAndImportProps {
   data: FormDatasetChangeAndImportData;
+  temp: TempState;
   disabled: boolean;
 
   onDatasetTransformIdChange: (payload: number) => void;
