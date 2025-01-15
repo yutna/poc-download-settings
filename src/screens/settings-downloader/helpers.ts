@@ -1,6 +1,7 @@
 import { trim } from "radash";
 
 import type { ParameterRow } from "@/components/form-process-settings";
+import type { SettingsDownloaderSchema } from "@/schemas/settingsDownloaderSchema";
 import type { State } from "./types";
 
 export function convertRowsToObject(
@@ -13,6 +14,79 @@ export function convertRowsToObject(
 
     return acc;
   }, {} as Record<string, string>);
+}
+
+function convertStatusToBoolean(status: "ACTIVE" | "INACTIVE"): boolean {
+  return status === "ACTIVE";
+}
+
+export function convertSettingsDownloaderToInitialState(
+  data: SettingsDownloaderSchema
+): State {
+  return {
+    general: {
+      agencyId: data.agencyId,
+      agencyOptions: [],
+      downloader: data.downloader,
+      downloaderDescription: data.downloaderDescription,
+      downloaderType: data.downloaderType,
+      status: convertStatusToBoolean(data.status),
+    },
+    dataStorageFolder: {
+      dataSubType: data.dataSubType,
+      dataType: data.dataType,
+      downloaderFileIds: data.downloaderFileIds,
+      downloaderFileOptions: [],
+      storagePreview: [],
+    },
+    download: {
+      retryCount: data.retryCount,
+      scheduleInterval: data.scheduleInterval,
+      timePreview: "",
+    },
+    downloaderDriver: {
+      commandSet: "",
+      dataEntryFormat: "SELF_FILL_DATA_ENTRY",
+      deleteOldFile: 0,
+      downloaderDriverConfigId: undefined,
+      downloaderDriverConfigOptions: [],
+      downloaderDriverType: data.downloaderDriver.downloaderDriverType,
+      driverId: data.downloaderDriver.driverId,
+      driverOptions: [],
+      driverTemplate: undefined,
+      hasParameter: true,
+      host: data.downloaderDriver.host,
+      parameter: {
+        ...data.downloaderDriver.additionalFields,
+      },
+      password: data.downloaderDriver.fields?.password ?? "",
+      timeoutSeconds: data.downloaderDriver.timeoutSeconds,
+      username: data.downloaderDriver.fields?.username ?? "",
+    },
+    temp: {
+      agencies: {
+        data: [],
+        isPending: false,
+      },
+      driverConfig: {
+        data: [],
+        isPending: false,
+      },
+      driverDropdown: {
+        data: [],
+        isPending: false,
+      },
+      downloaderFileDropdown: {
+        data: [],
+        isPending: false,
+      },
+      isSubmitting: false,
+      storage: {
+        data: [],
+        isPending: false,
+      },
+    },
+  };
 }
 
 export function convertStateToSchemaFormat(state: State) {

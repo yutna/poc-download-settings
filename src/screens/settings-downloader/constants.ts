@@ -2,7 +2,7 @@ import type { State } from "./types";
 
 export const initialState: State = {
   general: {
-    agencyId: 1,
+    agencyId: undefined,
     agencyOptions: [],
     downloader: "",
     downloaderDescription: "",
