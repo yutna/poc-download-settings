@@ -3,7 +3,7 @@ import type { Option } from "@/types/form";
 export type DownloaderType = "INTERNAL" | "EXTERNAL";
 
 export interface FormGeneralSettingsData {
-  agencyId: number;
+  agencyId: number | undefined;
   agencyOptions: Option[];
   downloader: string;
   downloaderDescription: string;

@@ -37,6 +37,13 @@ export default function useFetchAgencyOptions({
         type: "SET_AGENCY_OPTIONS",
         payload: options,
       });
+
+      if (options.length > 0) {
+        dispatch({
+          type: "SET_AGENCY_ID",
+          payload: Number(options[0].value),
+        });
+      }
     });
   }, [dispatch, locale]);
 }

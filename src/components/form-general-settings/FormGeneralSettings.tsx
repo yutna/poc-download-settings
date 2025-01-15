@@ -60,8 +60,11 @@ export default function FormGeneralSettings({
           name="agencyId"
           onChange={(e) => onAgencyChange(Number(e.target.value))}
           required
-          value={data.agencyId}
+          value={data.agencyId ?? ""}
         >
+          {data.agencyOptions.length === 0 && (
+            <option disabled value=""></option>
+          )}
           {data.agencyOptions.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}

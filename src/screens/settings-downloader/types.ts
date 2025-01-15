@@ -20,7 +20,7 @@ import type { Option } from "@/types/form";
 import type { Locale } from "@/types/locale";
 
 export type Action =
-  | { type: "SET_AGENCY_ID"; payload: number }
+  | { type: "SET_AGENCY_ID"; payload: number | undefined }
   | { type: "SET_AGENCY_OPTIONS"; payload: Option[] }
   | { type: "SET_COMMAND_SET"; payload: string }
   | { type: "SET_DATA_ENTRY_FORMAT"; payload: DataEntryFormat }
