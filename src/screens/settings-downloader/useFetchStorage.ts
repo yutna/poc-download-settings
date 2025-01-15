@@ -43,7 +43,7 @@ export default function useFetchStorage({
         }).then((payload) => {
           dispatch({
             type: "SET_TEMP_STORAGE",
-            payload: { data: payload, isPending: true },
+            payload: { data: payload, isPending: false },
           });
 
           dispatch({ type: "SET_STORAGE_PREVIEW", payload });

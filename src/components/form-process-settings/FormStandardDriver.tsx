@@ -66,7 +66,7 @@ export default function FormStandardDriver({
               required
               value={data.downloaderDriverConfigId}
             >
-              <option value=""></option>
+              <option disabled value=""></option>
               {data.downloaderDriverConfigOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}

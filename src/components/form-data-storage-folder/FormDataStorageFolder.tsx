@@ -77,19 +77,21 @@ export default function FormDataStorageFolder({
           />
         </div>
       </div>
-      <div className="group">
-        <label htmlFor="storagePreview1">โฟล์เดอร์จัดเก็บข้อมูล</label>
-        {data.storagePreview.map((storage, index) => (
-          <input
-            key={storage}
-            defaultValue={storage}
-            disabled
-            id={`storagePreview${index}`}
-            name={`storagePreview${index}`}
-            type="text"
-          />
-        ))}
-      </div>
+      {data.storagePreview.length > 0 && (
+        <div className="group">
+          <label htmlFor="storagePreview0">โฟล์เดอร์จัดเก็บข้อมูล</label>
+          {data.storagePreview.map((storage, index) => (
+            <input
+              key={storage}
+              defaultValue={storage}
+              disabled
+              id={`storagePreview${index}`}
+              name={`storagePreview${index}`}
+              type="text"
+            />
+          ))}
+        </div>
+      )}
     </fieldset>
   );
 }
