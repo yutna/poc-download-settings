@@ -57,6 +57,14 @@ export default function SettingsDataset() {
           value: value === true ? [{ ...initialKwargsMappingOption }] : [],
         },
       } as Action);
+
+      dispatch({
+        type: "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD",
+        payload: {
+          index,
+          value: "",
+        },
+      });
     };
   }
 
@@ -141,6 +149,7 @@ export default function SettingsDataset() {
         />
         <FormDataSetFieldSettings
           data={state.fieldSettings}
+          temp={state.temp}
           disabled={disabled}
           onDestinationColumnChange={handleEvent(
             "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN",
@@ -166,6 +175,9 @@ export default function SettingsDataset() {
           )}
           onKwargsMappingFieldNameChange={handleEvent(
             "SET_KWARGS_MAPPING_FIELD_NAME",
+          )}
+          onKwargsMappingDestinationMapChange={handleEvent(
+            "SET_KWARGS_MAPPING_DESTINATION_MAP",
           )}
           onKwargsMappingInputValidationFieldChange={handleEvent(
             "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD",

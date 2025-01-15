@@ -1,3 +1,5 @@
+import { TempState } from "@/screens/settings-dataset/types";
+
 export enum DatasetFieldSettingStatusType {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE",
@@ -35,6 +37,7 @@ export interface FormDatasetFieldSettingsData {
 
 export interface FormDatasetFieldSettingsProps {
   data: Array<FormDatasetFieldSettingsData>;
+  temp: TempState;
   disabled: boolean;
   onDestinationColumnChange: (
     payload: DatasetFieldSettingsDestinationColumn,
@@ -60,6 +63,10 @@ export interface FormDatasetFieldSettingsProps {
     value: string;
   }) => void;
   onKwargsMappingFieldNameChange: (payload: {
+    index: number;
+    value: string;
+  }) => void;
+  onKwargsMappingDestinationMapChange: (payload: {
     index: number;
     value: string;
   }) => void;
@@ -144,12 +151,17 @@ export interface FormDatasetFieldDateTimeProps {
 
 export interface FormDatasetFieldMappingProps {
   data: FormDatasetFieldSettingsData;
+  destinationDropdown: Array<string>;
   index: number;
   disabled: boolean;
   onDestinationOptionTypeChange: (
     payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
   onKwargsMappingFieldNameChange: (payload: {
+    index: number;
+    value: string;
+  }) => void;
+  onKwargsMappingDestinationMapChange: (payload: {
     index: number;
     value: string;
   }) => void;

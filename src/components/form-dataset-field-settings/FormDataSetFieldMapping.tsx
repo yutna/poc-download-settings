@@ -5,10 +5,12 @@ import type { FormDatasetFieldMappingProps, KwargsMapping } from "./types";
 
 export default function FormDatasetFieldMapping({
   data,
+  destinationDropdown,
   index,
   disabled,
   onDestinationOptionTypeChange,
   onKwargsMappingFieldNameChange,
+  onKwargsMappingDestinationMapChange,
   onKwargsMappingInputValidationFieldChange,
   onKwargsMappingIsCustomFunctionChange,
   onKwargsMappingOptionFieldChange,
@@ -60,42 +62,36 @@ export default function FormDatasetFieldMapping({
           <label htmlFor={`sourceOptionsDestinationMap-${index}`}>
             ชื่อตารางที่ใช้ในการ map ข้อมูล
           </label>
-          <input
+
+          <select
             id={`sourceOptionsDestinationMap-${index}`}
             name={`sourceOptionsDestinationMap-${index}`}
-            // onChange={(e) =>
-            //   onDestinationOptionTypeChange({ index, value: e.target.value })
-            // }
-            required
+            value={
+              (data.sourceOptions.transformOptions.kwargs as KwargsMapping)
+                .destinationMap
+            }
             disabled={disabled}
-            type="text"
-          // value={data.destinationOptions.type}
-          />
-
-          {/* <select */}
-          {/*   id={`sourceOptionsDestinationMap-${index}`} */}
-          {/*   name={`sourceOptionsDestinationMap-${index}`} */}
-          {/*   value={data.sourceOptions.transformOptions.method} */}
-          {/*   disabled={disabled} */}
-          {/*   onChange={(e) => */}
-          {/*     onSourceOptionTransformMethodChange({ */}
-          {/*       index, */}
-          {/*       value: e.target.value as TransformOptionsMethods, */}
-          {/*     }) */}
-          {/*   } */}
-          {/* > */}
-          {/*   {transformOptionsMethods.map((method) => { */}
-          {/*     return ( */}
-          {/*       <option */}
-          {/*         value={method} */}
-          {/*         key={`transformOptionsMethod-${method}`} */}
-          {/*         selected={method === TransformOptionsMethods.DEFAULT} */}
-          {/*       > */}
-          {/*         {method} */}
-          {/*       </option> */}
-          {/*     ); */}
-          {/*   })} */}
-          {/* </select> */}
+            onChange={(e) =>
+              onKwargsMappingDestinationMapChange({
+                index,
+                value: e.target.value,
+              })
+            }
+          >
+            <option selected disabled value={""}>
+              -- select an option --
+            </option>
+            {destinationDropdown.map((destinationDropdown, index) => {
+              return (
+                <option
+                  value={destinationDropdown}
+                  key={`sourceOptionDestinationDropdownItem-${index + 1}`}
+                >
+                  {destinationDropdown}
+                </option>
+              );
+            })}
+          </select>
         </div>
 
         <div className="col">
@@ -112,7 +108,11 @@ export default function FormDatasetFieldMapping({
               })
             }
             required
-            disabled={disabled}
+            disabled={
+              disabled ||
+              (data.sourceOptions.transformOptions.kwargs as KwargsMapping)
+                .isCustomFunction
+            }
             type="text"
             value={
               (data.sourceOptions.transformOptions.kwargs as KwargsMapping)

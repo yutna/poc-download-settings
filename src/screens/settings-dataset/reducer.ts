@@ -135,6 +135,12 @@ export default function reducer(draft: State, action: Action) {
           .kwargs as KwargsMapping
       ).fieldName = action.payload.value;
       break;
+    case "SET_KWARGS_MAPPING_DESTINATION_MAP":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsMapping
+      ).destinationMap = action.payload.value;
+      break;
     case "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD":
       (
         draft.fieldSettings[action.payload.index].sourceOptions.transformOptions

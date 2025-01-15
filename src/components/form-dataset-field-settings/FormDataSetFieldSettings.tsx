@@ -15,6 +15,7 @@ import FormDatasetFieldMapping from "./FormDataSetFieldMapping";
 
 export default function FormDatasetFieldSettings({
   data,
+  temp,
   disabled,
 
   onDestinationColumnChange,
@@ -29,6 +30,7 @@ export default function FormDatasetFieldSettings({
   onKwargsCustomEvalChange,
   onKwargsDateTimeFormatChange,
   onKwargsMappingFieldNameChange,
+  onKwargsMappingDestinationMapChange,
   onKwargsMappingInputValidationFieldChange,
   onKwargsMappingIsCustomFunctionChange,
   onKwargsMappingOptionFieldChange,
@@ -145,11 +147,16 @@ export default function FormDatasetFieldSettings({
             {item.sourceOptions.transformOptions.method ===
               TransformOptionsMethods.MAPPING && (
                 <FormDatasetFieldMapping
+                  key={`formDataSetFieldMapping-${index + 1}`}
                   data={item}
+                  destinationDropdown={temp.destinationDropdown}
                   disabled={disabled}
                   index={index}
                   onDestinationOptionTypeChange={onDestinationOptionTypeChange}
                   onKwargsMappingFieldNameChange={onKwargsMappingFieldNameChange}
+                  onKwargsMappingDestinationMapChange={
+                    onKwargsMappingDestinationMapChange
+                  }
                   onKwargsMappingInputValidationFieldChange={
                     onKwargsMappingInputValidationFieldChange
                   }

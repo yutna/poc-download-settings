@@ -69,6 +69,10 @@ export type Action =
     payload: { index: number; value: string };
   }
   | {
+    type: "SET_KWARGS_MAPPING_DESTINATION_MAP";
+    payload: { index: number; value: string };
+  }
+  | {
     type: "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD";
     payload: { index: number; value: string };
   }
