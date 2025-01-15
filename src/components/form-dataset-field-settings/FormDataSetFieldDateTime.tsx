@@ -56,9 +56,7 @@ export default function FormDatasetFieldDateTime({
           onChange={(e) =>
             onKwargsDateTimeFormatChange({
               index,
-              value: {
-                format: e.target.value,
-              },
+              value: e.target.value,
             })
           }
           required

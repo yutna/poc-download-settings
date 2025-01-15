@@ -26,6 +26,7 @@ export const initialState = {
     metadataId: undefined,
     metadataDropdown: [],
 
+    destinationDropdown: [],
     destination: "",
     destinationUniqueKey: "",
     destinationPartitionColumn: "",

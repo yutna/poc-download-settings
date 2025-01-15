@@ -55,7 +55,18 @@ export interface FormDatasetFieldSettingsProps {
     value: number;
   }) => void;
   onKwargsCustomEvalChange: (payload: { index: number; value: string }) => void;
-  onKwargsDateTimeFormatChange: (payload: KwargsDateTimePayload) => void;
+  onKwargsDateTimeFormatChange: (payload: {
+    index: number;
+    value: string;
+  }) => void;
+  onKwargsMappingFieldNameChange: (payload: {
+    index: number;
+    value: string;
+  }) => void;
+  onKwargsMappingInputValidationFieldChange: (payload: {
+    index: number;
+    value: string;
+  }) => void;
 }
 
 export interface FormDatasetFieldDefaultProps {
@@ -100,7 +111,10 @@ export interface FormDatasetFieldDateTimeProps {
   onDestinationOptionTypeChange: (
     payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
-  onKwargsDateTimeFormatChange: (payload: KwargsDateTimePayload) => void;
+  onKwargsDateTimeFormatChange: (payload: {
+    index: number;
+    value: string;
+  }) => void;
   onSourceOptionSourceColumnChange: (
     payload: DatasetFieldSettingsSourceOptionSourceColumn,
   ) => void;
@@ -113,7 +127,14 @@ export interface FormDatasetFieldMappingProps {
   onDestinationOptionTypeChange: (
     payload: DatasetFieldSettingsDestinationOptionType,
   ) => void;
-  onKwargsMappingFieldNameChange: (payload: KwargsMappingPayload) => void;
+  onKwargsMappingFieldNameChange: (payload: {
+    index: number;
+    value: string;
+  }) => void;
+  onKwargsMappingInputValidationFieldChange: (payload: {
+    index: number;
+    value: string;
+  }) => void;
   onSourceOptionSourceColumnChange: (
     payload: DatasetFieldSettingsSourceOptionSourceColumn,
   ) => void;

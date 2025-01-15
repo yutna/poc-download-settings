@@ -11,6 +11,7 @@ import { TransformOptionsMethods } from "./types";
 import type { FormDatasetFieldSettingsProps } from "./types";
 import FormDatasetFieldCustom from "./FormDataSetFieldCustom";
 import FormDatasetFieldDateTime from "./FormDataSetFieldDateTime";
+import FormDatasetFieldMapping from "./FormDataSetFieldMapping";
 
 export default function FormDatasetFieldSettings({
   data,
@@ -27,6 +28,8 @@ export default function FormDatasetFieldSettings({
   onKwargsConstantValueChange,
   onKwargsCustomEvalChange,
   onKwargsDateTimeFormatChange,
+  onKwargsMappingFieldNameChange,
+  onKwargsMappingInputValidationFieldChange,
 }: FormDatasetFieldSettingsProps) {
   return (
     <fieldset>
@@ -128,6 +131,23 @@ export default function FormDatasetFieldSettings({
                   index={index}
                   onDestinationOptionTypeChange={onDestinationOptionTypeChange}
                   onKwargsDateTimeFormatChange={onKwargsDateTimeFormatChange}
+                  onSourceOptionSourceColumnChange={
+                    onSourceOptionSourceColumnChange
+                  }
+                />
+              )}
+
+            {item.sourceOptions.transformOptions.method ===
+              TransformOptionsMethods.MAPPING && (
+                <FormDatasetFieldMapping
+                  data={item}
+                  disabled={disabled}
+                  index={index}
+                  onDestinationOptionTypeChange={onDestinationOptionTypeChange}
+                  onKwargsMappingFieldNameChange={onKwargsMappingFieldNameChange}
+                  onKwargsMappingInputValidationFieldChange={
+                    onKwargsMappingInputValidationFieldChange
+                  }
                   onSourceOptionSourceColumnChange={
                     onSourceOptionSourceColumnChange
                   }

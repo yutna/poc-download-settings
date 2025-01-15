@@ -63,6 +63,9 @@ export default function reducer(draft: State, action: Action) {
     case "SET_DOWNLOADER_DROPDOWN":
       draft.changeAndImport.downloaderDropdown = action.payload;
       break;
+    case "SET_DESTINATION_DROPDOWN":
+      draft.changeAndImport.destinationDropdown = action.payload;
+      break;
 
     // Data Set Field Settings Form
     case "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN":
@@ -118,7 +121,7 @@ export default function reducer(draft: State, action: Action) {
       (
         draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
           .kwargs as KwargsDateTime
-      ).format = action.payload.value.format;
+      ).format = action.payload.value;
       break;
 
     // Kwargs Mapping Method
@@ -126,7 +129,13 @@ export default function reducer(draft: State, action: Action) {
       (
         draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
           .kwargs as KwargsMapping
-      ).fieldName = action.payload.value.fieldName;
+      ).fieldName = action.payload.value;
+      break;
+    case "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD":
+      (
+        draft.fieldSettings[action.payload.index].sourceOptions.transformOptions
+          .kwargs as KwargsMapping
+      ).inputFieldValidation = action.payload.value;
       break;
 
     // NOTE: using for fetch dataset form by id + also clear state

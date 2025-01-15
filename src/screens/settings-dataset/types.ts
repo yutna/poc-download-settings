@@ -9,8 +9,6 @@ import type {
   DatasetFieldSettingsSourceOptionTransformKwargs,
   DatasetFieldSettingsSourceOptionTransformMethod,
   DatasetFieldSettingsStatus,
-  KwargsDateTimePayload,
-  KwargsMappingPayload,
 } from "@/components/form-dataset-field-settings/types";
 import type {
   DatasetDropdownOption,
@@ -33,9 +31,13 @@ export type Action =
   | { type: "SET_DESTINATION_UNIQUE_KEY"; payload: string }
   | { type: "SET_DESTINATION_PARTITION_COLUMN"; payload: string }
   | { type: "SET_DESTINATION_NULL_OPTION"; payload: string }
-  | { type: "SET_METADATA_DROPDOWN"; payload: MetadataDropdownOption[] }
-  | { type: "SET_DATASET_TRANSFORM_DROPDOWN"; payload: DatasetDropdownOption[] }
-  | { type: "SET_DOWNLOADER_DROPDOWN"; payload: DatasetDropdownOption[] }
+  | { type: "SET_METADATA_DROPDOWN"; payload: Array<MetadataDropdownOption> }
+  | {
+    type: "SET_DATASET_TRANSFORM_DROPDOWN";
+    payload: Array<DatasetDropdownOption>;
+  }
+  | { type: "SET_DOWNLOADER_DROPDOWN"; payload: Array<DatasetDropdownOption> }
+  | { type: "SET_DESTINATION_DROPDOWN"; payload: Array<string> }
   | {
     type: "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN";
     payload: DatasetFieldSettingsDestinationColumn;
@@ -58,11 +60,15 @@ export type Action =
   }
   | {
     type: "SET_KWARGS_DATE_TIME_FORMAT";
-    payload: KwargsDateTimePayload;
+    payload: { index: number; value: string };
   }
   | {
     type: "SET_KWARGS_MAPPING_FIELD_NAME";
-    payload: KwargsMappingPayload;
+    payload: { index: number; value: string };
+  }
+  | {
+    type: "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD";
+    payload: { index: number; value: string };
   }
   | {
     type: "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE";

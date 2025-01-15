@@ -6,6 +6,7 @@ export default function FormDatasetFieldMapping({
   disabled,
   onDestinationOptionTypeChange,
   onKwargsMappingFieldNameChange,
+  onKwargsMappingInputValidationFieldChange,
   onSourceOptionSourceColumnChange,
 }: FormDatasetFieldMappingProps) {
   return (
@@ -63,15 +64,18 @@ export default function FormDatasetFieldMapping({
         </div>
 
         <div className="col">
-          <label htmlFor="sourceOptionsSourceColumn">
+          <label htmlFor={`inputFieldValidation-${index}`}>
             ชื่อฟิลด์ที่ใช้ตรวจสอบข้อมูล input
           </label>
           <input
-            id="sourceOptionsSourceColumn"
-            name="sourceOptionsSourceColumn"
-            // onChange={(e) =>
-            //   onSourceOptionSourceColumnChange({ index, value: e.target.value })
-            // }
+            id={`inputFieldValidation-${index}`}
+            name={`inputFieldValidation-${index}`}
+            onChange={(e) =>
+              onKwargsMappingInputValidationFieldChange({
+                index,
+                value: e.target.value,
+              })
+            }
             required
             disabled={disabled}
             type="text"
@@ -92,7 +96,7 @@ export default function FormDatasetFieldMapping({
             required
             disabled={disabled}
             type="text"
-          // value={data.destinationOptions.type}
+          // value={data.sourceOptions.transformOptions.kwargs.}
           />
         </div>
 

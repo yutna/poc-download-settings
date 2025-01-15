@@ -1,16 +1,14 @@
-import { AUTH_TOKEN, BASE_API_URL } from "@/config/env";
-
 export default async function postDatasets() {
-  const url = `${BASE_API_URL}/v3/datasets`;
-  const options: RequestInit = {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${AUTH_TOKEN}`,
-      body: JSON.stringify({}),
-    },
-  };
+  // const url = `${BASE_API_URL}/v3/datasets`;
+  // const options: RequestInit = {
+  //   method: "POST",
+  //   headers: {
+  //     authorization: `Bearer ${AUTH_TOKEN}`,
+  //     body: JSON.stringify({}),
+  //   },
+  // };
 
-  console.log(options);
+  // console.log(options);
 
   try {
     // const response = await fetch(url, options);

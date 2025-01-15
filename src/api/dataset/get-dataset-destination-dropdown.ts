@@ -18,7 +18,9 @@ export default async function getDatasetDestinationDropdown() {
       );
     }
 
-    return await response.json();
+    const { destinations } = await response.json();
+
+    return destinations;
   } catch (error) {
     console.error("Error fetching datasets destination dropdown:", error);
     throw error;

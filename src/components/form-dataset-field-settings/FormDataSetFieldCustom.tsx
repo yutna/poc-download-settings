@@ -37,9 +37,6 @@ export default function FormDatasetFieldCustom({
             onChange={(e) =>
               onKwargsCustomEvalChange({
                 index,
-                // value: {
-                //   eval: e.target.value,
-                // },
                 value: e.target.value,
               })
             }

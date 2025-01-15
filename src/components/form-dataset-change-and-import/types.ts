@@ -22,6 +22,7 @@ export interface FormDatasetChangeAndImportData {
   metadataDropdown: Array<MetadataDropdownOption>;
 
   // destination
+  destinationDropdown: Array<string>;
   destination: string;
   destinationUniqueKey: string;
   destinationPartitionColumn: string;

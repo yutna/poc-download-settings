@@ -14,6 +14,7 @@ import useFetchMetadataDropdown from "./useFetchMetadataDropdown";
 import type { FormEvent } from "react";
 import type { Action } from "./types";
 import { TransformOptionsMethods } from "@/components/form-dataset-field-settings/types";
+import useFetchDatasetDestinationDropdown from "./useFetchDatasetDestinationDropdown";
 
 export default function SettingsDataset() {
   // Hooks
@@ -74,6 +75,7 @@ export default function SettingsDataset() {
   }
 
   // Effect hooks
+  useFetchDatasetDestinationDropdown({ dispatch });
   useFetchDatasetTransformDropdown({ dispatch });
   useFetchDownloaderDropdown({ dispatch });
   useFetchDownloaderRefs({ state, dispatch });
@@ -119,9 +121,6 @@ export default function SettingsDataset() {
           onDestinationColumnChange={handleEvent(
             "SET_DATASET_FIELD_SETTING_DESTINATION_COLUMN",
           )}
-          // onSourceOptionTransformMethodChange={handleEvent(
-          //   "SET_DATASET_FIELD_SETTING_SOURCE_OPTION_TRANSFORM_METHOD",
-          // )}
           onSourceOptionTransformMethodChange={handleTransformOptionMethodChange()}
           onDestinationOptionTypeChange={handleEvent(
             "SET_DATASET_FIELD_SETTING_DESTINATION_OPTION_TYPE",
@@ -141,7 +140,13 @@ export default function SettingsDataset() {
           onKwargsDateTimeFormatChange={handleEvent(
             "SET_KWARGS_DATE_TIME_FORMAT",
           )}
-        // onKwargsDateTimeIsCustomChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
+          // onKwargsDateTimeIsCustomChange={handleEvent("SET_KWARGS_CUSTOM_EVAL")}
+          onKwargsMappingFieldNameChange={handleEvent(
+            "SET_KWARGS_MAPPING_FIELD_NAME",
+          )}
+          onKwargsMappingInputValidationFieldChange={handleEvent(
+            "SET_KWARGS_MAPPING_INPUT_VALIDATION_FIELD",
+          )}
         />
         <div className="action">
           <button type="submit">บันทึก</button>
