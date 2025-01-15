@@ -1,7 +1,7 @@
 import type { Option } from "@/types/form";
 
 export interface FormDataStorageFolderData {
-  agencyId: number;
+  agencyId: number | undefined;
   agencyOptions: Option[];
   dataSubType: string;
   dataType: string;

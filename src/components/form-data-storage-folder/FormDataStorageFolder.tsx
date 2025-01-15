@@ -17,8 +17,11 @@ export default function FormDataStorageFolder({
             disabled
             id="agencyIdReader"
             name="agencyIdReader"
-            value={data.agencyId}
+            value={data.agencyId ?? ""}
           >
+            {data.agencyOptions.length === 0 && (
+              <option disabled value=""></option>
+            )}
             {data.agencyOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
